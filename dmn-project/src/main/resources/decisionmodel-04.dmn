@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="com.aeh.aoc2022.dmn" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_5E55DA10-4515-4CA7-9917-2F490E974865" name="decisionmodel-04" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="com.aeh.aoc2022.dmn">
+  <dmn:extensionElements/>
+  <dmn:itemDefinition id="_F64FDB6D-A1B9-47AE-AFEA-2B5E8283EE01" name="Raw Lines" isCollection="true">
+    <dmn:typeRef>string</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_9B217703-66FB-469A-9C54-883AE2928467" name="Elf Pair" isCollection="false">
+    <dmn:itemComponent id="_473F07D7-9CA0-427A-A979-8D8317DFFD8E" name="index" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_6BFA50DE-3BC5-480A-A164-13A794CEF1AE" name="Elf A Start" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_19D8CCEF-7ADA-4689-80D3-37F3BADA4350" name="Elf A End" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_A75FFF20-EDA8-4ABA-B5F3-2A97B8A96D90" name="Elf B Start" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_E4274013-2823-4E20-8B21-201EC8D6C1F9" name="Elf B End" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_F0AC8E17-5FE6-468C-94D0-A0B7EBB76806" name="Fully Included" isCollection="false">
+      <dmn:typeRef>boolean</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_B825C5E3-FA1D-4C32-B432-AC5C96030067" name="Overlap" isCollection="false">
+      <dmn:typeRef>boolean</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_F63793A0-DD5E-40DD-929D-9E7055B82312" name="Elf Pairs" isCollection="true">
+    <dmn:typeRef>Elf Pair</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:inputData id="_ED7EA867-DE13-4BAB-9077-14552A3AA084" name="InputLines">
+    <dmn:extensionElements/>
+    <dmn:variable id="_596A0205-20DD-4F3F-B941-C88C1A772344" name="InputLines" typeRef="Raw Lines"/>
+  </dmn:inputData>
+  <dmn:decision id="_D8C87A82-8C60-4481-8C7A-7A13101D0126" name="Elf Work">
+    <dmn:extensionElements/>
+    <dmn:variable id="_E2A59B16-FC40-4A19-AD39-0A539440F9C4" name="Elf Work" typeRef="Elf Pairs"/>
+    <dmn:informationRequirement id="_18C93DB0-A720-4A9C-B5BD-1A5C617A3D9B">
+      <dmn:requiredInput href="#_ED7EA867-DE13-4BAB-9077-14552A3AA084"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_9AD55776-3E8F-40A1-93C1-C11FC7587C61">
+      <dmn:requiredKnowledge href="#_3AFBCF1C-B72A-473B-9190-CC11994E3B16"/>
+    </dmn:knowledgeRequirement>
+    <dmn:literalExpression id="_B1CE8B78-1B57-403E-B77B-D8AECDE594A2">
+      <dmn:text>for i in 1..count(InputLines)
+return Process Elf Pair(i, InputLines[i])</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:businessKnowledgeModel id="_3AFBCF1C-B72A-473B-9190-CC11994E3B16" name="Process Elf Pair">
+    <dmn:extensionElements/>
+    <dmn:variable id="_36540FCD-DF22-47AE-8DEC-B4E5A8D25711" name="Process Elf Pair"/>
+    <dmn:encapsulatedLogic id="_35954798-390C-4194-B67B-4C41C3AC1754" kind="FEEL">
+      <dmn:formalParameter id="_D34A79AC-D155-4227-A2EB-0AD7E455C415" name="index" typeRef="number"/>
+      <dmn:formalParameter id="_970646DE-3C50-4F54-813B-108009350922" name="line" typeRef="string"/>
+      <dmn:context id="_B4D8F55A-0781-47B9-8617-1439E4BE9202">
+        <dmn:contextEntry>
+          <dmn:variable id="_BB962778-71D9-4AE8-BE02-F28FAE180289" name="index" typeRef="number"/>
+          <dmn:literalExpression id="_BA282C4D-2758-4536-AB5F-B73699349D21">
+            <dmn:text>index</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_A1848EAC-28D3-4427-A3B4-6C5E13FEB3AC" name="Elf A" typeRef="string"/>
+          <dmn:literalExpression id="_D4D2FDE0-A230-4EA6-8BD9-318DD4CFE804">
+            <dmn:text>split(line, ",")[1]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_1CB3DC85-764C-4F6E-BDA6-C19350DFC3FE" name="Elf B" typeRef="string"/>
+          <dmn:literalExpression id="_8855C2CB-7349-4F0D-969B-3D4C430E2585">
+            <dmn:text>split(line, ",")[2]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_79838D7F-38AE-4A27-A304-359C4D9E735C" name="Elf A Start" typeRef="number"/>
+          <dmn:literalExpression id="_B71C7046-BD18-4689-B084-2EC182FFF519">
+            <dmn:text>number(split(Elf A, "-")[1], ",", ".")</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_61CAF86D-EC68-4FD2-8912-69CED133731F" name="Elf A End" typeRef="number"/>
+          <dmn:literalExpression id="_4710DB0C-061B-4574-95BF-9DC5FE7BFDA7">
+            <dmn:text>number(split(Elf A, "-")[2], ",", ".")</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_7E41235E-CDD5-46B8-B447-AD6A62FAB161" name="Elf B Start" typeRef="number"/>
+          <dmn:literalExpression id="_8EED3FE4-8B6B-44CA-BB8A-71FF051B1D01">
+            <dmn:text>number(split(Elf B, "-")[1], ",", ".")</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_2813B10D-933E-41F7-82C3-6274A64E88D5" name="Elf B End" typeRef="number"/>
+          <dmn:literalExpression id="_238D4920-9733-4CF2-9A70-122A2A403B64">
+            <dmn:text>number(split(Elf B, "-")[2], ",", ".")</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_95302C0E-364C-477F-9810-40BF0DDFAB42" name="A includes B" typeRef="boolean"/>
+          <dmn:literalExpression id="_596D8406-952A-42C8-958B-526F93A591BD">
+            <dmn:text>Elf B Start &gt;= Elf A Start and Elf B End &lt;= Elf A End</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_2810B463-E881-471B-85C6-E99944E97F00" name="B includes A" typeRef="boolean"/>
+          <dmn:literalExpression id="_3D3C6F43-AD7F-40F5-A309-987CE30EA0F0">
+            <dmn:text>Elf A Start &gt;= Elf B Start and Elf A End &lt;= Elf B End</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_C5168DCD-B3EF-4882-933F-BC783EFF862F" name="Fully Included" typeRef="boolean"/>
+          <dmn:literalExpression id="_3F688286-0286-431C-B860-D773B9F5BEEC">
+            <dmn:text>A includes B or B includes A</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_AB951185-AF1D-41C5-AF57-49E2C922E18B" name="A over B" typeRef="boolean"/>
+          <dmn:literalExpression id="_3445ABA2-5842-43E1-A966-19E217E9B486">
+            <dmn:text>(Elf A Start &gt;= Elf B Start and Elf A Start &lt;= Elf B End) 
+or 
+(Elf A End &gt;= Elf B Start and Elf A End &lt;= Elf B End)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_94BF836F-FBA0-4771-964D-2C082D6440BF" name="B over A" typeRef="boolean"/>
+          <dmn:literalExpression id="_D3D8A99B-4B85-4581-845C-757CC9F71FCF">
+            <dmn:text>(Elf B Start &gt;= Elf A Start and Elf B Start &lt;= Elf A End) 
+or
+(Elf B End &gt;= Elf A Start and Elf B End &lt;= Elf A End)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_87E29061-010D-4900-9104-A7407A80C79D" name="Overlap" typeRef="boolean"/>
+          <dmn:literalExpression id="_95BB3D5A-3236-4F77-8030-B08CF4B056B5">
+            <dmn:text>A over B or B over A</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:literalExpression id="_79B99CA7-6EEA-458B-8180-2CB1D8F3B383">
+            <dmn:text>{ index: index, 
+Elf A Start: Elf A Start, 
+Elf A End: Elf A End, 
+Elf B Start: Elf B Start, 
+Elf B End: Elf B End, 
+Fully Included: Fully Included,
+Overlap: Overlap }</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+  </dmn:businessKnowledgeModel>
+  <dmn:decision id="_7580CCB7-5720-4EC4-A902-165515968417" name="Part 1">
+    <dmn:extensionElements/>
+    <dmn:variable id="_1E657AF7-B839-472E-8EF6-CB264ED05D9E" name="Part 1" typeRef="number"/>
+    <dmn:informationRequirement id="_B6058C6C-5F34-4CFA-A63A-27176D621FF6">
+      <dmn:requiredDecision href="#_D8C87A82-8C60-4481-8C7A-7A13101D0126"/>
+    </dmn:informationRequirement>
+    <dmn:literalExpression id="_92F089D9-5B15-4476-8F09-834A310E0BD0">
+      <dmn:text>count(Elf Work[Fully Included=true])</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:decision id="_1C4840F2-85EB-48BA-87BE-7380852C31F0" name="Part 2">
+    <dmn:extensionElements/>
+    <dmn:variable id="_0E3C218D-08B7-45FE-AADA-98B7521B97BF" name="Part 2" typeRef="number"/>
+    <dmn:informationRequirement id="_4C95B95F-BCB0-4E55-8BAD-F53130DF6E25">
+      <dmn:requiredDecision href="#_D8C87A82-8C60-4481-8C7A-7A13101D0126"/>
+    </dmn:informationRequirement>
+    <dmn:literalExpression id="_FD352899-4074-405A-B48F-0278AD03E306">
+      <dmn:text>count(Elf Work[Overlap=true])</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_2C9C3032-5034-4C9E-BD53-2A62E8CFB5C4" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_B1CE8B78-1B57-403E-B77B-D8AECDE594A2">
+            <kie:width>467</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_B4D8F55A-0781-47B9-8617-1439E4BE9202">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>595</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_BA282C4D-2758-4536-AB5F-B73699349D21">
+            <kie:width>595</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D4D2FDE0-A230-4EA6-8BD9-318DD4CFE804">
+            <kie:width>595</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_8855C2CB-7349-4F0D-969B-3D4C430E2585">
+            <kie:width>595</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_B71C7046-BD18-4689-B084-2EC182FFF519">
+            <kie:width>595</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_4710DB0C-061B-4574-95BF-9DC5FE7BFDA7">
+            <kie:width>595</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_8EED3FE4-8B6B-44CA-BB8A-71FF051B1D01">
+            <kie:width>595</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_238D4920-9733-4CF2-9A70-122A2A403B64">
+            <kie:width>595</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_596D8406-952A-42C8-958B-526F93A591BD">
+            <kie:width>595</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_3D3C6F43-AD7F-40F5-A309-987CE30EA0F0">
+            <kie:width>595</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_3F688286-0286-431C-B860-D773B9F5BEEC">
+            <kie:width>595</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_3445ABA2-5842-43E1-A966-19E217E9B486">
+            <kie:width>595</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D3D8A99B-4B85-4581-845C-757CC9F71FCF">
+            <kie:width>595</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_95BB3D5A-3236-4F77-8030-B08CF4B056B5">
+            <kie:width>595</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_79B99CA7-6EEA-458B-8180-2CB1D8F3B383">
+            <kie:width>595</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_35954798-390C-4194-B67B-4C41C3AC1754">
+            <kie:width>50</kie:width>
+            <kie:width>765</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_92F089D9-5B15-4476-8F09-834A310E0BD0">
+            <kie:width>300</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_FD352899-4074-405A-B48F-0278AD03E306">
+            <kie:width>300</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape xmlns:p0="https://kiegroup.org/dmn/_C47E90F0-9275-45CF-A2D4-FCE418D06C91" id="dmnshape-drg-_ED7EA867-DE13-4BAB-9077-14552A3AA084" dmnElementRef="p0:_ED7EA867-DE13-4BAB-9077-14552A3AA084" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="417" y="436" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape xmlns:p1="https://kiegroup.org/dmn/_C47E90F0-9275-45CF-A2D4-FCE418D06C91" id="dmnshape-drg-_D8C87A82-8C60-4481-8C7A-7A13101D0126" dmnElementRef="p1:_D8C87A82-8C60-4481-8C7A-7A13101D0126" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="418" y="313" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape xmlns:p2="https://kiegroup.org/dmn/_C47E90F0-9275-45CF-A2D4-FCE418D06C91" id="dmnshape-drg-_3AFBCF1C-B72A-473B-9190-CC11994E3B16" dmnElementRef="p2:_3AFBCF1C-B72A-473B-9190-CC11994E3B16" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="232" y="313" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape xmlns:p3="https://kiegroup.org/dmn/_C47E90F0-9275-45CF-A2D4-FCE418D06C91" id="dmnshape-drg-_7580CCB7-5720-4EC4-A902-165515968417" dmnElementRef="p3:_7580CCB7-5720-4EC4-A902-165515968417" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="418" y="201.15422276621786" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape xmlns:p4="https://kiegroup.org/dmn/_C47E90F0-9275-45CF-A2D4-FCE418D06C91" id="dmnshape-drg-_1C4840F2-85EB-48BA-87BE-7380852C31F0" dmnElementRef="p4:_1C4840F2-85EB-48BA-87BE-7380852C31F0" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="602" y="201.1865361077111" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge xmlns:p5="https://kiegroup.org/dmn/_C47E90F0-9275-45CF-A2D4-FCE418D06C91" id="dmnedge-drg-_9AD55776-3E8F-40A1-93C1-C11FC7587C61-AUTO-TARGET" dmnElementRef="p5:_9AD55776-3E8F-40A1-93C1-C11FC7587C61">
+        <di:waypoint x="282" y="338"/>
+        <di:waypoint x="418" y="338"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge xmlns:p6="https://kiegroup.org/dmn/_C47E90F0-9275-45CF-A2D4-FCE418D06C91" id="dmnedge-drg-_18C93DB0-A720-4A9C-B5BD-1A5C617A3D9B-AUTO-TARGET" dmnElementRef="p6:_18C93DB0-A720-4A9C-B5BD-1A5C617A3D9B">
+        <di:waypoint x="467" y="461"/>
+        <di:waypoint x="468" y="363"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge xmlns:p7="https://kiegroup.org/dmn/_C47E90F0-9275-45CF-A2D4-FCE418D06C91" id="dmnedge-drg-_B6058C6C-5F34-4CFA-A63A-27176D621FF6" dmnElementRef="p7:_B6058C6C-5F34-4CFA-A63A-27176D621FF6">
+        <di:waypoint x="468" y="338"/>
+        <di:waypoint x="468" y="226.15422276621786"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge xmlns:p8="https://kiegroup.org/dmn/_C47E90F0-9275-45CF-A2D4-FCE418D06C91" id="dmnedge-drg-_4C95B95F-BCB0-4E55-8BAD-F53130DF6E25-AUTO-TARGET" dmnElementRef="p8:_4C95B95F-BCB0-4E55-8BAD-F53130DF6E25">
+        <di:waypoint x="468" y="338"/>
+        <di:waypoint x="652" y="251.1865361077111"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>

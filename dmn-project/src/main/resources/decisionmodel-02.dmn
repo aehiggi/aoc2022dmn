@@ -1,0 +1,835 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="com.aeh.aoc2022.dmn" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_5D761C58-E49B-4675-9AD7-F0D4BD557C50" name="decisionmodel-02" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="com.aeh.aoc2022.dmn">
+  <dmn:extensionElements/>
+  <dmn:itemDefinition id="_01E08FBA-A1EF-4EBE-8A4A-A0A035EBCADC" name="the_input_line" isCollection="false">
+    <dmn:itemComponent id="_036703AE-ED53-41D0-9E99-A38FEA4E6DDA" name="index" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_961FDB75-1738-4806-8F31-18C1C3B2157A" name="value" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_30BEB744-76F1-450E-8DDE-EC00DC11524F" name="the_input_lines" isCollection="true">
+    <dmn:typeRef>the_input_line</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_5A667C1D-C8C5-4CBE-8AA7-EBD94148CC4C" name="raw lines" isCollection="true">
+    <dmn:typeRef>string</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_C8B284A7-3B1A-45FF-91AB-31B656B36A00" name="Game Line" isCollection="false">
+    <dmn:itemComponent id="_33A7E808-D1C3-4FDC-8827-FD182E137626" name="index" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_609563A7-81BF-447F-9B4C-B3FAAF2930C6" name="we_played" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_555B68BE-40B3-40B0-B78E-5B63755BBC25" name="they_played" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_48F06722-DB33-4BF5-9A1D-71C190A5AC44" name="Game Lines" isCollection="true">
+    <dmn:typeRef>Game Line</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_89117375-ABE4-4786-9423-E12B30A9EBD7" name="Scored Line" isCollection="false">
+    <dmn:itemComponent id="_8C173814-BBEA-44F5-AB1F-D82022A11A65" name="they_scored" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_8BED36BA-2E9B-4225-939C-06E89BEE91E3" name="we_scored" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_BFD9284E-93D5-42C6-9F10-47A6BAEC8E1D" name="win_score" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_2D6E20FA-7D00-43FE-930C-68D803C093E8" name="total_score" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_9AD4C9FD-8BB6-4241-9445-F2968075AFD9" name="winner" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_AECF226E-0A10-4EA2-9BF6-58F6FA80C2FD" name="index" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_AEA65091-85EB-4323-A18F-2BC631DFCFDD" name="Scored Lines" isCollection="true">
+    <dmn:typeRef>Scored Line</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:inputData id="_FF2695BB-35B7-40ED-96B2-7CEAB8E1E9A1" name="InputLines">
+    <dmn:extensionElements/>
+    <dmn:variable id="_F0AE06D8-F61C-4C52-81F7-873AF45AB47E" name="InputLines" typeRef="raw lines"/>
+  </dmn:inputData>
+  <dmn:businessKnowledgeModel id="_BC19F183-1301-4E7C-855A-10AAE2F5CE0F" name="Process Inputs">
+    <dmn:extensionElements/>
+    <dmn:variable id="_AA89EC3B-99EB-4550-8C6D-E624F2859DA2" name="Process Inputs" typeRef="Game Line"/>
+    <dmn:encapsulatedLogic id="_866D6EC8-1DB8-47DB-9BAA-FC69958B5C3B" kind="FEEL">
+      <dmn:formalParameter id="_840F3BC5-9C41-4D18-A0C8-F0213644F710" name="index" typeRef="number"/>
+      <dmn:formalParameter id="_5602E833-7B05-47AB-8366-8DB56CC5CE2A" name="the_line" typeRef="string"/>
+      <dmn:context id="_FFE2F146-AE9A-4B18-AAFE-7943D4AFCCEB">
+        <dmn:contextEntry>
+          <dmn:variable id="_0DB54B2C-60F2-4544-8DD6-68FB04638814" name="index" typeRef="number"/>
+          <dmn:literalExpression id="_0DB54B2C-60F2-4544-8DD6-68FB04638815">
+            <dmn:text>index</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_A4F91513-3AA3-488B-B67F-6E9C1A5D41DB" name="they_played" typeRef="string"/>
+          <dmn:literalExpression id="_A4F91513-3AA3-488B-B67F-6E9C1A5D41DC">
+            <dmn:text>split(the_line, " ")[1]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_9CE192D4-3FE9-487B-84D7-FBC6CA6B4BAC" name="we_played" typeRef="string"/>
+          <dmn:literalExpression id="_8B7C7BCE-70C6-4189-9CD5-127423E41F99">
+            <dmn:text>split(the_line, " ")[2]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+  </dmn:businessKnowledgeModel>
+  <dmn:decision id="_C1325934-9CBC-43C1-931B-9FC8C5D80E95" name="Game Lines">
+    <dmn:extensionElements/>
+    <dmn:variable id="_B8C2D008-45CE-4E25-BCFF-7E9CF28A2CC9" name="Game Lines" typeRef="Game Lines"/>
+    <dmn:informationRequirement id="_CA597EAD-24E2-4D02-98B0-0AA60E50260A">
+      <dmn:requiredInput href="#_FF2695BB-35B7-40ED-96B2-7CEAB8E1E9A1"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_04807CF6-8A30-473B-AE26-EB37BB9B07FB">
+      <dmn:requiredKnowledge href="#_BC19F183-1301-4E7C-855A-10AAE2F5CE0F"/>
+    </dmn:knowledgeRequirement>
+    <dmn:literalExpression id="_7F4506B1-A47D-4019-942A-BC864721ABF5">
+      <dmn:text>for i in 1..count(InputLines)
+return Process Inputs(i, InputLines[i])</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:decision id="_7637DC8B-2DFF-485E-BCAE-8DF02AF90B94" name="Scored Lines">
+    <dmn:extensionElements/>
+    <dmn:variable id="_A2ACC0E4-856C-49E9-9887-DB5F182E98CB" name="Scored Lines" typeRef="Scored Lines"/>
+    <dmn:informationRequirement id="_3EC16826-9D2D-483C-8C0C-F6D5B3BB8159">
+      <dmn:requiredDecision href="#_C1325934-9CBC-43C1-931B-9FC8C5D80E95"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_5E8D16E5-1F3F-40D3-8B08-0E70044E5571">
+      <dmn:requiredKnowledge href="#_2D7DB845-2139-4465-9351-A8BF3367E8A8"/>
+    </dmn:knowledgeRequirement>
+    <dmn:literalExpression id="_65BEC2F1-C6C6-43FF-9FE4-136092E57EB3">
+      <dmn:text>for i in 1..count(Game Lines)
+return Assign Scores(Game Lines[i])</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:businessKnowledgeModel id="_2D7DB845-2139-4465-9351-A8BF3367E8A8" name="Assign Scores">
+    <dmn:extensionElements/>
+    <dmn:variable id="_82CA96C3-4EA9-48B5-A547-FEB4D80E2E38" name="Assign Scores" typeRef="Scored Line"/>
+    <dmn:encapsulatedLogic id="_CB68E0ED-08FC-49D4-A493-E3A676D62593" kind="FEEL">
+      <dmn:formalParameter id="_AEB66668-B34E-47C0-8DB6-F1E4C2861029" name="line" typeRef="Game Line"/>
+      <dmn:context id="_694D9EE9-FEBE-456D-88B7-51F56C53F4F3">
+        <dmn:contextEntry>
+          <dmn:variable id="_7BB59D57-D629-49A0-9D49-6668A3C2B923" name="winner" typeRef="string"/>
+          <dmn:decisionTable id="_7BB59D57-D629-49A0-9D49-6668A3C2B922" hitPolicy="FIRST" preferredOrientation="Rule-as-Row">
+            <dmn:input id="_FACF37F2-EEDE-4525-8CE7-A6F7FD44EC69">
+              <dmn:inputExpression id="_035A0F8E-BBFF-4DE3-9ED8-409D238F8DA8" typeRef="string">
+                <dmn:text>line.they_played</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:input id="_51D35388-9020-473D-AF71-BD4B5BB3EBF4">
+              <dmn:inputExpression id="_20B71FE6-2599-4F15-A940-83CD4714779F" typeRef="string">
+                <dmn:text>line.we_played</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:output id="_F9602331-250B-40BC-8F3B-E8BDB0136DFE"/>
+            <dmn:annotation name="annotation-1"/>
+            <dmn:rule id="_B863CDBB-F4BC-44BD-B4B5-F08EADBCB05A">
+              <dmn:inputEntry id="_BDC2F626-D8C9-446D-9CC0-81B3E415B71E">
+                <dmn:text>"A"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_EC81CBA1-B96A-4174-9F71-334E3DCC1444">
+                <dmn:text>"Y"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_A6F6CAF8-248B-4FA5-8DFC-01BB70AE001F">
+                <dmn:text>"us"</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>paper over rock</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_90BB73FB-10EC-4367-B50A-0FCF8ADEB9D1">
+              <dmn:inputEntry id="_C9B2F64D-FFC3-4E4C-9F63-F35FAEBD0E63">
+                <dmn:text>"B"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_5920BEFC-8E69-450F-82FE-1B4D6BB83550">
+                <dmn:text>"Z"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_6076F6CA-AD48-46FB-B8B9-53B834A47EF7">
+                <dmn:text>"us"</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>scissors over paper</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_AE3136B0-8D03-4953-94D3-B20287FA4BCD">
+              <dmn:inputEntry id="_661A814C-7295-4A3C-8EF6-07BC825850CD">
+                <dmn:text>"C"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_E4C8E2F1-5122-4AF8-9963-0064C6DF14DD">
+                <dmn:text>"X"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_9E9115C7-75D0-484E-AE8A-013C4BE27F6B">
+                <dmn:text>"us"</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>rock over scissors</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_1EF03FD6-9619-4757-9120-ADD39F585389">
+              <dmn:inputEntry id="_B400AF37-270A-4D0E-BC08-4986FE5CECAD">
+                <dmn:text>"A"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_A8515529-3EC1-4E69-BCD5-B7BE33AA0D8C">
+                <dmn:text>"X"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_6B9DE0D8-3CF1-49EC-9130-0F575228B13A">
+                <dmn:text>"draw"</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text/>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_70571F78-3913-40EB-8C10-26EE3C6371CF">
+              <dmn:inputEntry id="_19C61D9D-5C65-47D3-AF53-839A40DB6144">
+                <dmn:text>"B"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_D7F586EF-55CB-4A84-9EB6-F5E81807AF95">
+                <dmn:text>"Y"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_7304399A-2F62-4E7B-9520-39E2B0BD088B">
+                <dmn:text>"draw"</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text/>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_5DF5D354-4EED-4B43-82AC-DBE2A5CE9F5A">
+              <dmn:inputEntry id="_43D5F2C8-625C-4377-92C1-3BEFECD7AFDF">
+                <dmn:text>"C"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_68EA0D1F-70D8-4536-8FBE-F24E70ACA06E">
+                <dmn:text>"Z"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_18B0DE33-DC50-49B5-AC22-FC55D3E5E107">
+                <dmn:text>"draw"</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text/>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_C6722F3D-83B4-445B-82FB-487EE6206FAE">
+              <dmn:inputEntry id="_98644C2E-512A-446E-9588-8A3F51185091">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_0D095C3C-C16C-4C90-80F4-CC0843A3F8F4">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_5C88A2B4-578F-487F-A45A-E6C3FD98DB74">
+                <dmn:text>"them"</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text/>
+              </dmn:annotationEntry>
+            </dmn:rule>
+          </dmn:decisionTable>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_3D949B50-E987-4547-BEB1-AC57EF81A244" name="they_scored" typeRef="number"/>
+          <dmn:decisionTable id="_3D949B50-E987-4547-BEB1-AC57EF81A243" hitPolicy="FIRST" preferredOrientation="Rule-as-Row">
+            <dmn:input id="_70FA4C8B-2404-4BD1-AD32-692733F784B6">
+              <dmn:inputExpression id="_DCE61AFF-DC78-4C38-9F57-26A78E9E682F" typeRef="string">
+                <dmn:text>line.they_played</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:input id="_581D46BF-F085-472E-9714-7B5670E77F2F">
+              <dmn:inputExpression id="_1E2945D5-7AF6-4B19-9515-9FD1595231C6" typeRef="string">
+                <dmn:text>winner</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:output id="_9E0870BB-8D95-4411-8A47-11CFF01DAC29"/>
+            <dmn:annotation name="annotation-1"/>
+            <dmn:rule id="_98955B9A-5DA7-495B-B943-79284561A2C9">
+              <dmn:inputEntry id="_5E351AC4-B4F3-42D3-8B93-B45F340BC136">
+                <dmn:text>"A"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_84A54DA0-0BC0-4B2A-A516-435FB7E90367">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_01E82DA6-58DF-42A9-9104-25F919C97875">
+                <dmn:text>1</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text/>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_736DA1E6-EF54-48FD-A388-25629E03F83B">
+              <dmn:inputEntry id="_B8B26E4C-982A-4C75-AF5A-DF2764B9DA72">
+                <dmn:text>"B"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_0D0CCDCD-7B5F-45A5-BACA-C41D06D30C08">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_09E4351E-F1BA-4CDE-AF76-569A3FF9D1CB">
+                <dmn:text>2</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text/>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_2C49AB40-00AA-4399-B6ED-D91109CF2E2E">
+              <dmn:inputEntry id="_9D5E4E57-0210-409D-ABC2-A5EC9E9D60FA">
+                <dmn:text>"C"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_9AA215E1-0DC8-40E8-B586-1447466F3082">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_2B4E8590-BEA9-4F1B-B2C1-4AE0229AF560">
+                <dmn:text>3</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text/>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_51859BFA-5365-4F8F-92EE-D4863796A170">
+              <dmn:inputEntry id="_0C6608B4-6325-4A8D-8664-6EE5D180FFE9">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_4D638163-4146-41A3-A8DA-6EE98A98ED70">
+                <dmn:text>"us"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_E14005FB-BF8D-49EF-95C6-727069C0C45F">
+                <dmn:text>0</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text/>
+              </dmn:annotationEntry>
+            </dmn:rule>
+          </dmn:decisionTable>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_5D499948-44D6-4C95-9973-78FECCF750C8" name="we_scored" typeRef="number"/>
+          <dmn:decisionTable id="_5D499948-44D6-4C95-9973-78FECCF750C9" hitPolicy="FIRST" preferredOrientation="Rule-as-Row">
+            <dmn:input id="_29074A85-D309-4CC7-B49A-CF0569D26C0D">
+              <dmn:inputExpression id="_A3FADB38-5F75-4D82-B980-D2108B59B458" typeRef="string">
+                <dmn:text>line.we_played</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:output id="_61037AF4-1DF1-4E6D-A097-656D31BF553C"/>
+            <dmn:annotation name="annotation-1"/>
+            <dmn:rule id="_B12A075A-E2CB-4763-9ED4-04480D7A262C">
+              <dmn:inputEntry id="_6CF9A080-A22E-432C-AF18-0715DAD84E93">
+                <dmn:text>"X"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_18918D5D-7781-48CA-B88A-A616A0F9EE05">
+                <dmn:text>1</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text/>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_EE358316-FDA3-410D-88F4-37FB38E3E801">
+              <dmn:inputEntry id="_C20A6EF1-73A0-4093-B818-B728659E57FC">
+                <dmn:text>"Y"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_A0D92730-4F6E-42D3-A80E-6F1B2EB3D827">
+                <dmn:text>2</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text/>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_FC3F831F-E961-4C6B-A124-16A14C7B7B0A">
+              <dmn:inputEntry id="_506415DC-C8DA-482D-89F1-0042832C5B14">
+                <dmn:text>"Z"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_3FB70171-A69F-4DD3-977A-5E6FCE2EAE80">
+                <dmn:text>3</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text/>
+              </dmn:annotationEntry>
+            </dmn:rule>
+          </dmn:decisionTable>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_5CA8D6FE-3A28-4576-8CC6-15DB2894D7B1" name="win_score" typeRef="number"/>
+          <dmn:literalExpression id="_5CA8D6FE-3A28-4576-8CC6-15DB2894D7B0">
+            <dmn:text>if winner = "us" 
+then 6 
+else if winner = "draw" 
+  then 3 
+  else 0</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_A493F96A-160B-4154-9CAA-73F915DDB501" name="total_score" typeRef="number"/>
+          <dmn:literalExpression id="_55AFA72F-27E1-471C-B29E-F08B06BEAD30">
+            <dmn:text>we_scored + win_score</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_F75C15DB-7DE8-4570-A823-E62E57506FE5" name="index" typeRef="number"/>
+          <dmn:literalExpression id="_F75C15DB-7DE8-4570-A823-E62E57506FE4">
+            <dmn:text>line.index</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+  </dmn:businessKnowledgeModel>
+  <dmn:decision id="_F4D4EE4A-A02D-43FD-B95E-ADF93F4EB5E9" name="Part 1">
+    <dmn:extensionElements/>
+    <dmn:variable id="_53325F89-7946-45FD-AD6F-5F09FEFF8A27" name="Part 1" typeRef="number"/>
+    <dmn:informationRequirement id="_B1FB1F36-38DC-4E55-9C68-AB3EB3550E35">
+      <dmn:requiredDecision href="#_7637DC8B-2DFF-485E-BCAE-8DF02AF90B94"/>
+    </dmn:informationRequirement>
+    <dmn:literalExpression id="_D0EEAA8E-027B-45E1-B5F1-11C3AF691FFC">
+      <dmn:text>sum(Scored Lines.total_score)</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:decision id="_61BB7E53-56EA-485D-AD55-06DAA74768F0" name="Part 2 Game Lines">
+    <dmn:extensionElements/>
+    <dmn:variable id="_E6F24D79-8546-401C-8668-CA0B7028EB97" name="Part 2 Game Lines" typeRef="Game Lines"/>
+    <dmn:informationRequirement id="_6F120DEB-CE1A-49BD-AC08-60B24548AB04">
+      <dmn:requiredInput href="#_FF2695BB-35B7-40ED-96B2-7CEAB8E1E9A1"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_AF9728D9-3F4A-49E1-8E32-6CD12B7A2810">
+      <dmn:requiredKnowledge href="#_05F122E5-C967-49AE-9E33-C8E5ADC088A2"/>
+    </dmn:knowledgeRequirement>
+    <dmn:literalExpression id="_80516C7A-C263-4605-ADD8-031570FF196C">
+      <dmn:text>for i in 1..count(InputLines)
+return Apply Move(i, InputLines[i])</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:businessKnowledgeModel id="_05F122E5-C967-49AE-9E33-C8E5ADC088A2" name="Apply Move">
+    <dmn:extensionElements/>
+    <dmn:variable id="_EE27EF1D-B3BE-4603-9C30-63D7DB184039" name="Apply Move" typeRef="Game Lines"/>
+    <dmn:encapsulatedLogic id="_6ACFC4C2-A6FC-4E7B-92C7-B11E82CC31E0" kind="FEEL">
+      <dmn:formalParameter id="_FCF1D4C8-1D80-4A1C-8FE0-62950C7C7222" name="idx" typeRef="number"/>
+      <dmn:formalParameter id="_C3B75645-A336-44D8-B95B-AEB9E0504D79" name="raw_line" typeRef="string"/>
+      <dmn:context id="_1D1BF840-6128-4137-97F8-09B120952097">
+        <dmn:contextEntry>
+          <dmn:variable id="_D4E62D78-32A6-4856-B131-4DC89631146F" name="index" typeRef="number"/>
+          <dmn:literalExpression id="_D4E62D78-32A6-4856-B131-4DC89631146D">
+            <dmn:text>idx</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_4BD1E764-9C2A-4606-B342-F441A8DB87A9" name="they_played" typeRef="string"/>
+          <dmn:literalExpression id="_4BD1E764-9C2A-4606-B342-F441A8DB87A8">
+            <dmn:text>split(raw_line, " ")[1]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_CF8246F0-1B0B-42AA-944D-E12A636AA353" name="hint" typeRef="string"/>
+          <dmn:literalExpression id="_CF8246F0-1B0B-42AA-944D-E12A636AA352">
+            <dmn:text>split(raw_line, " ")[2]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_BF24ADAF-136C-47D6-AD8A-B70452503980" name="we_played" typeRef="string"/>
+          <dmn:decisionTable id="_BF24ADAF-136C-47D6-AD8A-B7045250398F" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+            <dmn:input id="_7305C5CF-431D-4428-93AE-464AD3AA3E19">
+              <dmn:inputExpression id="_612001CD-8BD6-43BE-A032-303FB387C76C" typeRef="string">
+                <dmn:text>they_played</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:input id="_F156DE2E-11C9-46E5-9B3F-965475D47F01">
+              <dmn:inputExpression id="_EAAE059C-A917-4359-8EC7-351680DF73AE" typeRef="string">
+                <dmn:text>hint</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:output id="_22258015-E29F-4E62-AB05-AB62F188E63E"/>
+            <dmn:annotation name="annotation-1"/>
+            <dmn:rule id="_3BF3929A-1034-49AB-98B1-A7C333B3594F">
+              <dmn:inputEntry id="_2AAC26FB-4134-4D63-A64E-074390C3526E">
+                <dmn:text>"A"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_CEA6C694-BD2E-4958-BCF2-F67ADCE853AF">
+                <dmn:text>"X"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_B65E60D6-5BEB-4F28-B5A4-DF0446187AB3">
+                <dmn:text>"Z"</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>Lose to rock (play scissors)</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_3BF3929A-1034-49AB-98B1-A7C333B3594E">
+              <dmn:inputEntry id="_EC64F32F-44CD-4380-B88D-D33F459C0CE1">
+                <dmn:text>"A"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_011A8852-729C-439A-AB9F-8BF9E5D56C7E">
+                <dmn:text>"Y"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_2763F05A-01F0-413D-84B3-CFA0B8DEA8FF">
+                <dmn:text>"X"</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>Draw with rock</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_3BF3929A-1034-49AB-98B1-A7C333B3594A">
+              <dmn:inputEntry id="_7D89A701-DF76-485C-9C65-7270DF32F8F4">
+                <dmn:text>"A"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_68DD37DA-EBD8-4A3E-A49A-EB4262FF101E">
+                <dmn:text>"Z"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_50BF2FEE-1052-45F2-88DE-93CD62EFC5F7">
+                <dmn:text>"Y"</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>Beat rock (play paper)</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_3BF3929A-1034-49AB-98B1-A7C333B3594B">
+              <dmn:inputEntry id="_60CD1021-E07F-4DE6-B189-C56A0E31D133">
+                <dmn:text>"B"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_E17AECD6-ECBB-48AF-8287-E2DD9555850D">
+                <dmn:text>"X"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_1DFCA9A8-FBD5-4140-A3CB-8E244496258D">
+                <dmn:text>"X"</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>Lose to paper (play rock)</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_3BF3929A-1034-49AB-98B1-A7C333B3594C">
+              <dmn:inputEntry id="_A3620CB0-F5A9-4921-8DC9-0D41F917EC58">
+                <dmn:text>"B"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_E12F4143-70BA-4972-B078-AFCEAED02552">
+                <dmn:text>"Y"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_A2CADAE1-784D-4671-8D91-F0B15FDF5B53">
+                <dmn:text>"Y"</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>Draw with paper</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_3BF3929A-1034-49AB-98B1-A7C333B3594D">
+              <dmn:inputEntry id="_C6508D1B-88FB-4682-9819-657256A5A1AF">
+                <dmn:text>"B"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_1D149650-03B7-430A-919E-25A172F11743">
+                <dmn:text>"Z"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_F38DD728-BAC3-420A-B50D-75355B5096EC">
+                <dmn:text>"Z"</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>Beat paper (play scissors)</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_3BF3929A-1034-49AB-98B1-A7C333B35942">
+              <dmn:inputEntry id="_E07E1E10-0341-464E-8699-4863BAE39621">
+                <dmn:text>"C"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_5EAFC2F4-D96A-44E5-A8EC-9A299A64A9CC">
+                <dmn:text>"X"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_FE6D1013-B7A5-4D95-8585-587241446892">
+                <dmn:text>"Y"</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>Lose to scissors (play paper)</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_3BF3929A-1034-49AB-98B1-A7C333B35940">
+              <dmn:inputEntry id="_5D10F6D1-FD19-486F-80DB-029CC5211F8B">
+                <dmn:text>"C"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_645C83EE-6001-4D97-A0DB-665A9319F742">
+                <dmn:text>"Y"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_F1B6C34E-F285-407F-A0F7-90CB0E734B4A">
+                <dmn:text>"Z"</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>Draw with scissors</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_3BF3929A-1034-49AB-98B1-A7C333B35941">
+              <dmn:inputEntry id="_24786D2B-39B3-4B8C-830E-85B28B9D8C30">
+                <dmn:text>"C"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_36D90573-6E0C-48F7-B847-96FE0B4D9206">
+                <dmn:text>"Z"</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_FC0306DA-62B2-4D25-B108-59A705BBC83E">
+                <dmn:text>"X"</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>Beat scissors (play rock)</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+          </dmn:decisionTable>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+  </dmn:businessKnowledgeModel>
+  <dmn:decision id="_765CF278-EB3A-471C-B5DE-1CFD40A7834B" name="Part 2 Scored Lines">
+    <dmn:extensionElements/>
+    <dmn:variable id="_3F34B94F-6194-4207-BB0E-D647A79054D6" name="Part 2 Scored Lines" typeRef="Scored Lines"/>
+    <dmn:informationRequirement id="_27C7FF00-D8DC-464F-B6CD-66F91833D2AB">
+      <dmn:requiredDecision href="#_61BB7E53-56EA-485D-AD55-06DAA74768F0"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_6D5500E0-C8FB-4FE9-8ACB-C55E6374B114">
+      <dmn:requiredKnowledge href="#_2D7DB845-2139-4465-9351-A8BF3367E8A8"/>
+    </dmn:knowledgeRequirement>
+    <dmn:literalExpression id="_CFD0247E-FFF6-4C00-9877-951AD540617F">
+      <dmn:text>for line in Part 2 Game Lines
+return Assign Scores(line)</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:decision id="_34BB1B8F-25AA-486E-806E-3B5051830AF0" name="Part 2">
+    <dmn:extensionElements/>
+    <dmn:variable id="_670D466F-3516-40D9-86EE-1B83F090AFD3" name="Part 2" typeRef="number"/>
+    <dmn:informationRequirement id="_2C962295-9CD3-4140-B4AA-26A06434AA03">
+      <dmn:requiredDecision href="#_765CF278-EB3A-471C-B5DE-1CFD40A7834B"/>
+    </dmn:informationRequirement>
+    <dmn:literalExpression id="_79BE35DF-5513-42AA-8DF1-40D21AD82B2F">
+      <dmn:text>sum(Part 2 Scored Lines.total_score)</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_73BA1EBD-78B7-4AFE-A07F-B2EA629B1A73" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_FFE2F146-AE9A-4B18-AAFE-7943D4AFCCEB">
+            <kie:width>50</kie:width>
+            <kie:width>211</kie:width>
+            <kie:width>506</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_0DB54B2C-60F2-4544-8DD6-68FB04638815">
+            <kie:width>506</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_A4F91513-3AA3-488B-B67F-6E9C1A5D41DC">
+            <kie:width>506</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_8B7C7BCE-70C6-4189-9CD5-127423E41F99">
+            <kie:width>506</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_866D6EC8-1DB8-47DB-9BAA-FC69958B5C3B">
+            <kie:width>50</kie:width>
+            <kie:width>787</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_7F4506B1-A47D-4019-942A-BC864721ABF5">
+            <kie:width>520</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_65BEC2F1-C6C6-43FF-9FE4-136092E57EB3">
+            <kie:width>300</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_694D9EE9-FEBE-456D-88B7-51F56C53F4F3">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>842</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_7BB59D57-D629-49A0-9D49-6668A3C2B922">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>472</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_3D949B50-E987-4547-BEB1-AC57EF81A243">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>472</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_5D499948-44D6-4C95-9973-78FECCF750C9">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>572</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_5CA8D6FE-3A28-4576-8CC6-15DB2894D7B0">
+            <kie:width>842</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_55AFA72F-27E1-471C-B29E-F08B06BEAD30">
+            <kie:width>842</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_F75C15DB-7DE8-4570-A823-E62E57506FE4">
+            <kie:width>842</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_CB68E0ED-08FC-49D4-A493-E3A676D62593">
+            <kie:width>50</kie:width>
+            <kie:width>1012</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D0EEAA8E-027B-45E1-B5F1-11C3AF691FFC">
+            <kie:width>300</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_80516C7A-C263-4605-ADD8-031570FF196C">
+            <kie:width>300</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_1D1BF840-6128-4137-97F8-09B120952097">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>642</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D4E62D78-32A6-4856-B131-4DC89631146D">
+            <kie:width>642</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_4BD1E764-9C2A-4606-B342-F441A8DB87A8">
+            <kie:width>642</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_CF8246F0-1B0B-42AA-944D-E12A636AA352">
+            <kie:width>642</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_BF24ADAF-136C-47D6-AD8A-B7045250398F">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>272</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_6ACFC4C2-A6FC-4E7B-92C7-B11E82CC31E0">
+            <kie:width>50</kie:width>
+            <kie:width>812</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_CFD0247E-FFF6-4C00-9877-951AD540617F">
+            <kie:width>300</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_79BE35DF-5513-42AA-8DF1-40D21AD82B2F">
+            <kie:width>300</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-drg-_FF2695BB-35B7-40ED-96B2-7CEAB8E1E9A1" dmnElementRef="_FF2695BB-35B7-40ED-96B2-7CEAB8E1E9A1" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="439" y="401" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_BC19F183-1301-4E7C-855A-10AAE2F5CE0F" dmnElementRef="_BC19F183-1301-4E7C-855A-10AAE2F5CE0F" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="163.40186915887853" y="322" width="128" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_C1325934-9CBC-43C1-931B-9FC8C5D80E95" dmnElementRef="_C1325934-9CBC-43C1-931B-9FC8C5D80E95" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="354" y="275" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_7637DC8B-2DFF-485E-BCAE-8DF02AF90B94" dmnElementRef="_7637DC8B-2DFF-485E-BCAE-8DF02AF90B94" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="234" y="149" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_2D7DB845-2139-4465-9351-A8BF3367E8A8" dmnElementRef="_2D7DB845-2139-4465-9351-A8BF3367E8A8" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="430.29906542056074" y="148.68421052631578" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_F4D4EE4A-A02D-43FD-B95E-ADF93F4EB5E9" dmnElementRef="_F4D4EE4A-A02D-43FD-B95E-ADF93F4EB5E9" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="234" y="35" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_61BB7E53-56EA-485D-AD55-06DAA74768F0" dmnElementRef="_61BB7E53-56EA-485D-AD55-06DAA74768F0" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="543" y="276" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_05F122E5-C967-49AE-9E33-C8E5ADC088A2" dmnElementRef="_05F122E5-C967-49AE-9E33-C8E5ADC088A2" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="713" y="271" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_765CF278-EB3A-471C-B5DE-1CFD40A7834B" dmnElementRef="_765CF278-EB3A-471C-B5DE-1CFD40A7834B" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="628" y="149" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_34BB1B8F-25AA-486E-806E-3B5051830AF0" dmnElementRef="_34BB1B8F-25AA-486E-806E-3B5051830AF0" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="628" y="35" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_CA597EAD-24E2-4D02-98B0-0AA60E50260A-AUTO-TARGET" dmnElementRef="_CA597EAD-24E2-4D02-98B0-0AA60E50260A">
+        <di:waypoint x="489" y="426"/>
+        <di:waypoint x="404" y="325"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_04807CF6-8A30-473B-AE26-EB37BB9B07FB" dmnElementRef="_04807CF6-8A30-473B-AE26-EB37BB9B07FB">
+        <di:waypoint x="227.40186915887853" y="347"/>
+        <di:waypoint x="404" y="300"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_3EC16826-9D2D-483C-8C0C-F6D5B3BB8159-AUTO-TARGET" dmnElementRef="_3EC16826-9D2D-483C-8C0C-F6D5B3BB8159">
+        <di:waypoint x="404" y="300"/>
+        <di:waypoint x="284" y="199"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_5E8D16E5-1F3F-40D3-8B08-0E70044E5571" dmnElementRef="_5E8D16E5-1F3F-40D3-8B08-0E70044E5571">
+        <di:waypoint x="480.29906542056074" y="173.68421052631578"/>
+        <di:waypoint x="284" y="174"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_B1FB1F36-38DC-4E55-9C68-AB3EB3550E35-AUTO-TARGET" dmnElementRef="_B1FB1F36-38DC-4E55-9C68-AB3EB3550E35">
+        <di:waypoint x="284" y="174"/>
+        <di:waypoint x="284" y="85"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_6F120DEB-CE1A-49BD-AC08-60B24548AB04-AUTO-TARGET" dmnElementRef="_6F120DEB-CE1A-49BD-AC08-60B24548AB04">
+        <di:waypoint x="489" y="426"/>
+        <di:waypoint x="593" y="326"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_AF9728D9-3F4A-49E1-8E32-6CD12B7A2810-AUTO-TARGET" dmnElementRef="_AF9728D9-3F4A-49E1-8E32-6CD12B7A2810">
+        <di:waypoint x="763" y="296"/>
+        <di:waypoint x="643" y="301"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_6D5500E0-C8FB-4FE9-8ACB-C55E6374B114" dmnElementRef="_6D5500E0-C8FB-4FE9-8ACB-C55E6374B114">
+        <di:waypoint x="480.29906542056074" y="173.68421052631578"/>
+        <di:waypoint x="678" y="174"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_27C7FF00-D8DC-464F-B6CD-66F91833D2AB" dmnElementRef="_27C7FF00-D8DC-464F-B6CD-66F91833D2AB">
+        <di:waypoint x="593" y="301"/>
+        <di:waypoint x="678" y="174"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_2C962295-9CD3-4140-B4AA-26A06434AA03" dmnElementRef="_2C962295-9CD3-4140-B4AA-26A06434AA03">
+        <di:waypoint x="678" y="174"/>
+        <di:waypoint x="678" y="60"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>

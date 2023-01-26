@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="com.aeh.aoc2022.dmn" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_149D3087-686C-4514-81C1-E51067648788" name="decisionmodel-05" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="com.aeh.aoc2022.dmn">
+  <dmn:extensionElements/>
+  <dmn:itemDefinition id="_B83FB4A8-CDE6-4760-A309-00607C563E05" name="Stack" isCollection="true">
+    <dmn:typeRef>string</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_EC313A51-F654-403F-85BB-6AFF3FD2E4DE" name="Stacks" isCollection="true">
+    <dmn:typeRef>Stack</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_A6B412A5-F006-4E2C-84A9-BBC59E64A253" name="raw_lines" isCollection="true">
+    <dmn:typeRef>string</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_7378154E-7E19-4CE7-909D-B4017A4BB601" name="Moves" isCollection="true">
+    <dmn:typeRef>string</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_EE0EEB9C-20A8-4E7A-B6BC-173E947723D8" name="Crate List" isCollection="true">
+    <dmn:typeRef>string</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:decision id="_FB9C4CC7-1E7F-4F21-AE0B-F324DB482E9E" name="Initial State">
+    <dmn:extensionElements/>
+    <dmn:variable id="_6DD4DC78-5B95-49B3-853C-33B6C7FB1DF7" name="Initial State" typeRef="Stacks"/>
+    <dmn:literalExpression id="_93AD8AAF-5EDF-44F0-B841-8CB32A7ED8EB">
+      <dmn:text>[
+["B","G","S","C"],
+["T","M","W","H","J","N","V","G"],
+["M","Q","S"],
+["B","S","L","T","W","N","M"],
+["J","Z","F","T","V","G","W","P"],
+["C","T","B","G","Q","H","S"],
+["T","J","P","B","W"],
+["G","D","C","Z","F","T","Q","M"],
+["N","S","H","B","P","F"]
+]</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:inputData id="_1B9A7288-245A-4642-AAD7-2C88E903BB42" name="InputLines">
+    <dmn:extensionElements/>
+    <dmn:variable id="_B5436576-C784-48A4-A358-BE02C383897A" name="InputLines" typeRef="raw_lines"/>
+  </dmn:inputData>
+  <dmn:decision id="_02A17FF5-1A1A-414A-A0E2-6D6CA7E81193" name="Final State Part 1">
+    <dmn:extensionElements/>
+    <dmn:variable id="_3FE7EE97-FE92-4967-A89C-BDAAAF3BB812" name="Final State Part 1" typeRef="Stacks"/>
+    <dmn:informationRequirement id="_BC48063C-0223-40F2-899D-303938264249">
+      <dmn:requiredInput href="#_1B9A7288-245A-4642-AAD7-2C88E903BB42"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_25178490-8957-449F-953D-D26A2029A8A4">
+      <dmn:requiredDecision href="#_FB9C4CC7-1E7F-4F21-AE0B-F324DB482E9E"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_4FA3012E-B284-4EBE-B3B9-8C6CE19BE579">
+      <dmn:requiredKnowledge href="#_F70C075B-4531-42D4-A984-DB636B45EC51"/>
+    </dmn:knowledgeRequirement>
+    <dmn:context id="_3378744A-3F0E-4655-89BD-67A6352075A2">
+      <dmn:contextEntry>
+        <dmn:variable id="_E5468232-CD6C-455D-A379-FE8D3ADD2E9C" name="Moves" typeRef="raw_lines"/>
+        <dmn:literalExpression id="_6DFC952E-1C37-446C-B99A-2225E5388FDD">
+          <dmn:text>sublist(InputLines, 11, count(InputLines)-10)</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_2FCF9DFD-31BC-4132-9486-F8B921C4BFEC" name="Update 1" typeRef="Stacks"/>
+        <dmn:literalExpression id="_B91A3AEA-265E-4EF7-9660-EC5CCDA52E8C">
+          <dmn:text>Update Stacks(Initial State, sublist(Moves, 1, 100), 1, "Part 1")</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_A16358A2-96DE-45F3-A4EE-62687D02FAD0" name="Update 2" typeRef="Stacks"/>
+        <dmn:literalExpression id="_EA8D4D60-0B10-4165-AE7A-C66D5A805BF5">
+          <dmn:text>Update Stacks(Update 1, sublist(Moves, 101, 100), 1, "Part 1")</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_516D8B9A-7C80-44CD-A3E4-BB922AB4AE1B" name="Update 3" typeRef="Stacks"/>
+        <dmn:literalExpression id="_9364810C-269A-46FE-80C5-D76A14C6EAE3">
+          <dmn:text>Update Stacks(Update 2, sublist(Moves, 201, 100), 1, "Part 1")</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_4BB15130-F77C-4E7F-9CA8-54F3C0E509B2" name="Update 4" typeRef="Stacks"/>
+        <dmn:literalExpression id="_B841DCC4-8D2C-4476-8FD7-8C692E5AF94C">
+          <dmn:text>Update Stacks(Update 3, sublist(Moves, 301, 100), 1, "Part 1")</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:literalExpression id="_4422A45A-B308-43C0-929C-323E6E8EF935">
+          <dmn:text>Update Stacks(Update 4, sublist(Moves, 401, 101), 1, "Part 1")
+</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmn:businessKnowledgeModel id="_F70C075B-4531-42D4-A984-DB636B45EC51" name="Update Stacks">
+    <dmn:extensionElements/>
+    <dmn:variable id="_2839C4DE-BDDB-4E15-B83A-380675EA2C50" name="Update Stacks" typeRef="Stacks"/>
+    <dmn:encapsulatedLogic id="_B024146E-B0D6-4FF7-8456-4EC5076B9B7C" kind="FEEL">
+      <dmn:formalParameter id="_7E24F679-3F6C-4AEA-A16E-843DF1DAD6E7" name="State" typeRef="Stacks"/>
+      <dmn:formalParameter id="_D567CA5F-DF02-4D23-ACAA-D75CFFAF7C93" name="Moves" typeRef="Moves"/>
+      <dmn:formalParameter id="_9CF7B4EC-7CB2-4217-BDD2-F2A08A8053F6" name="move_num" typeRef="number"/>
+      <dmn:formalParameter id="_EE20CF23-E949-4A8E-A227-40BA8D8DFDBE" name="mode" typeRef="string"/>
+      <dmn:context id="_19658803-4A0C-4986-8F36-386E2D741061">
+        <dmn:contextEntry>
+          <dmn:variable id="_22C756A7-DA1E-46AD-8F59-7E4968CB3685" name="Move Bits" typeRef="Any"/>
+          <dmn:literalExpression id="_F1E7B6E9-2B21-4853-89E2-5C1F5C9DF8DB">
+            <dmn:text>split(Moves[move_num], " ")</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_D11B8490-7A6E-4327-A38F-7E04AD575550" name="qty" typeRef="number"/>
+          <dmn:literalExpression id="_64E54593-D9B3-4BD1-80E1-A8A92E8E3DA1">
+            <dmn:text>number(Move Bits[2], ",", ".")</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_9B6C658C-9EDE-482A-8CE4-2C1D2B00FFB9" name="src" typeRef="number"/>
+          <dmn:literalExpression id="_DC8868FE-D616-45B7-BD4C-3AD3F3650F9B">
+            <dmn:text>number(Move Bits[4], ",", ".")</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_DEBB8B07-00A3-40C6-8E08-32EFE134E063" name="dest" typeRef="number"/>
+          <dmn:literalExpression id="_9250E12B-A120-4FAA-B6C1-A1BE14153F45">
+            <dmn:text>number(Move Bits[6], ",", ".")</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_96F4D66C-388A-488C-9CCC-603DD7160A5A" name="moved" typeRef="Any"/>
+          <dmn:literalExpression id="_1517E5E0-1309-4B5D-BE24-DCEDB113B2E9">
+            <dmn:text>if mode = "Part 1" then
+  reverse(sublist(State[src], (count(State[src])-qty)+1, qty))
+else
+  sublist(State[src], (count(State[src])-qty)+1, qty)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_0D2B031E-90BB-43CA-941A-EE502627928E" name="New State" typeRef="Stacks"/>
+          <dmn:literalExpression id="_177BACC2-971D-43E7-9CA8-6C1FC3541749">
+            <dmn:text>for i in 1..count(State)
+return if i = src then
+ if count(State[i])-qty = 0 then [] else sublist(State[i], 1, count(State[i])-qty)
+else
+ if i = dest then
+   concatenate(State[i], moved)
+ else
+   State[i]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:literalExpression id="_35448CE1-17A8-49DD-AE89-A2C4C16324AD">
+            <dmn:text>if move_num = count(Moves) then
+ New State
+else
+ Update Stacks(New State, Moves, move_num+1)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+  </dmn:businessKnowledgeModel>
+  <dmn:decision id="_10B3EBD1-A45D-4E17-BBFD-F59BA41CC0D0" name="Part 1">
+    <dmn:extensionElements/>
+    <dmn:variable id="_47F78354-47E9-4F25-B061-37CB4D44CED6" name="Part 1" typeRef="string"/>
+    <dmn:informationRequirement id="_7DCD7881-0A6E-4421-864E-716946D799AF">
+      <dmn:requiredDecision href="#_02A17FF5-1A1A-414A-A0E2-6D6CA7E81193"/>
+    </dmn:informationRequirement>
+    <dmn:context id="_0023C14B-5E34-4828-9B1F-4163CEA88A77">
+      <dmn:contextEntry>
+        <dmn:variable id="_A50D2B6E-5153-4333-B996-F26404E1E75B" name="Top Crates" typeRef="Crate List"/>
+        <dmn:literalExpression id="_59221D41-0456-4697-A2A1-E79980BB2BDB">
+          <dmn:text>for s in Final State Part 1
+return if count(s) = 0 then ""
+else s[-1]</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:literalExpression id="_BD678261-8E9A-4972-8BBC-66CF0EAD1679">
+          <dmn:text>string(Top Crates)</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmn:decision id="_F0FE5962-D441-4BF1-9764-E053C14B7F73" name="Final State Part 2">
+    <dmn:extensionElements/>
+    <dmn:variable id="_07FD2030-BBC0-405E-ACED-D69A44F23753" name="Final State Part 2"/>
+    <dmn:informationRequirement id="_67C3BBD3-B4E3-4EC4-932C-4D12543818C8">
+      <dmn:requiredInput href="#_1B9A7288-245A-4642-AAD7-2C88E903BB42"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_051FEB4F-CC89-4129-BB61-584F6283B76B">
+      <dmn:requiredDecision href="#_FB9C4CC7-1E7F-4F21-AE0B-F324DB482E9E"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_C4D9CF09-D6D4-4C4C-8AEF-809E4B6E9688">
+      <dmn:requiredKnowledge href="#_F70C075B-4531-42D4-A984-DB636B45EC51"/>
+    </dmn:knowledgeRequirement>
+    <dmn:context id="_38B638FE-4F30-420C-8373-E63A3215C283">
+      <dmn:contextEntry>
+        <dmn:variable id="_594DC37C-5EF6-4108-BD40-27F629EE9469" name="Moves" typeRef="Any"/>
+        <dmn:literalExpression id="_01A857F9-15AF-43A5-A94E-8308E4F56C7A">
+          <dmn:text>sublist(InputLines, 11, count(InputLines)-10)</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_DEECE0FC-1FE0-4589-B396-67B7FB5C7581" name="Update 1" typeRef="Stacks"/>
+        <dmn:literalExpression id="_D376AF92-354D-44D6-8536-797F7A75B43B">
+          <dmn:text>Update Stacks(Initial State, sublist(Moves, 1, 100), 1, "Part 2")</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_3178B5B1-D0D6-4344-B276-D8BCD063D5D9" name="Update 2" typeRef="Stacks"/>
+        <dmn:literalExpression id="_6F9C0BE2-E978-4361-B54F-62DA56374130">
+          <dmn:text>Update Stacks(Update 1, sublist(Moves, 101, 100), 1, "Part 2")</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_B8746C35-72A1-46ED-8EE0-784E2F159D01" name="Update 3" typeRef="Stacks"/>
+        <dmn:literalExpression id="_69C321FE-0B12-4B4F-8B18-F909082E376A">
+          <dmn:text>Update Stacks(Update 2, sublist(Moves, 201, 100), 1, "Part 2")</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_85DB2EA7-E157-41A2-B703-3BE8D1ED6C6F" name="Update 4" typeRef="Stacks"/>
+        <dmn:literalExpression id="_66735575-4518-4C63-BC9C-D811EC34D586">
+          <dmn:text>Update Stacks(Update 3, sublist(Moves, 301, 100), 1, "Part 2")</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:literalExpression id="_31D38E3B-DB75-4344-8FD2-08D41624D4C7">
+          <dmn:text>Update Stacks(Update 4, sublist(Moves, 401, 101), 1, "Part 2")</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmn:decision id="_84F6C0C0-BC7F-48D0-B4F9-990B9580D9A2" name="Part 2">
+    <dmn:extensionElements/>
+    <dmn:variable id="_F08E40EA-3B07-4676-AD05-622A4DE82237" name="Part 2" typeRef="string"/>
+    <dmn:informationRequirement id="_A848E94D-BD59-4502-9059-F926AC4BF220">
+      <dmn:requiredDecision href="#_F0FE5962-D441-4BF1-9764-E053C14B7F73"/>
+    </dmn:informationRequirement>
+    <dmn:context id="_CF43FCA6-F201-4271-A3F7-8E81D682C6A2">
+      <dmn:contextEntry>
+        <dmn:variable id="_22BC58AD-ACAD-429C-B49B-9B7386FEBEF1" name="Top Crates" typeRef="Any"/>
+        <dmn:literalExpression id="_67C98103-E017-4E0D-B69F-1DE123DAB927">
+          <dmn:text>for s in Final State Part 2
+return if count(s) = 0 then ""
+else s[-1]</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:literalExpression id="_DFD68DF7-4BF8-453A-9410-A2BBE9251AA9">
+          <dmn:text>string(Top Crates)</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_B1A23027-9E97-4815-887B-DAF71F778B6B" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_93AD8AAF-5EDF-44F0-B841-8CB32A7ED8EB">
+            <kie:width>528</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_3378744A-3F0E-4655-89BD-67A6352075A2">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>650</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_6DFC952E-1C37-446C-B99A-2225E5388FDD">
+            <kie:width>650</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_B91A3AEA-265E-4EF7-9660-EC5CCDA52E8C">
+            <kie:width>650</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_EA8D4D60-0B10-4165-AE7A-C66D5A805BF5">
+            <kie:width>650</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_9364810C-269A-46FE-80C5-D76A14C6EAE3">
+            <kie:width>650</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_B841DCC4-8D2C-4476-8FD7-8C692E5AF94C">
+            <kie:width>650</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_4422A45A-B308-43C0-929C-323E6E8EF935">
+            <kie:width>650</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_19658803-4A0C-4986-8F36-386E2D741061">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>577</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_F1E7B6E9-2B21-4853-89E2-5C1F5C9DF8DB">
+            <kie:width>577</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_64E54593-D9B3-4BD1-80E1-A8A92E8E3DA1">
+            <kie:width>577</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_DC8868FE-D616-45B7-BD4C-3AD3F3650F9B">
+            <kie:width>577</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_9250E12B-A120-4FAA-B6C1-A1BE14153F45">
+            <kie:width>577</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_1517E5E0-1309-4B5D-BE24-DCEDB113B2E9">
+            <kie:width>577</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_177BACC2-971D-43E7-9CA8-6C1FC3541749">
+            <kie:width>577</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_35448CE1-17A8-49DD-AE89-A2C4C16324AD">
+            <kie:width>577</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_B024146E-B0D6-4FF7-8456-4EC5076B9B7C">
+            <kie:width>50</kie:width>
+            <kie:width>747</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_0023C14B-5E34-4828-9B1F-4163CEA88A77">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>300</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_59221D41-0456-4697-A2A1-E79980BB2BDB">
+            <kie:width>300</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_BD678261-8E9A-4972-8BBC-66CF0EAD1679">
+            <kie:width>300</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_38B638FE-4F30-420C-8373-E63A3215C283">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>603</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_01A857F9-15AF-43A5-A94E-8308E4F56C7A">
+            <kie:width>603</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D376AF92-354D-44D6-8536-797F7A75B43B">
+            <kie:width>603</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_6F9C0BE2-E978-4361-B54F-62DA56374130">
+            <kie:width>603</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_69C321FE-0B12-4B4F-8B18-F909082E376A">
+            <kie:width>603</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_66735575-4518-4C63-BC9C-D811EC34D586">
+            <kie:width>603</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_31D38E3B-DB75-4344-8FD2-08D41624D4C7">
+            <kie:width>603</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_CF43FCA6-F201-4271-A3F7-8E81D682C6A2">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>300</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_67C98103-E017-4E0D-B69F-1DE123DAB927">
+            <kie:width>300</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_DFD68DF7-4BF8-453A-9410-A2BBE9251AA9">
+            <kie:width>300</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-drg-_FB9C4CC7-1E7F-4F21-AE0B-F324DB482E9E" dmnElementRef="_FB9C4CC7-1E7F-4F21-AE0B-F324DB482E9E" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="314" y="494" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_1B9A7288-245A-4642-AAD7-2C88E903BB42" dmnElementRef="_1B9A7288-245A-4642-AAD7-2C88E903BB42" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="465" y="494" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_02A17FF5-1A1A-414A-A0E2-6D6CA7E81193" dmnElementRef="_02A17FF5-1A1A-414A-A0E2-6D6CA7E81193" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="579" y="345.5" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_F70C075B-4531-42D4-A984-DB636B45EC51" dmnElementRef="_F70C075B-4531-42D4-A984-DB636B45EC51" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="395.29906542056074" y="344.31578947368416" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_10B3EBD1-A45D-4E17-BBFD-F59BA41CC0D0" dmnElementRef="_10B3EBD1-A45D-4E17-BBFD-F59BA41CC0D0" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="579" y="239.2554385964912" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_F0FE5962-D441-4BF1-9764-E053C14B7F73" dmnElementRef="_F0FE5962-D441-4BF1-9764-E053C14B7F73" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="190" y="356" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_84F6C0C0-BC7F-48D0-B4F9-990B9580D9A2" dmnElementRef="_84F6C0C0-BC7F-48D0-B4F9-990B9580D9A2" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="190" y="239" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_BC48063C-0223-40F2-899D-303938264249" dmnElementRef="_BC48063C-0223-40F2-899D-303938264249">
+        <di:waypoint x="515" y="519"/>
+        <di:waypoint x="629" y="370.5"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_25178490-8957-449F-953D-D26A2029A8A4-AUTO-TARGET" dmnElementRef="_25178490-8957-449F-953D-D26A2029A8A4">
+        <di:waypoint x="364" y="519"/>
+        <di:waypoint x="629" y="395.5"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_4FA3012E-B284-4EBE-B3B9-8C6CE19BE579" dmnElementRef="_4FA3012E-B284-4EBE-B3B9-8C6CE19BE579">
+        <di:waypoint x="445.29906542056074" y="369.31578947368416"/>
+        <di:waypoint x="629" y="370.5"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_7DCD7881-0A6E-4421-864E-716946D799AF" dmnElementRef="_7DCD7881-0A6E-4421-864E-716946D799AF">
+        <di:waypoint x="629" y="370.5"/>
+        <di:waypoint x="629" y="264.2554385964912"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_C4D9CF09-D6D4-4C4C-8AEF-809E4B6E9688-AUTO-TARGET" dmnElementRef="_C4D9CF09-D6D4-4C4C-8AEF-809E4B6E9688">
+        <di:waypoint x="445.29906542056074" y="369.31578947368416"/>
+        <di:waypoint x="290" y="381"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_67C3BBD3-B4E3-4EC4-932C-4D12543818C8-AUTO-TARGET" dmnElementRef="_67C3BBD3-B4E3-4EC4-932C-4D12543818C8">
+        <di:waypoint x="515" y="519"/>
+        <di:waypoint x="240" y="406"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_051FEB4F-CC89-4129-BB61-584F6283B76B-AUTO-TARGET" dmnElementRef="_051FEB4F-CC89-4129-BB61-584F6283B76B">
+        <di:waypoint x="364" y="519"/>
+        <di:waypoint x="240" y="406"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_A848E94D-BD59-4502-9059-F926AC4BF220-AUTO-TARGET" dmnElementRef="_A848E94D-BD59-4502-9059-F926AC4BF220">
+        <di:waypoint x="240" y="381"/>
+        <di:waypoint x="239.5929438893388" y="340"/>
+        <di:waypoint x="240" y="289"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>
