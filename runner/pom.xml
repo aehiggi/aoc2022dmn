@@ -114,35 +114,35 @@
                 <mainClass>com.aeh.aoc2022.App</mainClass>
                 <arguments>
                   <!--argument>01</argument>
-                  <argument>full</argument>
+                  <argument>input</argument>
                   <argument>Output, Part 2</argument-->
 
                   <!--argument>02</argument>
-                  <argument>full</argument>
+                  <argument>input</argument>
                   <argument>Part 1, Part 2</argument-->
 
                   <!--argument>03</argument>
-                  <argument>full</argument>
+                  <argument>input</argument>
                   <argument>Part 1, Part 2</argument-->
 
                   <!--argument>04</argument>
-                  <argument>full</argument>
+                  <argument>input</argument>
                   <argument>Part 1, Part 2</argument-->
 
                   <!--argument>05</argument>
-                  <argument>full</argument>
+                  <argument>input</argument>
                   <argument>Part 1, Part 2</argument-->
 
                   <!--argument>06</argument>
-                  <argument>full</argument>
+                  <argument>input</argument>
                   <argument>Part 1, Part 2</argument-->
 
                   <!--argument>07</argument>
-                  <argument>full</argument>
+                  <argument>input</argument>
                   <argument>Part 1, Part 2</argument-->
 
                   <!--argument>08</argument>
-                  <argument>full</argument>
+                  <argument>input</argument>
                   <argument>Part 2</argument-->
 
                   <!--argument>09</argument>
