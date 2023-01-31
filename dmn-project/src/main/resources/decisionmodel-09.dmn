@@ -5,11 +5,16 @@
     <dmn:itemComponent id="_8FEC0F33-21BD-4276-94E4-13656140F128" name="head" isCollection="false">
       <dmn:typeRef>Position</dmn:typeRef>
     </dmn:itemComponent>
-    <dmn:itemComponent id="_6B9B786C-03B2-4C82-973C-5248B4D8AC42" name="tail" isCollection="false">
+    <dmn:itemComponent id="_6B9B786C-03B2-4C82-973C-5248B4D8AC42" name="tail" isCollection="true">
       <dmn:typeRef>Position</dmn:typeRef>
     </dmn:itemComponent>
-    <dmn:itemComponent id="_3F4677BD-8472-45C4-A8C9-073554367B9B" name="tail_visited" isCollection="true">
-      <dmn:typeRef>string</dmn:typeRef>
+    <dmn:itemComponent id="_3F4677BD-8472-45C4-A8C9-073554367B9B" name="tail_visited" isCollection="false">
+      <dmn:itemComponent id="_FE46EF66-6D26-4C20-A0B6-4C26A4BBF56E" name="first" isCollection="true">
+        <dmn:typeRef>string</dmn:typeRef>
+      </dmn:itemComponent>
+      <dmn:itemComponent id="_8692AF67-68DF-4EF0-A8CC-F631DCF48940" name="last" isCollection="true">
+        <dmn:typeRef>string</dmn:typeRef>
+      </dmn:itemComponent>
     </dmn:itemComponent>
   </dmn:itemDefinition>
   <dmn:itemDefinition id="_CBBF3443-4D77-4336-89E4-945A6780A258" name="Position" isCollection="false">
@@ -45,8 +50,9 @@
         <dmn:literalExpression id="_C366FF53-F92C-4891-8E63-A64CADFE470A">
           <dmn:text>{
  head: { x: 0, y: 0 },
- tail: { x: 0, y: 0 },
- tail_visited: ["0,0"]
+ tail: [ { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 },
+         { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 } ],
+ tail_visited: { first: ["0,0"], last: ["0,0"] }
 }</dmn:text>
         </dmn:literalExpression>
       </dmn:contextEntry>
@@ -148,292 +154,157 @@ else old_state.head.y</dmn:text>
           </dmn:literalExpression>
         </dmn:contextEntry>
         <dmn:contextEntry>
-          <dmn:variable id="_C05FD2DD-F747-4EF2-BFB7-CDA209B35C16" name="tail_move" typeRef="Any"/>
-          <dmn:decisionTable id="_8B6171E7-210A-4324-86BB-29A1A9298650" hitPolicy="FIRST" preferredOrientation="Rule-as-Row">
-            <dmn:input id="_CB515F64-0BC9-4843-AFB2-776ED0119706">
-              <dmn:inputExpression id="_79F71F37-C560-4615-975B-4DA45764AD4F" typeRef="number">
-                <dmn:text>new_head_x</dmn:text>
-              </dmn:inputExpression>
-            </dmn:input>
-            <dmn:input id="_3B36F992-0464-439C-AE47-A5DF044DFCB7">
-              <dmn:inputExpression id="_F367349E-3BF3-4710-B330-3403BC7A5BB8" typeRef="number">
-                <dmn:text>new_head_y</dmn:text>
-              </dmn:inputExpression>
-            </dmn:input>
-            <dmn:output id="_4D7D18C5-0C1F-46E7-B7EC-895DBAA014CB" name="x" typeRef="number"/>
-            <dmn:output id="_86E21F2F-638A-46FD-93F0-65E4CDEBCAF6" name="y" typeRef="number"/>
-            <dmn:annotation name="type"/>
-            <dmn:rule id="_B42DD5C5-1D32-48C4-8602-D7532B63DAC2">
-              <dmn:inputEntry id="_C7C57538-2BA8-4AE2-8A1B-B7BB38770CCD">
-                <dmn:text>old_state.tail.x</dmn:text>
-              </dmn:inputEntry>
-              <dmn:inputEntry id="_494908D8-28BD-4522-ABA8-B72EC8272C48">
-                <dmn:text>old_state.tail.y + 2</dmn:text>
-              </dmn:inputEntry>
-              <dmn:outputEntry id="_4E6D85AA-5427-4F50-AB6A-13A535D99632">
-                <dmn:text>0</dmn:text>
-              </dmn:outputEntry>
-              <dmn:outputEntry id="_16B6B5FA-E5BD-4890-B100-17953DB78195">
-                <dmn:text>1</dmn:text>
-              </dmn:outputEntry>
-              <dmn:annotationEntry>
-                <dmn:text>N</dmn:text>
-              </dmn:annotationEntry>
-            </dmn:rule>
-            <dmn:rule id="_79313DD5-FCAC-4278-BDB5-89D76D37D846">
-              <dmn:inputEntry id="_40D683F5-2B5B-489B-A105-063CEE40838E">
-                <dmn:text>old_state.tail.x + 1</dmn:text>
-              </dmn:inputEntry>
-              <dmn:inputEntry id="_F886EF21-CE22-40DE-A3D0-62E10AAE90DA">
-                <dmn:text>old_state.tail.y + 2</dmn:text>
-              </dmn:inputEntry>
-              <dmn:outputEntry id="_D07C0C85-57A4-42A8-8AEB-2D19C8A11627">
-                <dmn:text>1</dmn:text>
-              </dmn:outputEntry>
-              <dmn:outputEntry id="_1F6517C3-1E12-45E0-B5D6-A406025281CC">
-                <dmn:text>1</dmn:text>
-              </dmn:outputEntry>
-              <dmn:annotationEntry>
-                <dmn:text>NNE</dmn:text>
-              </dmn:annotationEntry>
-            </dmn:rule>
-            <dmn:rule id="_CF63F833-C88D-422D-AE39-6875BB148F0F">
-              <dmn:inputEntry id="_C7839EFA-79CC-4414-82C5-D3EAB5BA462E">
-                <dmn:text>old_state.tail.x + 2</dmn:text>
-              </dmn:inputEntry>
-              <dmn:inputEntry id="_47FB4FA7-7F66-448A-87F7-9E51C5465DE0">
-                <dmn:text>old_state.tail.y + 1</dmn:text>
-              </dmn:inputEntry>
-              <dmn:outputEntry id="_8D1A15DB-4C1B-401C-A95F-4DD6B8F70CF9">
-                <dmn:text>1</dmn:text>
-              </dmn:outputEntry>
-              <dmn:outputEntry id="_D5AD09B3-D65F-404B-A9CB-7ED96A2FE26A">
-                <dmn:text>1</dmn:text>
-              </dmn:outputEntry>
-              <dmn:annotationEntry>
-                <dmn:text>ENE</dmn:text>
-              </dmn:annotationEntry>
-            </dmn:rule>
-            <dmn:rule id="_26E204A7-5718-496A-880F-459FAF8ABE21">
-              <dmn:inputEntry id="_93240B77-A7F6-4783-BFB3-9C80BB2BD922">
-                <dmn:text>old_state.tail.x + 2</dmn:text>
-              </dmn:inputEntry>
-              <dmn:inputEntry id="_50613DF5-7CBF-4E45-B536-CE43613378B8">
-                <dmn:text>old_state.tail.y</dmn:text>
-              </dmn:inputEntry>
-              <dmn:outputEntry id="_AE78E86C-98BA-4A03-AEA6-91D6AB7FD639">
-                <dmn:text>1</dmn:text>
-              </dmn:outputEntry>
-              <dmn:outputEntry id="_706D509B-B8CE-4B6D-B8B1-047E1833C24F">
-                <dmn:text>0</dmn:text>
-              </dmn:outputEntry>
-              <dmn:annotationEntry>
-                <dmn:text>E</dmn:text>
-              </dmn:annotationEntry>
-            </dmn:rule>
-            <dmn:rule id="_9B07D0E5-096A-4174-8A9C-771F06898B62">
-              <dmn:inputEntry id="_D04506E2-9AE0-405E-A782-899C5D2EDCD3">
-                <dmn:text>old_state.tail.x + 2</dmn:text>
-              </dmn:inputEntry>
-              <dmn:inputEntry id="_A1521262-8E16-417F-870E-36965AE8F8C4">
-                <dmn:text>old_state.tail.y - 1</dmn:text>
-              </dmn:inputEntry>
-              <dmn:outputEntry id="_EB456C96-7A93-498B-BF5E-89E583E23EDA">
-                <dmn:text>1</dmn:text>
-              </dmn:outputEntry>
-              <dmn:outputEntry id="_221C1D28-A886-4E26-9550-4B4D675DA98D">
-                <dmn:text>-1</dmn:text>
-              </dmn:outputEntry>
-              <dmn:annotationEntry>
-                <dmn:text>ESE</dmn:text>
-              </dmn:annotationEntry>
-            </dmn:rule>
-            <dmn:rule id="_E53258C2-6501-4EB8-B782-03A2D53A5C13">
-              <dmn:inputEntry id="_AC20DDEE-FC20-43CC-9D12-C58D675F3472">
-                <dmn:text>old_state.tail.x + 1</dmn:text>
-              </dmn:inputEntry>
-              <dmn:inputEntry id="_02A20983-C968-4CAE-8551-7E2AFDEF1F71">
-                <dmn:text>old_state.tail.y - 2</dmn:text>
-              </dmn:inputEntry>
-              <dmn:outputEntry id="_2DA90DB8-B715-44C7-8EEA-F36248F6CDC0">
-                <dmn:text>1</dmn:text>
-              </dmn:outputEntry>
-              <dmn:outputEntry id="_D963E332-4FAB-4180-BD80-A1F186D3524D">
-                <dmn:text>-1</dmn:text>
-              </dmn:outputEntry>
-              <dmn:annotationEntry>
-                <dmn:text>SSE</dmn:text>
-              </dmn:annotationEntry>
-            </dmn:rule>
-            <dmn:rule id="_A56A3493-D2AA-4E4F-9CFB-B83F1EA5E228">
-              <dmn:inputEntry id="_4783A4B9-2D94-4DB9-AED6-E43220E5A74C">
-                <dmn:text>old_state.tail.x</dmn:text>
-              </dmn:inputEntry>
-              <dmn:inputEntry id="_F3B26698-6C9C-4867-AD73-16A53A624690">
-                <dmn:text>old_state.tail.y - 2</dmn:text>
-              </dmn:inputEntry>
-              <dmn:outputEntry id="_DA2E2191-81B8-48F7-8123-0F033A1F02CB">
-                <dmn:text>0</dmn:text>
-              </dmn:outputEntry>
-              <dmn:outputEntry id="_BF5746D1-AC6A-4C5A-B205-DF55F3D0AE61">
-                <dmn:text>-1</dmn:text>
-              </dmn:outputEntry>
-              <dmn:annotationEntry>
-                <dmn:text>S</dmn:text>
-              </dmn:annotationEntry>
-            </dmn:rule>
-            <dmn:rule id="_00A8E03E-C8AE-4A34-985E-E081E8E8BE3E">
-              <dmn:inputEntry id="_CC34CB68-89D3-43F8-AB53-DFB3D0968FE7">
-                <dmn:text>old_state.tail.x - 1</dmn:text>
-              </dmn:inputEntry>
-              <dmn:inputEntry id="_3B1E4331-5DAC-4CA1-9799-A2503C9FD4E3">
-                <dmn:text>old_state.tail.y - 2</dmn:text>
-              </dmn:inputEntry>
-              <dmn:outputEntry id="_9D850C05-FA13-4989-8B16-D127A2559BC1">
-                <dmn:text>-1</dmn:text>
-              </dmn:outputEntry>
-              <dmn:outputEntry id="_34D22DAB-F1EF-4D80-9C4F-0B571D763780">
-                <dmn:text>-1</dmn:text>
-              </dmn:outputEntry>
-              <dmn:annotationEntry>
-                <dmn:text>SSW</dmn:text>
-              </dmn:annotationEntry>
-            </dmn:rule>
-            <dmn:rule id="_A9BC1F43-CB34-48FA-A7BF-BEC639FD60E9">
-              <dmn:inputEntry id="_25605947-250F-484D-BE4E-45A3043DF44B">
-                <dmn:text>old_state.tail.x - 2</dmn:text>
-              </dmn:inputEntry>
-              <dmn:inputEntry id="_232D7862-EC74-419F-BE57-8D9F06160634">
-                <dmn:text>old_state.tail.y - 1</dmn:text>
-              </dmn:inputEntry>
-              <dmn:outputEntry id="_0172260D-632B-414F-888D-6F98D874763F">
-                <dmn:text>-1</dmn:text>
-              </dmn:outputEntry>
-              <dmn:outputEntry id="_3D0A96E1-6837-4586-807E-50155DB65533">
-                <dmn:text>-1</dmn:text>
-              </dmn:outputEntry>
-              <dmn:annotationEntry>
-                <dmn:text>WSW</dmn:text>
-              </dmn:annotationEntry>
-            </dmn:rule>
-            <dmn:rule id="_F4FDB121-E740-4E37-B6BE-F33BEF33F4C6">
-              <dmn:inputEntry id="_0408DA07-3EB3-4939-AB2C-61CD493C08A6">
-                <dmn:text>old_state.tail.x - 2</dmn:text>
-              </dmn:inputEntry>
-              <dmn:inputEntry id="_5DF4027A-5314-4DA9-8F56-53FC4F4F0C83">
-                <dmn:text>old_state.tail.y </dmn:text>
-              </dmn:inputEntry>
-              <dmn:outputEntry id="_1204A470-B2CC-4F8C-AF9D-0FEAFF123F7A">
-                <dmn:text>-1</dmn:text>
-              </dmn:outputEntry>
-              <dmn:outputEntry id="_E7BA292B-9C8C-4BFE-A517-781FB51B162C">
-                <dmn:text>0</dmn:text>
-              </dmn:outputEntry>
-              <dmn:annotationEntry>
-                <dmn:text>W</dmn:text>
-              </dmn:annotationEntry>
-            </dmn:rule>
-            <dmn:rule id="_57773439-A52D-494A-8422-BAC0D5CD6870">
-              <dmn:inputEntry id="_5D581C74-9F5F-4C74-A960-769A39F4925E">
-                <dmn:text>old_state.tail.x - 2</dmn:text>
-              </dmn:inputEntry>
-              <dmn:inputEntry id="_A8BD89D6-6E7D-4704-B225-80834CA02C40">
-                <dmn:text>old_state.tail.y + 1</dmn:text>
-              </dmn:inputEntry>
-              <dmn:outputEntry id="_874008B6-734B-46B5-A2C7-81533406A4E0">
-                <dmn:text>-1</dmn:text>
-              </dmn:outputEntry>
-              <dmn:outputEntry id="_92F651BC-4B3A-4C45-9032-3B4C61DC55FA">
-                <dmn:text>1</dmn:text>
-              </dmn:outputEntry>
-              <dmn:annotationEntry>
-                <dmn:text>WNW</dmn:text>
-              </dmn:annotationEntry>
-            </dmn:rule>
-            <dmn:rule id="_C96644CC-BEA8-407D-9299-91AF5DD12D18">
-              <dmn:inputEntry id="_13241DCA-534B-4037-A10A-03B9BAED6E54">
-                <dmn:text>old_state.tail.x - 1</dmn:text>
-              </dmn:inputEntry>
-              <dmn:inputEntry id="_17CB51C2-04F9-43EC-8FDD-E599A355D03F">
-                <dmn:text>old_state.tail.y + 2</dmn:text>
-              </dmn:inputEntry>
-              <dmn:outputEntry id="_DFD20333-02D1-4F85-BEE0-3680934EE558">
-                <dmn:text>-1</dmn:text>
-              </dmn:outputEntry>
-              <dmn:outputEntry id="_D4866088-B7DA-4001-9A88-2A34C525A71E">
-                <dmn:text>1</dmn:text>
-              </dmn:outputEntry>
-              <dmn:annotationEntry>
-                <dmn:text>NNW</dmn:text>
-              </dmn:annotationEntry>
-            </dmn:rule>
-            <dmn:rule id="_E199D36F-2F1A-4BFD-9175-4DAE9C2163B0">
-              <dmn:inputEntry id="_DF940B30-EEBF-4D66-925A-342F3023F657">
-                <dmn:text>-</dmn:text>
-              </dmn:inputEntry>
-              <dmn:inputEntry id="_060EFAD7-B35A-4A12-A617-35699FCEABAD">
-                <dmn:text>-</dmn:text>
-              </dmn:inputEntry>
-              <dmn:outputEntry id="_8EABC6C1-549D-4892-B3F3-599DB807A4F7">
-                <dmn:text>0</dmn:text>
-              </dmn:outputEntry>
-              <dmn:outputEntry id="_574F62E4-2E99-4195-A21F-B4C2F2008DA0">
-                <dmn:text>0</dmn:text>
-              </dmn:outputEntry>
-              <dmn:annotationEntry>
-                <dmn:text>Nothing to do</dmn:text>
-              </dmn:annotationEntry>
-            </dmn:rule>
-          </dmn:decisionTable>
+          <dmn:variable id="_74A1DBC6-B8B5-45CC-B27D-0FB36D7F9E73" name="new_tail_1" typeRef="Position"/>
+          <dmn:context id="_6698861E-3E67-4E4A-AED2-2C6D8E0CADD2">
+            <dmn:contextEntry>
+              <dmn:variable id="_289A80B6-2959-486D-842E-CD86F06CC137" name="knot_move" typeRef="Position"/>
+              <dmn:literalExpression id="_6C31A547-1F8E-434E-B24B-47F3D22D26EE">
+                <dmn:text>Knot Move({x: new_head_x, y: new_head_y}, old_state.tail[1])</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+            <dmn:contextEntry>
+              <dmn:literalExpression id="_12194886-A0C5-49EB-88A5-03A9A3C8A539">
+                <dmn:text>{x: old_state.tail[1].x + knot_move.x, 
+y: old_state.tail[1].y + knot_move.y}</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+          </dmn:context>
         </dmn:contextEntry>
         <dmn:contextEntry>
-          <dmn:variable id="_94105D3C-27CD-4D6B-B672-EB20E8855627" name="new_tail_x" typeRef="number"/>
-          <dmn:literalExpression id="_907CF116-5A60-4C06-9E60-EA473408423C">
-            <dmn:text>old_state.tail.x + tail_move.x</dmn:text>
-          </dmn:literalExpression>
+          <dmn:variable id="_53A311B1-02C0-4EB0-B30B-F8559EE6E086" name="new_tail_2" typeRef="Position"/>
+          <dmn:context id="_2B3BE952-6A83-4C67-BAEF-572BA1F4CC4D">
+            <dmn:contextEntry>
+              <dmn:variable id="_ABE36F79-8849-468F-ABF1-D6E4C8EFCBE5" name="knot_move" typeRef="Position"/>
+              <dmn:literalExpression id="_00DDAFCA-DB74-4A3E-945A-C6FF49FD8CF8">
+                <dmn:text>Knot Move(new_tail_1, old_state.tail[2])</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+            <dmn:contextEntry>
+              <dmn:literalExpression id="_1E3D0001-F3BB-457E-824A-95B171DF92DB">
+                <dmn:text>{x: old_state.tail[2].x + knot_move.x, 
+y: old_state.tail[2].y + knot_move.y}</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+          </dmn:context>
         </dmn:contextEntry>
         <dmn:contextEntry>
-          <dmn:variable id="_148628F6-7281-4C27-A14C-C05B1033DD5B" name="new_tail_y" typeRef="number"/>
-          <dmn:literalExpression id="_54C1600F-1C9D-43C6-85AC-18B18107AFA6">
-            <dmn:text>old_state.tail.y + tail_move.y</dmn:text>
-          </dmn:literalExpression>
+          <dmn:variable id="_4567FD28-4B02-415B-8652-76BFDB6EAD38" name="new_tail_3" typeRef="Position"/>
+          <dmn:context id="_2EA857ED-5E0C-4567-88D9-3E87055765DC">
+            <dmn:contextEntry>
+              <dmn:variable id="_B5AE7DEA-DFAC-480D-9376-19E98C424A19" name="knot_move" typeRef="Position"/>
+              <dmn:literalExpression id="_89658353-46D8-499F-A20D-6E75BDCE05FB">
+                <dmn:text>Knot Move(new_tail_2, old_state.tail[3])</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+            <dmn:contextEntry>
+              <dmn:literalExpression id="_D1D881CA-5EE9-4BAC-BDAE-B278CE4287EE">
+                <dmn:text>{x: old_state.tail[3].x + knot_move.x, 
+y: old_state.tail[3].y + knot_move.y}</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+          </dmn:context>
         </dmn:contextEntry>
         <dmn:contextEntry>
-          <dmn:variable id="_8B6BBB3B-DC7B-4683-9984-38929844459B" name="new_tail_xOLD" typeRef="number"/>
-          <dmn:literalExpression id="_B7779127-8B7B-4BBC-9B88-E7E009A83D4E">
-            <dmn:text>if moved = 2 and (dir = "U" or dir = "D") then 
- old_state.head.x
-
-else if new_head_x - old_state.tail.x &gt; 1 then
- old_state.tail.x + 1
-
-else if new_head_x - old_state.tail.x &lt; -1 then
- old_state.tail.x -1
-
-else old_state.tail.x
- </dmn:text>
-          </dmn:literalExpression>
+          <dmn:variable id="_F9E92228-83E1-49AD-8ED9-47D4F8261A9F" name="new_tail_4" typeRef="Position"/>
+          <dmn:context id="_E4F3DF33-E78E-47E7-85FA-9503624025D1">
+            <dmn:contextEntry>
+              <dmn:variable id="_AB2DDFE2-7264-4D27-B938-E332589B9A78" name="knot_move" typeRef="Position"/>
+              <dmn:literalExpression id="_B59DC71D-EE05-4EE4-A2F6-C24E8E4C491C">
+                <dmn:text>Knot Move(new_tail_3, old_state.tail[4])</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+            <dmn:contextEntry>
+              <dmn:literalExpression id="_78025AE5-D5F1-497C-8355-8DFE3EDF1322">
+                <dmn:text>{x: old_state.tail[4].x + knot_move.x,
+y: old_state.tail[4].y + knot_move.y}</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+          </dmn:context>
         </dmn:contextEntry>
         <dmn:contextEntry>
-          <dmn:variable id="_911595BA-DAB2-4A44-9C58-5B8D3E3C377D" name="new_tail_yOLD" typeRef="number"/>
-          <dmn:literalExpression id="_51442265-CFF8-45E8-B541-7D579BA8C675">
-            <dmn:text>if moved = 2 and (dir = "L" or dir = "R") then
- old_state.head.y
-
-else if new_head_y - old_state.tail.y &gt; 1 then
- old_state.tail.y + 1
-
-else if new_head_y - old_state.tail.y &lt; -1 then
- old_state.tail.y - 1
-
-else old_state.tail.y</dmn:text>
-          </dmn:literalExpression>
+          <dmn:variable id="_A847E372-2017-4B2E-935D-D59AA6ECEB3A" name="new_tail_5" typeRef="Position"/>
+          <dmn:context id="_755205FE-F48E-4431-9075-6E1D526007DF">
+            <dmn:contextEntry>
+              <dmn:variable id="_4795CEBE-914B-4EBF-B4DD-7890D5DE9C35" name="knot_move" typeRef="Position"/>
+              <dmn:literalExpression id="_A6659D4D-12EB-4BC0-AB9E-C1C225393195">
+                <dmn:text>Knot Move(new_tail_4, old_state.tail[5])</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+            <dmn:contextEntry>
+              <dmn:literalExpression id="_684A8C31-3658-4894-A903-3AE34B3410CB">
+                <dmn:text>{x: old_state.tail[5].x + knot_move.x,
+y: old_state.tail[5].y + knot_move.y}</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+          </dmn:context>
         </dmn:contextEntry>
         <dmn:contextEntry>
-          <dmn:variable id="_B7E68862-C801-4B66-B95C-0DE92E711404" name="new_tail_loc" typeRef="string"/>
-          <dmn:literalExpression id="_5FF30144-6F6E-43DB-80DA-471EEACBA4F9">
-            <dmn:text>string(new_tail_x) + "," + string(new_tail_y)</dmn:text>
-          </dmn:literalExpression>
+          <dmn:variable id="_A9F46D24-57B6-428F-B500-1C3D7A9CF9A3" name="new_tail_6" typeRef="Position"/>
+          <dmn:context id="_0D15030D-8C51-4910-A273-8A4915944E15">
+            <dmn:contextEntry>
+              <dmn:variable id="_5A96387E-A407-4D95-A20F-6EA73887C018" name="knot_move" typeRef="Position"/>
+              <dmn:literalExpression id="_23F6BBB1-8FD6-47D9-8B5D-584768C40FC2">
+                <dmn:text>Knot Move(new_tail_5, old_state.tail[6])</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+            <dmn:contextEntry>
+              <dmn:literalExpression id="_1A426730-FF81-4AAF-875E-6BF018C48881">
+                <dmn:text>{x: old_state.tail[6].x + knot_move.x,
+ y: old_state.tail[6].y + knot_move.y}</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+          </dmn:context>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_EA3CA28A-4DF9-479C-954F-F4CB94C57CC4" name="new_tail_7" typeRef="Position"/>
+          <dmn:context id="_C645CFDE-3058-4089-BC1C-2C7FEE6DE9B4">
+            <dmn:contextEntry>
+              <dmn:variable id="_7CFA2FDF-CC8D-4912-B6E6-460D433E21AC" name="knot_move" typeRef="Position"/>
+              <dmn:literalExpression id="_A1D98866-1F68-4B27-9F79-F2C5143BD8E4">
+                <dmn:text>Knot Move(new_tail_6, old_state.tail[7])</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+            <dmn:contextEntry>
+              <dmn:literalExpression id="_E2F05687-D732-466E-B986-B601D14748D0">
+                <dmn:text>{x: old_state.tail[7].x + knot_move.x, 
+y: old_state.tail[7].y + knot_move.y}</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+          </dmn:context>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_C904698D-3D50-45A9-8B95-646F653ED468" name="new_tail_8" typeRef="Position"/>
+          <dmn:context id="_02A871F8-0195-40A0-9358-18E12D7F68DE">
+            <dmn:contextEntry>
+              <dmn:variable id="_FF779B53-94B8-459B-9956-E50A257ED40D" name="knot_move" typeRef="Position"/>
+              <dmn:literalExpression id="_FD0C1576-3B23-409A-AA3E-3D5F8B49DAC3">
+                <dmn:text>Knot Move(new_tail_7, old_state.tail[8])</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+            <dmn:contextEntry>
+              <dmn:literalExpression id="_7A18CF6A-3355-4D60-901A-EED2487CBA0F">
+                <dmn:text>{x: old_state.tail[8].x + knot_move.x,
+y: old_state.tail[8].y + knot_move.y}</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+          </dmn:context>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_5601B4AA-3625-4142-A568-BBEE7EC79A47" name="new_tail_9" typeRef="Position"/>
+          <dmn:context id="_DC4481AE-542C-47B3-BE65-E17F10D1D01A">
+            <dmn:contextEntry>
+              <dmn:variable id="_6E8ABCE1-EDBB-4D24-B825-0F94E86ADD62" name="knot_move" typeRef="Position"/>
+              <dmn:literalExpression id="_9820232F-BB77-4F86-8B65-DE48E4E8DCE0">
+                <dmn:text>Knot Move(new_tail_8, old_state.tail[9])</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+            <dmn:contextEntry>
+              <dmn:literalExpression id="_100A5194-3B2F-403B-A993-999E5C60457B">
+                <dmn:text>{x: old_state.tail[9].x + knot_move.x,
+y: old_state.tail[9].y + knot_move.y}</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+          </dmn:context>
         </dmn:contextEntry>
         <dmn:contextEntry>
           <dmn:variable id="_1B15DE67-E8B0-4FE2-84FB-238694552597" name="new_state" typeRef="State"/>
@@ -443,17 +314,23 @@ else old_state.tail.y</dmn:text>
   { x: new_head_x,
     y: new_head_y
   },
- tail: 
-  { x: new_tail_x,
-    y: new_tail_y
-  },
-  tail_visited: 
-   if new_tail_loc != string(old_state.tail.x) + "," + string(old_state.tail.y) then    
-    append(old_state.tail_visited, new_tail_loc)
+ tail: [
+  new_tail_1, new_tail_2, new_tail_3, new_tail_4, new_tail_5, 
+  new_tail_6, new_tail_7, new_tail_8, new_tail_9],
+  tail_visited: {
+   first: if new_tail_1.x != old_state.tail[1].x or new_tail_1.y != old_state.tail[1].y then    
+    append(old_state.tail_visited.first, string(new_tail_1.x) + "," + string(new_tail_1.y))
    else
-    old_state.tail_visited 
+    old_state.tail_visited.first,
+   last: if new_tail_9.x != old_state.tail[9].x or new_tail_9.y != old_state.tail[9].y then
+    append(old_state.tail_visited.last, string(new_tail_9.x) + "," + string(new_tail_9.y))
+   else
+    old_state.tail_visited.last
+  }
 }
-   </dmn:text>
+
+
+</dmn:text>
           </dmn:literalExpression>
         </dmn:contextEntry>
         <dmn:contextEntry>
@@ -466,6 +343,9 @@ else
         </dmn:contextEntry>
       </dmn:context>
     </dmn:encapsulatedLogic>
+    <dmn:knowledgeRequirement id="_CAEC6922-32C0-40FC-8A4E-947DE3F1DB4D">
+      <dmn:requiredKnowledge href="#_B72D2206-AFA0-47C4-8BCD-3CEFF015EF09"/>
+    </dmn:knowledgeRequirement>
   </dmn:businessKnowledgeModel>
   <dmn:businessKnowledgeModel id="_BC055FE5-0DC7-4322-9A4F-8CCA12B86CE4" name="Process Moves">
     <dmn:extensionElements/>
@@ -521,7 +401,7 @@ else
       <dmn:requiredDecision href="#_39F50479-D09B-4615-A9C8-7AB3808B09AA"/>
     </dmn:informationRequirement>
     <dmn:literalExpression id="_65038BCD-C952-4B31-A1BC-76F90B913D87">
-      <dmn:text>count(distinct values(All States[1].tail_visited))</dmn:text>
+      <dmn:text>count(distinct values(All States[1].tail_visited.first))</dmn:text>
     </dmn:literalExpression>
   </dmn:decision>
   <dmn:decision id="_9DFFF14E-81C2-4EF1-A939-AFEB9998989C" name="Sample States">
@@ -539,8 +419,9 @@ else
         <dmn:literalExpression id="_73299A6D-9576-4267-A6E4-00D64E58672A">
           <dmn:text>{
  head: { x: 0, y: 0 },
- tail: { x: 0, y: 0 },
- tail_visited: ["0,0"]
+ tail: [{ x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 },
+        { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }],
+ tail_visited: { first: ["0,0"], last: ["0,0"] }
 }</dmn:text>
         </dmn:literalExpression>
       </dmn:contextEntry>
@@ -558,7 +439,339 @@ else
       <dmn:requiredDecision href="#_9DFFF14E-81C2-4EF1-A939-AFEB9998989C"/>
     </dmn:informationRequirement>
     <dmn:literalExpression id="_FE9857C5-CB23-4DF6-AC9F-DDF640ABD950">
-      <dmn:text>count(distinct values(Sample States[1].tail_visited))</dmn:text>
+      <dmn:text>count(distinct values(Sample States[1].tail_visited.first))</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:businessKnowledgeModel id="_B72D2206-AFA0-47C4-8BCD-3CEFF015EF09" name="Knot Move">
+    <dmn:extensionElements/>
+    <dmn:variable id="_8271D9B8-B2DC-4B47-BEFF-08BCEFD2FF3D" name="Knot Move" typeRef="Any"/>
+    <dmn:encapsulatedLogic id="_83F5833D-F937-48CA-9748-2F4053E13CB1" kind="FEEL">
+      <dmn:formalParameter id="_8929E5FE-2817-4DFE-840E-85DBF12BADF6" name="head" typeRef="Position"/>
+      <dmn:formalParameter id="_BD1E53BC-927C-4566-9232-B22B0669D2DE" name="tail" typeRef="Position"/>
+      <dmn:decisionTable id="_8B6171E7-210A-4324-86BB-29A1A9298650" hitPolicy="FIRST" preferredOrientation="Rule-as-Row">
+        <dmn:input id="_CB515F64-0BC9-4843-AFB2-776ED0119706">
+          <dmn:inputExpression id="_79F71F37-C560-4615-975B-4DA45764AD4F" typeRef="number">
+            <dmn:text>head.x</dmn:text>
+          </dmn:inputExpression>
+        </dmn:input>
+        <dmn:input id="_3B36F992-0464-439C-AE47-A5DF044DFCB7">
+          <dmn:inputExpression id="_F367349E-3BF3-4710-B330-3403BC7A5BB8" typeRef="number">
+            <dmn:text>head.y</dmn:text>
+          </dmn:inputExpression>
+        </dmn:input>
+        <dmn:output id="_4D7D18C5-0C1F-46E7-B7EC-895DBAA014CB" name="x" typeRef="number"/>
+        <dmn:output id="_86E21F2F-638A-46FD-93F0-65E4CDEBCAF6" name="y" typeRef="number"/>
+        <dmn:annotation name="type"/>
+        <dmn:rule id="_B42DD5C5-1D32-48C4-8602-D7532B63DAC2">
+          <dmn:inputEntry id="_C7C57538-2BA8-4AE2-8A1B-B7BB38770CCD">
+            <dmn:text>tail.x</dmn:text>
+          </dmn:inputEntry>
+          <dmn:inputEntry id="_494908D8-28BD-4522-ABA8-B72EC8272C48">
+            <dmn:text>tail.y + 2</dmn:text>
+          </dmn:inputEntry>
+          <dmn:outputEntry id="_4E6D85AA-5427-4F50-AB6A-13A535D99632">
+            <dmn:text>0</dmn:text>
+          </dmn:outputEntry>
+          <dmn:outputEntry id="_16B6B5FA-E5BD-4890-B100-17953DB78195">
+            <dmn:text>1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:annotationEntry>
+            <dmn:text>N</dmn:text>
+          </dmn:annotationEntry>
+        </dmn:rule>
+        <dmn:rule id="_0A5A4865-441E-43CD-A5DA-51872FDF456C">
+          <dmn:inputEntry id="_3D0013DB-F943-41A7-80F5-D5317BD36843">
+            <dmn:text>tail.x + 1</dmn:text>
+          </dmn:inputEntry>
+          <dmn:inputEntry id="_4C4DCE1D-F235-4C7F-8B1C-167EAE885644">
+            <dmn:text>tail.y + 2</dmn:text>
+          </dmn:inputEntry>
+          <dmn:outputEntry id="_CDCDF094-CFA2-4769-BC92-F95763D9CE58">
+            <dmn:text>1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:outputEntry id="_F5DE4BF7-602B-4B19-AAC1-E036DB351C53">
+            <dmn:text>1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:annotationEntry>
+            <dmn:text>NNE</dmn:text>
+          </dmn:annotationEntry>
+        </dmn:rule>
+        <dmn:rule id="_79313DD5-FCAC-4278-BDB5-89D76D37D846">
+          <dmn:inputEntry id="_40D683F5-2B5B-489B-A105-063CEE40838E">
+            <dmn:text>tail.x + 2</dmn:text>
+          </dmn:inputEntry>
+          <dmn:inputEntry id="_F886EF21-CE22-40DE-A3D0-62E10AAE90DA">
+            <dmn:text>tail.y + 2</dmn:text>
+          </dmn:inputEntry>
+          <dmn:outputEntry id="_D07C0C85-57A4-42A8-8AEB-2D19C8A11627">
+            <dmn:text>1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:outputEntry id="_1F6517C3-1E12-45E0-B5D6-A406025281CC">
+            <dmn:text>1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:annotationEntry>
+            <dmn:text>NE</dmn:text>
+          </dmn:annotationEntry>
+        </dmn:rule>
+        <dmn:rule id="_CF63F833-C88D-422D-AE39-6875BB148F0F">
+          <dmn:inputEntry id="_C7839EFA-79CC-4414-82C5-D3EAB5BA462E">
+            <dmn:text>tail.x + 2</dmn:text>
+          </dmn:inputEntry>
+          <dmn:inputEntry id="_47FB4FA7-7F66-448A-87F7-9E51C5465DE0">
+            <dmn:text>tail.y + 1</dmn:text>
+          </dmn:inputEntry>
+          <dmn:outputEntry id="_8D1A15DB-4C1B-401C-A95F-4DD6B8F70CF9">
+            <dmn:text>1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:outputEntry id="_D5AD09B3-D65F-404B-A9CB-7ED96A2FE26A">
+            <dmn:text>1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:annotationEntry>
+            <dmn:text>ENE</dmn:text>
+          </dmn:annotationEntry>
+        </dmn:rule>
+        <dmn:rule id="_26E204A7-5718-496A-880F-459FAF8ABE21">
+          <dmn:inputEntry id="_93240B77-A7F6-4783-BFB3-9C80BB2BD922">
+            <dmn:text>tail.x + 2</dmn:text>
+          </dmn:inputEntry>
+          <dmn:inputEntry id="_50613DF5-7CBF-4E45-B536-CE43613378B8">
+            <dmn:text>tail.y</dmn:text>
+          </dmn:inputEntry>
+          <dmn:outputEntry id="_AE78E86C-98BA-4A03-AEA6-91D6AB7FD639">
+            <dmn:text>1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:outputEntry id="_706D509B-B8CE-4B6D-B8B1-047E1833C24F">
+            <dmn:text>0</dmn:text>
+          </dmn:outputEntry>
+          <dmn:annotationEntry>
+            <dmn:text>E</dmn:text>
+          </dmn:annotationEntry>
+        </dmn:rule>
+        <dmn:rule id="_FE566815-A68A-4C1D-9A0D-6DECED1E1A31">
+          <dmn:inputEntry id="_C46BA6C4-4946-437E-9725-289AF4D5CEBE">
+            <dmn:text>tail.x + 2</dmn:text>
+          </dmn:inputEntry>
+          <dmn:inputEntry id="_3D554E1A-C699-46FD-AF0E-763227030256">
+            <dmn:text>tail.y - 1</dmn:text>
+          </dmn:inputEntry>
+          <dmn:outputEntry id="_033D2150-08BD-4AB4-9432-F8FB297B3413">
+            <dmn:text>1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:outputEntry id="_1BD99BF4-FF67-4F65-84C2-67D7F1E40EF9">
+            <dmn:text>-1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:annotationEntry>
+            <dmn:text>ESE</dmn:text>
+          </dmn:annotationEntry>
+        </dmn:rule>
+        <dmn:rule id="_9B07D0E5-096A-4174-8A9C-771F06898B62">
+          <dmn:inputEntry id="_D04506E2-9AE0-405E-A782-899C5D2EDCD3">
+            <dmn:text>tail.x + 2</dmn:text>
+          </dmn:inputEntry>
+          <dmn:inputEntry id="_A1521262-8E16-417F-870E-36965AE8F8C4">
+            <dmn:text>tail.y - 2</dmn:text>
+          </dmn:inputEntry>
+          <dmn:outputEntry id="_EB456C96-7A93-498B-BF5E-89E583E23EDA">
+            <dmn:text>1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:outputEntry id="_221C1D28-A886-4E26-9550-4B4D675DA98D">
+            <dmn:text>-1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:annotationEntry>
+            <dmn:text>SE</dmn:text>
+          </dmn:annotationEntry>
+        </dmn:rule>
+        <dmn:rule id="_E53258C2-6501-4EB8-B782-03A2D53A5C13">
+          <dmn:inputEntry id="_AC20DDEE-FC20-43CC-9D12-C58D675F3472">
+            <dmn:text>tail.x + 1</dmn:text>
+          </dmn:inputEntry>
+          <dmn:inputEntry id="_02A20983-C968-4CAE-8551-7E2AFDEF1F71">
+            <dmn:text>tail.y - 2</dmn:text>
+          </dmn:inputEntry>
+          <dmn:outputEntry id="_2DA90DB8-B715-44C7-8EEA-F36248F6CDC0">
+            <dmn:text>1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:outputEntry id="_D963E332-4FAB-4180-BD80-A1F186D3524D">
+            <dmn:text>-1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:annotationEntry>
+            <dmn:text>SSE</dmn:text>
+          </dmn:annotationEntry>
+        </dmn:rule>
+        <dmn:rule id="_A56A3493-D2AA-4E4F-9CFB-B83F1EA5E228">
+          <dmn:inputEntry id="_4783A4B9-2D94-4DB9-AED6-E43220E5A74C">
+            <dmn:text>tail.x</dmn:text>
+          </dmn:inputEntry>
+          <dmn:inputEntry id="_F3B26698-6C9C-4867-AD73-16A53A624690">
+            <dmn:text>tail.y - 2</dmn:text>
+          </dmn:inputEntry>
+          <dmn:outputEntry id="_DA2E2191-81B8-48F7-8123-0F033A1F02CB">
+            <dmn:text>0</dmn:text>
+          </dmn:outputEntry>
+          <dmn:outputEntry id="_BF5746D1-AC6A-4C5A-B205-DF55F3D0AE61">
+            <dmn:text>-1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:annotationEntry>
+            <dmn:text>S</dmn:text>
+          </dmn:annotationEntry>
+        </dmn:rule>
+        <dmn:rule id="_00A8E03E-C8AE-4A34-985E-E081E8E8BE3E">
+          <dmn:inputEntry id="_CC34CB68-89D3-43F8-AB53-DFB3D0968FE7">
+            <dmn:text>tail.x - 1</dmn:text>
+          </dmn:inputEntry>
+          <dmn:inputEntry id="_3B1E4331-5DAC-4CA1-9799-A2503C9FD4E3">
+            <dmn:text>tail.y - 2</dmn:text>
+          </dmn:inputEntry>
+          <dmn:outputEntry id="_9D850C05-FA13-4989-8B16-D127A2559BC1">
+            <dmn:text>-1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:outputEntry id="_34D22DAB-F1EF-4D80-9C4F-0B571D763780">
+            <dmn:text>-1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:annotationEntry>
+            <dmn:text>SSW</dmn:text>
+          </dmn:annotationEntry>
+        </dmn:rule>
+        <dmn:rule id="_6E65A026-3ED5-474E-AF35-83052C968200">
+          <dmn:inputEntry id="_3EF7118E-62CC-4279-987A-7FF903D696C1">
+            <dmn:text>tail.x - 2</dmn:text>
+          </dmn:inputEntry>
+          <dmn:inputEntry id="_A3AE6437-CC38-436D-A0CF-5768D50B9B4B">
+            <dmn:text>tail.y - 2</dmn:text>
+          </dmn:inputEntry>
+          <dmn:outputEntry id="_CB3799F9-918C-4D67-8A0B-33B362D1352B">
+            <dmn:text>-1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:outputEntry id="_5DFB6657-90FF-4DF7-87E1-D2D75C1B0FCD">
+            <dmn:text>-1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:annotationEntry>
+            <dmn:text>SW</dmn:text>
+          </dmn:annotationEntry>
+        </dmn:rule>
+        <dmn:rule id="_A9BC1F43-CB34-48FA-A7BF-BEC639FD60E9">
+          <dmn:inputEntry id="_25605947-250F-484D-BE4E-45A3043DF44B">
+            <dmn:text>tail.x - 2</dmn:text>
+          </dmn:inputEntry>
+          <dmn:inputEntry id="_232D7862-EC74-419F-BE57-8D9F06160634">
+            <dmn:text>tail.y - 1</dmn:text>
+          </dmn:inputEntry>
+          <dmn:outputEntry id="_0172260D-632B-414F-888D-6F98D874763F">
+            <dmn:text>-1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:outputEntry id="_3D0A96E1-6837-4586-807E-50155DB65533">
+            <dmn:text>-1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:annotationEntry>
+            <dmn:text>WSW</dmn:text>
+          </dmn:annotationEntry>
+        </dmn:rule>
+        <dmn:rule id="_F4FDB121-E740-4E37-B6BE-F33BEF33F4C6">
+          <dmn:inputEntry id="_0408DA07-3EB3-4939-AB2C-61CD493C08A6">
+            <dmn:text>tail.x - 2</dmn:text>
+          </dmn:inputEntry>
+          <dmn:inputEntry id="_5DF4027A-5314-4DA9-8F56-53FC4F4F0C83">
+            <dmn:text>tail.y </dmn:text>
+          </dmn:inputEntry>
+          <dmn:outputEntry id="_1204A470-B2CC-4F8C-AF9D-0FEAFF123F7A">
+            <dmn:text>-1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:outputEntry id="_E7BA292B-9C8C-4BFE-A517-781FB51B162C">
+            <dmn:text>0</dmn:text>
+          </dmn:outputEntry>
+          <dmn:annotationEntry>
+            <dmn:text>W</dmn:text>
+          </dmn:annotationEntry>
+        </dmn:rule>
+        <dmn:rule id="_7AF392D9-B950-456C-9191-75C17C38F2FF">
+          <dmn:inputEntry id="_BFBE7641-47B8-4FE0-A2AF-8C8B8B304CE3">
+            <dmn:text>tail.x - 2</dmn:text>
+          </dmn:inputEntry>
+          <dmn:inputEntry id="_2BBCE9E0-59CF-4D76-9C5A-C0A5E927571C">
+            <dmn:text>tail.y + 1</dmn:text>
+          </dmn:inputEntry>
+          <dmn:outputEntry id="_981290A2-CD2B-46AA-B55F-B1B64DC5077C">
+            <dmn:text>-1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:outputEntry id="_1F023533-0983-4EBE-83AE-457C4ADDB39A">
+            <dmn:text>1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:annotationEntry>
+            <dmn:text>WNW</dmn:text>
+          </dmn:annotationEntry>
+        </dmn:rule>
+        <dmn:rule id="_57773439-A52D-494A-8422-BAC0D5CD6870">
+          <dmn:inputEntry id="_5D581C74-9F5F-4C74-A960-769A39F4925E">
+            <dmn:text>tail.x - 2</dmn:text>
+          </dmn:inputEntry>
+          <dmn:inputEntry id="_A8BD89D6-6E7D-4704-B225-80834CA02C40">
+            <dmn:text>tail.y + 2</dmn:text>
+          </dmn:inputEntry>
+          <dmn:outputEntry id="_874008B6-734B-46B5-A2C7-81533406A4E0">
+            <dmn:text>-1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:outputEntry id="_92F651BC-4B3A-4C45-9032-3B4C61DC55FA">
+            <dmn:text>1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:annotationEntry>
+            <dmn:text>NW</dmn:text>
+          </dmn:annotationEntry>
+        </dmn:rule>
+        <dmn:rule id="_C96644CC-BEA8-407D-9299-91AF5DD12D18">
+          <dmn:inputEntry id="_13241DCA-534B-4037-A10A-03B9BAED6E54">
+            <dmn:text>tail.x - 1</dmn:text>
+          </dmn:inputEntry>
+          <dmn:inputEntry id="_17CB51C2-04F9-43EC-8FDD-E599A355D03F">
+            <dmn:text>tail.y + 2</dmn:text>
+          </dmn:inputEntry>
+          <dmn:outputEntry id="_DFD20333-02D1-4F85-BEE0-3680934EE558">
+            <dmn:text>-1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:outputEntry id="_D4866088-B7DA-4001-9A88-2A34C525A71E">
+            <dmn:text>1</dmn:text>
+          </dmn:outputEntry>
+          <dmn:annotationEntry>
+            <dmn:text>NNW</dmn:text>
+          </dmn:annotationEntry>
+        </dmn:rule>
+        <dmn:rule id="_E199D36F-2F1A-4BFD-9175-4DAE9C2163B0">
+          <dmn:inputEntry id="_DF940B30-EEBF-4D66-925A-342F3023F657">
+            <dmn:text>-</dmn:text>
+          </dmn:inputEntry>
+          <dmn:inputEntry id="_060EFAD7-B35A-4A12-A617-35699FCEABAD">
+            <dmn:text>-</dmn:text>
+          </dmn:inputEntry>
+          <dmn:outputEntry id="_8EABC6C1-549D-4892-B3F3-599DB807A4F7">
+            <dmn:text>0</dmn:text>
+          </dmn:outputEntry>
+          <dmn:outputEntry id="_574F62E4-2E99-4195-A21F-B4C2F2008DA0">
+            <dmn:text>0</dmn:text>
+          </dmn:outputEntry>
+          <dmn:annotationEntry>
+            <dmn:text>Nothing to do</dmn:text>
+          </dmn:annotationEntry>
+        </dmn:rule>
+      </dmn:decisionTable>
+    </dmn:encapsulatedLogic>
+  </dmn:businessKnowledgeModel>
+  <dmn:decision id="_9CF3827B-4A29-4AC8-B14E-98A11345E45C" name="Part 2 Sample2">
+    <dmn:extensionElements/>
+    <dmn:variable id="_2262F0CD-88AB-45E9-A478-27D804307EF6" name="Part 2 Sample2" typeRef="number"/>
+    <dmn:informationRequirement id="_BDA14C8C-96A1-4F50-A736-4AFDE8DA4F21">
+      <dmn:requiredDecision href="#_9DFFF14E-81C2-4EF1-A939-AFEB9998989C"/>
+    </dmn:informationRequirement>
+    <dmn:literalExpression id="_59EECFBA-5A0D-495C-9701-06EC875FDA4B">
+      <dmn:text>count(distinct values(Sample States[i].tail_visited.last))</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:decision id="_D7AF4D3C-58D0-43DD-B74D-7401101D49CF" name="Part 2">
+    <dmn:extensionElements/>
+    <dmn:variable id="_4E4ECEE0-FECC-4DD7-81CF-AED6F344F4C8" name="Part 2" typeRef="number"/>
+    <dmn:informationRequirement id="_5E8222FE-2CAC-4C14-ACE2-5FC27B4874C4">
+      <dmn:requiredDecision href="#_39F50479-D09B-4615-A9C8-7AB3808B09AA"/>
+    </dmn:informationRequirement>
+    <dmn:literalExpression id="_AF066263-7CCC-4254-9C28-C69C34AEEEFB">
+      <dmn:text>count(distinct values(All States[1].tail_visited.last))</dmn:text>
     </dmn:literalExpression>
   </dmn:decision>
   <dmndi:DMNDI>
@@ -568,40 +781,40 @@ else
           <kie:ComponentWidths dmnElementRef="_50507C49-497E-4DFD-AB63-77A39B0D9BAC">
             <kie:width>50</kie:width>
             <kie:width>100</kie:width>
-            <kie:width>512</kie:width>
+            <kie:width>759</kie:width>
           </kie:ComponentWidths>
           <kie:ComponentWidths dmnElementRef="_C366FF53-F92C-4891-8E63-A64CADFE470A">
-            <kie:width>512</kie:width>
+            <kie:width>759</kie:width>
           </kie:ComponentWidths>
           <kie:ComponentWidths dmnElementRef="_DFB933C9-7857-4C06-8EFB-CFD8C888BE1F">
-            <kie:width>512</kie:width>
+            <kie:width>759</kie:width>
           </kie:ComponentWidths>
           <kie:ComponentWidths dmnElementRef="_0B647715-1CCA-4C0E-9581-755C035666C4">
-            <kie:width>512</kie:width>
+            <kie:width>759</kie:width>
           </kie:ComponentWidths>
           <kie:ComponentWidths dmnElementRef="_E1E42BF5-CA1F-4841-9B83-EC394A4C911A">
-            <kie:width>512</kie:width>
+            <kie:width>759</kie:width>
           </kie:ComponentWidths>
           <kie:ComponentWidths dmnElementRef="_75B935C0-AE5B-49CE-8064-6B6A8AA7224D">
-            <kie:width>512</kie:width>
+            <kie:width>759</kie:width>
           </kie:ComponentWidths>
           <kie:ComponentWidths dmnElementRef="_9804C0F0-190B-4B7E-9145-02EA3567AD0E">
-            <kie:width>512</kie:width>
+            <kie:width>759</kie:width>
           </kie:ComponentWidths>
           <kie:ComponentWidths dmnElementRef="_CD19A2CB-1C30-48FB-91F2-EA63DD7A8863">
-            <kie:width>512</kie:width>
+            <kie:width>759</kie:width>
           </kie:ComponentWidths>
           <kie:ComponentWidths dmnElementRef="_25ED2934-ED8B-4322-8715-64086C3E2CE4">
-            <kie:width>512</kie:width>
+            <kie:width>759</kie:width>
           </kie:ComponentWidths>
           <kie:ComponentWidths dmnElementRef="_7DD10959-5918-4BCA-8AA8-A7B715AB539F">
-            <kie:width>512</kie:width>
+            <kie:width>759</kie:width>
           </kie:ComponentWidths>
           <kie:ComponentWidths dmnElementRef="_F6E9BCCB-5555-4F52-81FC-F87EC43BEA9E">
-            <kie:width>512</kie:width>
+            <kie:width>759</kie:width>
           </kie:ComponentWidths>
           <kie:ComponentWidths dmnElementRef="_71F831B0-1A9E-4478-819E-4CF05572B95A">
-            <kie:width>512</kie:width>
+            <kie:width>759</kie:width>
           </kie:ComponentWidths>
           <kie:ComponentWidths dmnElementRef="_7891D20D-D804-4C5D-BE31-482A19C59E0E">
             <kie:width>50</kie:width>
@@ -617,28 +830,104 @@ else
           <kie:ComponentWidths dmnElementRef="_92E37FA2-C15F-4C88-8B10-B2D5421DC658">
             <kie:width>780</kie:width>
           </kie:ComponentWidths>
-          <kie:ComponentWidths dmnElementRef="_8B6171E7-210A-4324-86BB-29A1A9298650">
+          <kie:ComponentWidths dmnElementRef="_6698861E-3E67-4E4A-AED2-2C6D8E0CADD2">
             <kie:width>50</kie:width>
-            <kie:width>197</kie:width>
-            <kie:width>179</kie:width>
             <kie:width>100</kie:width>
+            <kie:width>610</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_6C31A547-1F8E-434E-B24B-47F3D22D26EE">
+            <kie:width>610</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_12194886-A0C5-49EB-88A5-03A9A3C8A539">
+            <kie:width>610</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_2B3BE952-6A83-4C67-BAEF-572BA1F4CC4D">
+            <kie:width>50</kie:width>
             <kie:width>100</kie:width>
-            <kie:width>134</kie:width>
+            <kie:width>610</kie:width>
           </kie:ComponentWidths>
-          <kie:ComponentWidths dmnElementRef="_907CF116-5A60-4C06-9E60-EA473408423C">
-            <kie:width>780</kie:width>
+          <kie:ComponentWidths dmnElementRef="_00DDAFCA-DB74-4A3E-945A-C6FF49FD8CF8">
+            <kie:width>610</kie:width>
           </kie:ComponentWidths>
-          <kie:ComponentWidths dmnElementRef="_54C1600F-1C9D-43C6-85AC-18B18107AFA6">
-            <kie:width>780</kie:width>
+          <kie:ComponentWidths dmnElementRef="_1E3D0001-F3BB-457E-824A-95B171DF92DB">
+            <kie:width>610</kie:width>
           </kie:ComponentWidths>
-          <kie:ComponentWidths dmnElementRef="_B7779127-8B7B-4BBC-9B88-E7E009A83D4E">
-            <kie:width>780</kie:width>
+          <kie:ComponentWidths dmnElementRef="_2EA857ED-5E0C-4567-88D9-3E87055765DC">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>610</kie:width>
           </kie:ComponentWidths>
-          <kie:ComponentWidths dmnElementRef="_51442265-CFF8-45E8-B541-7D579BA8C675">
-            <kie:width>780</kie:width>
+          <kie:ComponentWidths dmnElementRef="_89658353-46D8-499F-A20D-6E75BDCE05FB">
+            <kie:width>610</kie:width>
           </kie:ComponentWidths>
-          <kie:ComponentWidths dmnElementRef="_5FF30144-6F6E-43DB-80DA-471EEACBA4F9">
-            <kie:width>780</kie:width>
+          <kie:ComponentWidths dmnElementRef="_D1D881CA-5EE9-4BAC-BDAE-B278CE4287EE">
+            <kie:width>610</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_E4F3DF33-E78E-47E7-85FA-9503624025D1">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>610</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_B59DC71D-EE05-4EE4-A2F6-C24E8E4C491C">
+            <kie:width>610</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_78025AE5-D5F1-497C-8355-8DFE3EDF1322">
+            <kie:width>610</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_755205FE-F48E-4431-9075-6E1D526007DF">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>610</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_A6659D4D-12EB-4BC0-AB9E-C1C225393195">
+            <kie:width>610</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_684A8C31-3658-4894-A903-3AE34B3410CB">
+            <kie:width>610</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_0D15030D-8C51-4910-A273-8A4915944E15">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>610</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_23F6BBB1-8FD6-47D9-8B5D-584768C40FC2">
+            <kie:width>610</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_1A426730-FF81-4AAF-875E-6BF018C48881">
+            <kie:width>610</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_C645CFDE-3058-4089-BC1C-2C7FEE6DE9B4">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>610</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_A1D98866-1F68-4B27-9F79-F2C5143BD8E4">
+            <kie:width>610</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_E2F05687-D732-466E-B986-B601D14748D0">
+            <kie:width>610</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_02A871F8-0195-40A0-9358-18E12D7F68DE">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>610</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_FD0C1576-3B23-409A-AA3E-3D5F8B49DAC3">
+            <kie:width>610</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_7A18CF6A-3355-4D60-901A-EED2487CBA0F">
+            <kie:width>610</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_DC4481AE-542C-47B3-BE65-E17F10D1D01A">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>610</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_9820232F-BB77-4F86-8B65-DE48E4E8DCE0">
+            <kie:width>610</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_100A5194-3B2F-403B-A993-999E5C60457B">
+            <kie:width>610</kie:width>
           </kie:ComponentWidths>
           <kie:ComponentWidths dmnElementRef="_81A0FC1C-BF09-4F58-93F0-9F9C7DA72BFE">
             <kie:width>780</kie:width>
@@ -680,16 +969,34 @@ else
           <kie:ComponentWidths dmnElementRef="_F1B59551-62FC-49AF-A055-3E8523FFB558">
             <kie:width>50</kie:width>
             <kie:width>100</kie:width>
-            <kie:width>300</kie:width>
+            <kie:width>815</kie:width>
           </kie:ComponentWidths>
           <kie:ComponentWidths dmnElementRef="_73299A6D-9576-4267-A6E4-00D64E58672A">
-            <kie:width>300</kie:width>
+            <kie:width>815</kie:width>
           </kie:ComponentWidths>
           <kie:ComponentWidths dmnElementRef="_F8CD1856-E14A-4FC0-8FDB-69AE97C5F8BE">
-            <kie:width>300</kie:width>
+            <kie:width>815</kie:width>
           </kie:ComponentWidths>
           <kie:ComponentWidths dmnElementRef="_FE9857C5-CB23-4DF6-AC9F-DDF640ABD950">
             <kie:width>681</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_8B6171E7-210A-4324-86BB-29A1A9298650">
+            <kie:width>50</kie:width>
+            <kie:width>197</kie:width>
+            <kie:width>179</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_83F5833D-F937-48CA-9748-2F4053E13CB1">
+            <kie:width>50</kie:width>
+            <kie:width>746</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_59EECFBA-5A0D-495C-9701-06EC875FDA4B">
+            <kie:width>577</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_AF066263-7CCC-4254-9C28-C69C34AEEEFB">
+            <kie:width>491</kie:width>
           </kie:ComponentWidths>
         </kie:ComponentsWidthsExtension>
       </di:extension>
@@ -756,6 +1063,33 @@ else
         <dc:Bounds x="120" y="347" width="100" height="50"/>
         <dmndi:DMNLabel/>
       </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_B72D2206-AFA0-47C4-8BCD-3CEFF015EF09" dmnElementRef="_B72D2206-AFA0-47C4-8BCD-3CEFF015EF09" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="122.00000000000001" y="122" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_9CF3827B-4A29-4AC8-B14E-98A11345E45C" dmnElementRef="_9CF3827B-4A29-4AC8-B14E-98A11345E45C" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="120" y="432" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_D7AF4D3C-58D0-43DD-B74D-7401101D49CF" dmnElementRef="_D7AF4D3C-58D0-43DD-B74D-7401101D49CF" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="593" y="194" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
       <dmndi:DMNEdge id="dmnedge-drg-_09887286-D7F6-4AAC-BA87-695778E62768" dmnElementRef="_09887286-D7F6-4AAC-BA87-695778E62768">
         <di:waypoint x="459" y="372"/>
         <di:waypoint x="460" y="272"/>
@@ -763,6 +1097,10 @@ else
       <dmndi:DMNEdge id="dmnedge-drg-_EE94D314-9B67-4089-8C35-3527DC9EA291" dmnElementRef="_EE94D314-9B67-4089-8C35-3527DC9EA291">
         <di:waypoint x="316.29906542056074" y="265"/>
         <di:waypoint x="460" y="272"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_CAEC6922-32C0-40FC-8A4E-947DE3F1DB4D" dmnElementRef="_CAEC6922-32C0-40FC-8A4E-947DE3F1DB4D">
+        <di:waypoint x="172" y="147"/>
+        <di:waypoint x="172.5981308411215" y="240"/>
       </dmndi:DMNEdge>
       <dmndi:DMNEdge id="dmnedge-drg-_DB38B3B1-F4C6-440D-802F-D335535BFC28" dmnElementRef="_DB38B3B1-F4C6-440D-802F-D335535BFC28">
         <di:waypoint x="172.5981308411215" y="240"/>
@@ -783,6 +1121,14 @@ else
       <dmndi:DMNEdge id="dmnedge-drg-_62512489-D339-4C80-8BA0-D828C6A58DBB" dmnElementRef="_62512489-D339-4C80-8BA0-D828C6A58DBB">
         <di:waypoint x="315" y="372"/>
         <di:waypoint x="170" y="372"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_BDA14C8C-96A1-4F50-A736-4AFDE8DA4F21" dmnElementRef="_BDA14C8C-96A1-4F50-A736-4AFDE8DA4F21">
+        <di:waypoint x="315" y="372"/>
+        <di:waypoint x="220" y="457"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_5E8222FE-2CAC-4C14-ACE2-5FC27B4874C4" dmnElementRef="_5E8222FE-2CAC-4C14-ACE2-5FC27B4874C4">
+        <di:waypoint x="460" y="272"/>
+        <di:waypoint x="593" y="219"/>
       </dmndi:DMNEdge>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>

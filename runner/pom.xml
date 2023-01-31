@@ -149,9 +149,13 @@
                   <argument>sample</argument>
                   <argument>Part 1 Sample</argument-->
 
+                  <!--argument>09</argument>
+                  <argument>sample</argument>
+                  <argument>Part 1 Sample</argument-->
+
                   <argument>09</argument>
                   <argument>input</argument>
-                  <argument>Part 1</argument>
+                  <argument>Part 1, Part 2</argument>
 
                 </arguments>
             </configuration>

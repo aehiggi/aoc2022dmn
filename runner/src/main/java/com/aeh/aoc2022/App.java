@@ -42,7 +42,7 @@ public class App {
 
       final DMNContext context = dmnRuntime.newContext();
       
-      String filename = "src/main/resources/"+ (mode.equals("sample") ? "sample-" : "input-") + day + ".txt";
+      String filename = "src/main/resources/"+ mode + "-" + day + ".txt";
       List<String> lines = Files.readAllLines(Paths.get(filename));
 
       context.set("InputLines", lines);  
@@ -50,7 +50,7 @@ public class App {
       DMNResult dmnResult = dmnRuntime.evaluateByName (dmnModel, context, outputNodeNames);  
 
       System.out.println(LocalTime.now());
-      if (mode.equals("sample")) {
+      if (mode.startsWith("sample")) {
          for (DMNDecisionResult dr : dmnResult.getDecisionResults()) {  
             System.out.println(dr.getDecisionName());
             System.out.println(dr.getResult());
