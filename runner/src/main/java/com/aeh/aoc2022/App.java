@@ -17,7 +17,6 @@ import org.kie.dmn.api.core.DMNResult;
 import org.kie.dmn.api.core.DMNRuntime;
 import org.kie.dmn.core.compiler.RuntimeTypeCheckOption;
 import org.kie.dmn.core.impl.DMNRuntimeImpl;
-import static java.util.stream.Collectors.toList;
 
 public class App {
     
@@ -60,16 +59,6 @@ public class App {
             System.out.println(decision + ": " + dmnResult.getContext().get(decision));
          }
       }
-      
-//        for (Integer age : Arrays.asList(1,12,13,64,65,66)) {
-//            dmnContext.set("age", age);  
-//            DMNResult dmnResult =
-//                dmnRuntime.evaluateAll(dmnModel, dmnContext);  
-//            for (DMNDecisionResult dr : dmnResult.getDecisionResults()) {  
-//                System.out.println("Age: " + age + ", " +
-//                        "Decision: '" + dr.getDecisionName() + "', " +
-//                        "Result: " + dr.getResult());
-//            }
-//        }
+
    }
 }
