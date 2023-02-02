@@ -157,10 +157,13 @@
                   <argument>input</argument>
                   <argument>Part 1, Part 2</argument-->
 
-                  <argument>10</argument>
+                  <!--argument>10</argument>
                   <argument>input</argument>
-                  <argument>Display</argument>
+                  <argument>Display</argument-->
                   
+                  <argument>11</argument>
+                  <argument>input</argument>
+                  <argument>Part 1</argument>
 
                 </arguments>
             </configuration>
