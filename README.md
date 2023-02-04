@@ -6,6 +6,8 @@ I am fully aware that DMN is in many ways The Wrong Tool For The Job - but I'm d
 
 *Warning: This is not an example of "best practices". These models and code are provided for entertainment and amusement only. The horrors you will find within include: Decision Tables with a First hit policy, poorly factored solutions, redundancy, naive algorithms, poor performance, awful and inconsistent variable naming, variables declared as the Any datatype, and many more.*
 
+![Day11](https://user-images.githubusercontent.com/10354739/216742987-afda35d5-5ed2-47a2-8f7c-b67810898fb8.png)
+
 ## Prerequisites
 - JDK 11+ with JAVA_HOME configured appropriately
 - Apache Maven 3.8.6+
