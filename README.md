@@ -12,6 +12,7 @@ I am fully aware that DMN is in many ways The Wrong Tool For The Job - but I'm d
 - JDK 11+ with JAVA_HOME configured appropriately
 - Apache Maven 3.8.6+
 - Optionally, an IDE, such as IntelliJ IDEA, VSCode or Eclipse
+- A DMN Editor (I'm using the VSCode extension "DMN Editor" by redhat)
 
 ## Structure
 

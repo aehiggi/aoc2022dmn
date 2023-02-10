@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="com.aeh.aoc2022.dmn" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_8F0494F0-E5C0-42A6-BFDA-615F5CE1895C" name="decisionmodel-12" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="com.aeh.aoc2022.dmn">
+  <dmn:extensionElements/>
+  <dmn:itemDefinition id="_32B1F665-F7E0-4491-9EB4-CD8A42DDB575" name="Raw Lines" isCollection="true">
+    <dmn:typeRef>string</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_DCE965FB-3BDA-493B-82E7-7F708B390CAC" name="Node" isCollection="false">
+    <dmn:itemComponent id="_4DA0220B-34FF-4F7C-9F56-377960AF4FD8" name="index" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_8BADB7D0-C07A-404F-9137-137F6B0F8E12" name="x" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_8E22A4A7-577A-44AD-98F0-AF226A24A2DE" name="y" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_D49F58B4-D0F1-4A7F-AFC8-C2691B30A7B5" name="distance" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_FC79F40E-66A1-4EDB-A1B5-70E8655F4E40" name="height" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_4E6F2329-8A13-4DE4-84E8-2C50BE392171" name="isStart" isCollection="false">
+      <dmn:typeRef>boolean</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_FCEDB14D-55A0-4D6A-88C7-82F06E37D4BF" name="isEnd" isCollection="false">
+      <dmn:typeRef>boolean</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_BAAADEA8-276F-462F-9E6D-13803C0EB0CB" name="visited" isCollection="false">
+      <dmn:typeRef>boolean</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_0E01F8E2-87C4-42FA-A56D-E818EF1D9A8D" name="Nodes" isCollection="true">
+    <dmn:typeRef>Node</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_8B289B2F-8B4A-45EB-8E1A-BC2FEF658628" name="Queue" isCollection="true">
+    <dmn:typeRef>Nodes</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:inputData id="_D9146FCE-C889-4A9B-AECA-6BF749D21C19" name="InputLines">
+    <dmn:extensionElements/>
+    <dmn:variable id="_0E78A3C6-D1ED-48B7-B04F-B265E24D0BE4" name="InputLines" typeRef="Raw Lines"/>
+  </dmn:inputData>
+  <dmn:decision id="_9B6B2B90-A660-466E-8E34-3029FA2ED153" name="Nodes">
+    <dmn:extensionElements/>
+    <dmn:variable id="_07C1CEEB-2392-4A20-B5F8-4E9E28BB2453" name="Nodes" typeRef="Nodes"/>
+    <dmn:informationRequirement id="_CFE59E1D-DFB8-4995-BE69-B88CF31EE3C9">
+      <dmn:requiredInput href="#_D9146FCE-C889-4A9B-AECA-6BF749D21C19"/>
+    </dmn:informationRequirement>
+    <dmn:context id="_80C21377-A0C9-41A7-930D-D7398319881C">
+      <dmn:contextEntry>
+        <dmn:variable id="_7D6A116E-76B5-46C9-8A3E-7D6BDE04B89D" name="flat_list" typeRef="Nodes"/>
+        <dmn:literalExpression id="_E2414F17-A9F5-44A1-A577-B191C886A111">
+          <dmn:text>flatten(
+for i in 1..count(InputLines)
+ return for j in 1..string length(InputLines[i])
+  return {
+   index: ((i-1) * string length(InputLines[i])) + j,
+   x: j,
+   y: i,
+   distance: if substring(InputLines[i], j, 1) = "S" then 0 else 1000000000000,
+   height: 
+    if substring(InputLines[i], j, 1) = "S" then 1
+    else if substring(InputLines[i], j, 1) = "E" then 26
+    else string length(split("abcdefghijklmnopqrstuvwxyz", substring(InputLines[i], j, 1))[1])
+   ,
+   isStart: substring(InputLines[i], j, 1) = "S",
+   isEnd: substring(InputLines[i], j, 1) = "E",
+   visited: false
+  }
+)
+
+
+
+ 
+ </dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:literalExpression id="_5B06B930-0189-49EE-8F9B-635B792DF344">
+          <dmn:text>flat_list</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmn:decision id="_A405D283-7026-4B92-8926-2FCDD97E6428" name="Part 1">
+    <dmn:extensionElements/>
+    <dmn:variable id="_4A1C5302-D23B-4968-B822-D365761D78F9" name="Part 1" typeRef="Any"/>
+    <dmn:informationRequirement id="_1EDA7F26-837A-4A2E-BE56-48B5944F1498">
+      <dmn:requiredDecision href="#_9B6B2B90-A660-466E-8E34-3029FA2ED153"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_06C1D393-11C4-460D-BB98-BFD732D1B88E">
+      <dmn:requiredKnowledge href="#_D0706AF3-0608-49C2-8411-3A942080278C"/>
+    </dmn:knowledgeRequirement>
+    <dmn:context id="_5E41E4BB-4FD2-4903-97B4-F9B5ED0FE6F9">
+      <dmn:contextEntry>
+        <dmn:variable id="_6D310652-5204-4237-80BB-1DECE614342A" name="q" typeRef="Queue"/>
+        <dmn:literalExpression id="_F9D519C7-D4CA-43B5-A24C-F23688198468">
+          <dmn:text>insert before(
+ for i in 1..500 return [],
+ 1, 
+ Nodes[isStart=true]
+)
+
+
+
+
+
+</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:literalExpression id="_0E07346B-55E8-4070-9C1D-E9018CCFF5CA">
+          <dmn:text>Batch Dijkstra(Nodes, 0, q)</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmn:businessKnowledgeModel id="_A20A5CED-5EDE-4905-9CA7-E2A984ECF40B" name="Dijkstra">
+    <dmn:extensionElements/>
+    <dmn:variable id="_6D5FFD2A-C0FE-426F-BA50-7F20E4DA74AE" name="Dijkstra" typeRef="Any"/>
+    <dmn:encapsulatedLogic id="_21F9BC30-45C1-443C-A0E2-E98E7F8DF55B" kind="FEEL">
+      <dmn:formalParameter id="_0259A3D0-6CDE-4A9D-8492-346739085C14" name="unexplored" typeRef="Nodes"/>
+      <dmn:formalParameter id="_708860A3-011B-4B30-AE8B-D44266AF9FC9" name="max_loops" typeRef="number"/>
+      <dmn:formalParameter id="_60B399B7-FD7A-44E1-86D9-5D87DC3DC5FE" name="loops" typeRef="number"/>
+      <dmn:formalParameter id="_168A4199-102B-499E-BDB4-87E3C20AD2B8" name="q" typeRef="Queue"/>
+      <dmn:context id="_5E04EDED-4568-4611-9591-04A0088BA8BA">
+        <dmn:contextEntry>
+          <dmn:variable id="_0F1C4B58-BCD1-4C4D-BCF9-9F163F732755" name="dists" typeRef="Any"/>
+          <dmn:literalExpression id="_846CE38D-6D2E-4505-A072-B2DF08F8C593">
+            <dmn:text>for d in 1..count(q) 
+return {
+ dist: d,
+ size: count(q[d]),
+ items: q[d]
+}</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_0FFBFD38-74F3-40DE-BD93-65662A842005" name="active_dist" typeRef="Any"/>
+          <dmn:literalExpression id="_BD69FEC7-D657-4548-8CAB-33022173A7B4">
+            <dmn:text>dists[size &gt; 0][1]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_85BA4D00-D298-4035-9682-3C46307E30F7" name="current" typeRef="Node"/>
+          <dmn:literalExpression id="_4637ADC9-C778-41FD-A1EB-F1AB7D9EFF92">
+            <dmn:text>active_dist.items[1]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_A0634EBB-8C0B-4EBE-AAFC-B250767CC9EC" name="neighbours" typeRef="Nodes"/>
+          <dmn:literalExpression id="_083DE86C-70E6-494E-99A6-E0D025295B91">
+            <dmn:text>concatenate(
+ if current.x &gt; 1 then unexplored[current.index - 1] else [],
+ if current.y &gt; 1 then unexplored[current.index - 70] else [],
+ if current.x &lt; 70  then unexplored[current.index + 1] else [],
+ if current.y &lt; 41 then unexplored[current.index + 70] else []
+)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_20ABC11D-E9C9-490E-AEA9-0ECA9295DE0D" name="valid_neighbours" typeRef="Nodes"/>
+          <dmn:literalExpression id="_3D893F60-F300-45AE-904F-DF2B7E3030DD">
+            <dmn:text>neighbours[visited=false and height &lt;= (current.height+1)]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_87ABC27A-9782-49CE-8C94-0556311C46F2" name="updated_neighbours" typeRef="Nodes"/>
+          <dmn:literalExpression id="_A1B9C3F0-83B0-4314-AD89-528781E92F6B">
+            <dmn:text>for n in valid_neighbours
+ return {
+  index: n.index,
+  x: n.x,
+  y: n.y,
+  height: n.height,
+  distance: if n.distance &gt; current.distance + 1 then current.distance + 1 else n.distance,
+  isStart: n.isStart,
+  isEnd: n.isEnd,
+  visited: false
+ }</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_B8A56109-7B69-433D-AB85-FF45B4EB1312" name="upd_current" typeRef="Node"/>
+          <dmn:literalExpression id="_715495C5-C071-41EA-9700-06BE7A72978A">
+            <dmn:text>{
+ index: current.index,
+ x: current.x,
+ y: current.y,
+ height: current.height,
+ distance: current.distance,
+ isStart: current.isStart,
+ isEnd: current.isEnd,
+ visited: true
+}</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_610689E3-D3E8-4533-BF8C-D7317AE8FE3D" name="updated_unexplored" typeRef="Nodes"/>
+          <dmn:literalExpression id="_9D382B40-CF7A-42D2-B7C5-E3B817F6F543">
+            <dmn:text>for i in 1..count(unexplored)
+ return
+  if i = current.index then upd_current
+  else if list contains(updated_neighbours.index, i) then
+   updated_neighbours[index=i][1]
+  else
+   unexplored[i]
+</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_459270B7-1648-470B-B4E1-B5D0EA68E7D8" name="updated_q" typeRef="Queue"/>
+          <dmn:literalExpression id="_E1C9FF82-2409-463A-938C-221E03AD2D5D">
+            <dmn:text>for d in 1..count(q)
+ return
+  concatenate(
+   q[d][index!=current.index and not(list contains(updated_neighbours[distance=d].index, index))],
+   updated_neighbours[distance=d]
+  )</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:literalExpression id="_8305F5F6-25BD-4A55-8EB5-F9A524FEE738">
+            <dmn:text>if modulo(loops+1, max_loops) = 0 and not(current.isEnd) then
+{ 
+ nodes: updated_unexplored,
+ loops: loops+1,
+ shortest: null,
+ current: current,
+ neighbours: updated_neighbours,
+ q: updated_q
+} 
+else if count(q[count(item) &gt; 0]) = 0 then
+{
+ nodes: updated_unexplored,
+ loops: loops+1,
+ shortest: null,
+ current: current,
+ neighbours: updated_neighbours,
+ q: updated_q,
+ abort: true
+}
+else if current.isEnd then 
+{ 
+ nodes: updated_unexplored,
+ shortest: current.distance,
+ loops: loops+1,
+ current: current,
+ neighbours: updated_neighbours
+}
+else Dijkstra(updated_unexplored, max_loops, loops+1, updated_q)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+  </dmn:businessKnowledgeModel>
+  <dmn:businessKnowledgeModel id="_D0706AF3-0608-49C2-8411-3A942080278C" name="Batch Dijkstra">
+    <dmn:extensionElements/>
+    <dmn:variable id="_4C617B3A-E09B-476B-A93E-B606D45C1B67" name="Batch Dijkstra" typeRef="Any"/>
+    <dmn:encapsulatedLogic id="_D34DF0BE-ED54-4F5D-88C6-487C77A50F26" kind="FEEL">
+      <dmn:formalParameter id="_179B8614-0F4E-437D-9E1D-D98541B04643" name="nodes" typeRef="Nodes"/>
+      <dmn:formalParameter id="_65480B11-766B-403A-8371-5F82E7704143" name="done" typeRef="number"/>
+      <dmn:formalParameter id="_F5B3EFEE-C644-4CF4-9EC6-C135F70840A8" name="q" typeRef="Queue"/>
+      <dmn:context id="_F12D209E-52B6-437D-8104-31724C7DE2B9">
+        <dmn:contextEntry>
+          <dmn:variable id="_5489FC53-7065-4874-99DA-967F7788CFF0" name="batch" typeRef="Any"/>
+          <dmn:literalExpression id="_BE855C7B-1334-43E1-BC4A-A6C6BB8035F3">
+            <dmn:text>Dijkstra(nodes, 200, done, q)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:literalExpression id="_11DFC7CD-68DA-49EF-8369-9CB5176066BD">
+            <dmn:text>if batch.shortest != null or batch.abort = true then
+ batch
+else
+ Batch Dijkstra(batch.nodes, batch.loops, batch.q)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+    <dmn:knowledgeRequirement id="_C3D0A366-9168-4438-BB41-79C959DE2808">
+      <dmn:requiredKnowledge href="#_A20A5CED-5EDE-4905-9CA7-E2A984ECF40B"/>
+    </dmn:knowledgeRequirement>
+  </dmn:businessKnowledgeModel>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_8F3941AC-6400-4C83-B581-7CAD8202E3BC" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_80C21377-A0C9-41A7-930D-D7398319881C">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>748</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_E2414F17-A9F5-44A1-A577-B191C886A111">
+            <kie:width>748</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_5B06B930-0189-49EE-8F9B-635B792DF344">
+            <kie:width>748</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_5E41E4BB-4FD2-4903-97B4-F9B5ED0FE6F9">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>556</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_F9D519C7-D4CA-43B5-A24C-F23688198468">
+            <kie:width>556</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_0E07346B-55E8-4070-9C1D-E9018CCFF5CA">
+            <kie:width>556</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_5E04EDED-4568-4611-9591-04A0088BA8BA">
+            <kie:width>50</kie:width>
+            <kie:width>196</kie:width>
+            <kie:width>773</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_846CE38D-6D2E-4505-A072-B2DF08F8C593">
+            <kie:width>773</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_BD69FEC7-D657-4548-8CAB-33022173A7B4">
+            <kie:width>773</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_4637ADC9-C778-41FD-A1EB-F1AB7D9EFF92">
+            <kie:width>773</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_083DE86C-70E6-494E-99A6-E0D025295B91">
+            <kie:width>773</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_3D893F60-F300-45AE-904F-DF2B7E3030DD">
+            <kie:width>773</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_A1B9C3F0-83B0-4314-AD89-528781E92F6B">
+            <kie:width>773</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_715495C5-C071-41EA-9700-06BE7A72978A">
+            <kie:width>773</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_9D382B40-CF7A-42D2-B7C5-E3B817F6F543">
+            <kie:width>773</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_E1C9FF82-2409-463A-938C-221E03AD2D5D">
+            <kie:width>773</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_8305F5F6-25BD-4A55-8EB5-F9A524FEE738">
+            <kie:width>773</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_21F9BC30-45C1-443C-A0E2-E98E7F8DF55B">
+            <kie:width>50</kie:width>
+            <kie:width>1039</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_F12D209E-52B6-437D-8104-31724C7DE2B9">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>471</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_BE855C7B-1334-43E1-BC4A-A6C6BB8035F3">
+            <kie:width>471</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_11DFC7CD-68DA-49EF-8369-9CB5176066BD">
+            <kie:width>471</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D34DF0BE-ED54-4F5D-88C6-487C77A50F26">
+            <kie:width>50</kie:width>
+            <kie:width>641</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-drg-_D9146FCE-C889-4A9B-AECA-6BF749D21C19" dmnElementRef="_D9146FCE-C889-4A9B-AECA-6BF749D21C19" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="443" y="404" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_9B6B2B90-A660-466E-8E34-3029FA2ED153" dmnElementRef="_9B6B2B90-A660-466E-8E34-3029FA2ED153" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="443" y="305" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_A405D283-7026-4B92-8926-2FCDD97E6428" dmnElementRef="_A405D283-7026-4B92-8926-2FCDD97E6428" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="443" y="196" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_A20A5CED-5EDE-4905-9CA7-E2A984ECF40B" dmnElementRef="_A20A5CED-5EDE-4905-9CA7-E2A984ECF40B" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="131.5981308411215" y="195" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_D0706AF3-0608-49C2-8411-3A942080278C" dmnElementRef="_D0706AF3-0608-49C2-8411-3A942080278C" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="287.29906542056074" y="195" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_CFE59E1D-DFB8-4995-BE69-B88CF31EE3C9" dmnElementRef="_CFE59E1D-DFB8-4995-BE69-B88CF31EE3C9">
+        <di:waypoint x="493" y="429"/>
+        <di:waypoint x="493" y="330"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_1EDA7F26-837A-4A2E-BE56-48B5944F1498" dmnElementRef="_1EDA7F26-837A-4A2E-BE56-48B5944F1498">
+        <di:waypoint x="493" y="330"/>
+        <di:waypoint x="493" y="221"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_06C1D393-11C4-460D-BB98-BFD732D1B88E-AUTO-TARGET" dmnElementRef="_06C1D393-11C4-460D-BB98-BFD732D1B88E">
+        <di:waypoint x="337.29906542056074" y="220"/>
+        <di:waypoint x="443" y="221"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_C3D0A366-9168-4438-BB41-79C959DE2808-AUTO-TARGET" dmnElementRef="_C3D0A366-9168-4438-BB41-79C959DE2808">
+        <di:waypoint x="181.5981308411215" y="220"/>
+        <di:waypoint x="287.29906542056074" y="220"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>
