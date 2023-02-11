@@ -36,6 +36,17 @@
   <dmn:itemDefinition id="_8B289B2F-8B4A-45EB-8E1A-BC2FEF658628" name="Queue" isCollection="true">
     <dmn:typeRef>Nodes</dmn:typeRef>
   </dmn:itemDefinition>
+  <dmn:itemDefinition id="_61DD57F1-92B4-4024-B34E-34A59F2C759B" name="Config" isCollection="false">
+    <dmn:itemComponent id="_ADCFF642-13F1-42C2-B212-F39D384BEB5C" name="width" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_34B49E15-565F-41E2-8DCD-C67AD224AC7C" name="height" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_0C9C7B07-A887-4709-BAFC-16F44B07AC6E" name="heightFn" isCollection="false">
+      <dmn:typeRef>Any</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
   <dmn:inputData id="_D9146FCE-C889-4A9B-AECA-6BF749D21C19" name="InputLines">
     <dmn:extensionElements/>
     <dmn:variable id="_0E78A3C6-D1ED-48B7-B04F-B265E24D0BE4" name="InputLines" typeRef="Raw Lines"/>
@@ -88,18 +99,30 @@ for i in 1..count(InputLines)
     <dmn:informationRequirement id="_1EDA7F26-837A-4A2E-BE56-48B5944F1498">
       <dmn:requiredDecision href="#_9B6B2B90-A660-466E-8E34-3029FA2ED153"/>
     </dmn:informationRequirement>
+    <dmn:informationRequirement id="_27132123-7FD1-46EB-B907-106142DE043B">
+      <dmn:requiredDecision href="#_69D490EF-BE3A-4EC6-8864-F24509921744"/>
+    </dmn:informationRequirement>
     <dmn:knowledgeRequirement id="_06C1D393-11C4-460D-BB98-BFD732D1B88E">
       <dmn:requiredKnowledge href="#_D0706AF3-0608-49C2-8411-3A942080278C"/>
     </dmn:knowledgeRequirement>
+    <dmn:knowledgeRequirement id="_24A73AA3-FC7B-40AE-B627-5E6D6FEF48D5">
+      <dmn:requiredKnowledge href="#_7DE8DB50-D706-4D1C-AEAB-4CBCC4CFF6A1"/>
+    </dmn:knowledgeRequirement>
     <dmn:context id="_5E41E4BB-4FD2-4903-97B4-F9B5ED0FE6F9">
+      <dmn:contextEntry>
+        <dmn:variable id="_6935DC7E-F109-46B0-B847-1D7B0808721D" name="config" typeRef="Config"/>
+        <dmn:literalExpression id="_B86C263B-45DF-4879-9AD6-7B20DA6CB1EE">
+          <dmn:text>{
+ width: Map Size.width,
+ height: Map Size.height,
+ heightFn: UpHeightFn
+}</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
       <dmn:contextEntry>
         <dmn:variable id="_6D310652-5204-4237-80BB-1DECE614342A" name="q" typeRef="Queue"/>
         <dmn:literalExpression id="_F9D519C7-D4CA-43B5-A24C-F23688198468">
-          <dmn:text>insert before(
- for i in 1..500 return [],
- 1, 
- Nodes[isStart=true]
-)
+          <dmn:text>[ Nodes[isStart=true] ]
 
 
 
@@ -110,7 +133,7 @@ for i in 1..count(InputLines)
       </dmn:contextEntry>
       <dmn:contextEntry>
         <dmn:literalExpression id="_0E07346B-55E8-4070-9C1D-E9018CCFF5CA">
-          <dmn:text>Batch Dijkstra(Nodes, 0, q)</dmn:text>
+          <dmn:text>Batch Dijkstra(Nodes, 0, q, config)</dmn:text>
         </dmn:literalExpression>
       </dmn:contextEntry>
     </dmn:context>
@@ -123,6 +146,7 @@ for i in 1..count(InputLines)
       <dmn:formalParameter id="_708860A3-011B-4B30-AE8B-D44266AF9FC9" name="max_loops" typeRef="number"/>
       <dmn:formalParameter id="_60B399B7-FD7A-44E1-86D9-5D87DC3DC5FE" name="loops" typeRef="number"/>
       <dmn:formalParameter id="_168A4199-102B-499E-BDB4-87E3C20AD2B8" name="q" typeRef="Queue"/>
+      <dmn:formalParameter id="_410ED08E-77D6-470A-BE88-94C5C66DE869" name="config" typeRef="Config"/>
       <dmn:context id="_5E04EDED-4568-4611-9591-04A0088BA8BA">
         <dmn:contextEntry>
           <dmn:variable id="_0F1C4B58-BCD1-4C4D-BCF9-9F163F732755" name="dists" typeRef="Any"/>
@@ -152,16 +176,16 @@ return {
           <dmn:literalExpression id="_083DE86C-70E6-494E-99A6-E0D025295B91">
             <dmn:text>concatenate(
  if current.x &gt; 1 then unexplored[current.index - 1] else [],
- if current.y &gt; 1 then unexplored[current.index - 70] else [],
- if current.x &lt; 70  then unexplored[current.index + 1] else [],
- if current.y &lt; 41 then unexplored[current.index + 70] else []
+ if current.y &gt; 1 then unexplored[current.index - config.width] else [],
+ if current.x &lt; config.width  then unexplored[current.index + 1] else [],
+ if current.y &lt; config.height then unexplored[current.index + config.width] else []
 )</dmn:text>
           </dmn:literalExpression>
         </dmn:contextEntry>
         <dmn:contextEntry>
           <dmn:variable id="_20ABC11D-E9C9-490E-AEA9-0ECA9295DE0D" name="valid_neighbours" typeRef="Nodes"/>
           <dmn:literalExpression id="_3D893F60-F300-45AE-904F-DF2B7E3030DD">
-            <dmn:text>neighbours[visited=false and height &lt;= (current.height+1)]</dmn:text>
+            <dmn:text>neighbours[visited=false and config.heightFn(item.height, current.height)]</dmn:text>
           </dmn:literalExpression>
         </dmn:contextEntry>
         <dmn:contextEntry>
@@ -209,12 +233,27 @@ return {
           </dmn:literalExpression>
         </dmn:contextEntry>
         <dmn:contextEntry>
+          <dmn:variable id="_CE959D51-4CC6-4419-A5D7-15859814B734" name="new_q_max" typeRef="number"/>
+          <dmn:literalExpression id="_2F1648F6-A48A-451E-B9D6-B3302DF0003A">
+            <dmn:text>if count(updated_neighbours) &gt; 0 then max(updated_neighbours.distance) else 0</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_02AAA802-E694-4381-8543-8DD65B7B4A30" name="expanded_q" typeRef="Queue"/>
+          <dmn:literalExpression id="_F07EAC94-3BBE-4C59-9A31-0AE0EE6F936E">
+            <dmn:text>if new_q_max &gt; count(dists) then
+ concatenate(q, for i in 1..(new_q_max - count(q)) return [])
+else
+ q</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
           <dmn:variable id="_459270B7-1648-470B-B4E1-B5D0EA68E7D8" name="updated_q" typeRef="Queue"/>
           <dmn:literalExpression id="_E1C9FF82-2409-463A-938C-221E03AD2D5D">
-            <dmn:text>for d in 1..count(q)
+            <dmn:text>for d in 1..count(expanded_q)
  return
   concatenate(
-   q[d][index!=current.index and not(list contains(updated_neighbours[distance=d].index, index))],
+   expanded_q[d][index!=current.index and not(list contains(updated_neighbours[distance=d].index, index))],
    updated_neighbours[distance=d]
   )</dmn:text>
           </dmn:literalExpression>
@@ -261,11 +300,12 @@ else Dijkstra(updated_unexplored, max_loops, loops+1, updated_q)</dmn:text>
       <dmn:formalParameter id="_179B8614-0F4E-437D-9E1D-D98541B04643" name="nodes" typeRef="Nodes"/>
       <dmn:formalParameter id="_65480B11-766B-403A-8371-5F82E7704143" name="done" typeRef="number"/>
       <dmn:formalParameter id="_F5B3EFEE-C644-4CF4-9EC6-C135F70840A8" name="q" typeRef="Queue"/>
+      <dmn:formalParameter id="_CD4EC50A-9864-4C7D-9398-75C0B7D318A6" name="config" typeRef="Config"/>
       <dmn:context id="_F12D209E-52B6-437D-8104-31724C7DE2B9">
         <dmn:contextEntry>
           <dmn:variable id="_5489FC53-7065-4874-99DA-967F7788CFF0" name="batch" typeRef="Any"/>
           <dmn:literalExpression id="_BE855C7B-1334-43E1-BC4A-A6C6BB8035F3">
-            <dmn:text>Dijkstra(nodes, 200, done, q)</dmn:text>
+            <dmn:text>Dijkstra(nodes, 200, done, q, config)</dmn:text>
           </dmn:literalExpression>
         </dmn:contextEntry>
         <dmn:contextEntry>
@@ -273,7 +313,7 @@ else Dijkstra(updated_unexplored, max_loops, loops+1, updated_q)</dmn:text>
             <dmn:text>if batch.shortest != null or batch.abort = true then
  batch
 else
- Batch Dijkstra(batch.nodes, batch.loops, batch.q)</dmn:text>
+ Batch Dijkstra(batch.nodes, batch.loops, batch.q, config)</dmn:text>
           </dmn:literalExpression>
         </dmn:contextEntry>
       </dmn:context>
@@ -282,6 +322,30 @@ else
       <dmn:requiredKnowledge href="#_A20A5CED-5EDE-4905-9CA7-E2A984ECF40B"/>
     </dmn:knowledgeRequirement>
   </dmn:businessKnowledgeModel>
+  <dmn:businessKnowledgeModel id="_7DE8DB50-D706-4D1C-AEAB-4CBCC4CFF6A1" name="UpHeightFn">
+    <dmn:extensionElements/>
+    <dmn:variable id="_8FD92C86-6CBB-470F-9310-E26DD3563786" name="UpHeightFn" typeRef="boolean"/>
+    <dmn:encapsulatedLogic id="_7A4E6302-C077-41C8-9151-0D72230AE16D" kind="FEEL">
+      <dmn:formalParameter id="_22852830-14A8-40BA-A2D0-16B412F5EF8C" name="item_height" typeRef="number"/>
+      <dmn:formalParameter id="_6588B10A-7BA0-4917-9F4E-6ABAF4C4AADC" name="current_height" typeRef="number"/>
+      <dmn:literalExpression id="_B2710D8A-EC4B-4A55-A100-EC8120740429">
+        <dmn:text>item_height &lt;= (current_height + 1)</dmn:text>
+      </dmn:literalExpression>
+    </dmn:encapsulatedLogic>
+  </dmn:businessKnowledgeModel>
+  <dmn:decision id="_69D490EF-BE3A-4EC6-8864-F24509921744" name="Map Size">
+    <dmn:extensionElements/>
+    <dmn:variable id="_21D82E90-4775-44C3-84F1-50888F460DBC" name="Map Size" typeRef="Any"/>
+    <dmn:informationRequirement id="_E8565DBD-2584-4DEF-9621-EB81F0CA5859">
+      <dmn:requiredInput href="#_D9146FCE-C889-4A9B-AECA-6BF749D21C19"/>
+    </dmn:informationRequirement>
+    <dmn:literalExpression id="_D8AACBEB-D9FD-4680-928B-B53F0348F5D4">
+      <dmn:text>{
+ width: string length(InputLines[1]),
+ height: count(InputLines)
+}</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram id="_8F3941AC-6400-4C83-B581-7CAD8202E3BC" name="DRG">
       <di:extension>
@@ -300,6 +364,9 @@ else
           <kie:ComponentWidths dmnElementRef="_5E41E4BB-4FD2-4903-97B4-F9B5ED0FE6F9">
             <kie:width>50</kie:width>
             <kie:width>100</kie:width>
+            <kie:width>556</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_B86C263B-45DF-4879-9AD6-7B20DA6CB1EE">
             <kie:width>556</kie:width>
           </kie:ComponentWidths>
           <kie:ComponentWidths dmnElementRef="_F9D519C7-D4CA-43B5-A24C-F23688198468">
@@ -337,6 +404,12 @@ else
           <kie:ComponentWidths dmnElementRef="_9D382B40-CF7A-42D2-B7C5-E3B817F6F543">
             <kie:width>773</kie:width>
           </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_2F1648F6-A48A-451E-B9D6-B3302DF0003A">
+            <kie:width>773</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_F07EAC94-3BBE-4C59-9A31-0AE0EE6F936E">
+            <kie:width>773</kie:width>
+          </kie:ComponentWidths>
           <kie:ComponentWidths dmnElementRef="_E1C9FF82-2409-463A-938C-221E03AD2D5D">
             <kie:width>773</kie:width>
           </kie:ComponentWidths>
@@ -362,6 +435,16 @@ else
             <kie:width>50</kie:width>
             <kie:width>641</kie:width>
           </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_B2710D8A-EC4B-4A55-A100-EC8120740429">
+            <kie:width>343</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_7A4E6302-C077-41C8-9151-0D72230AE16D">
+            <kie:width>50</kie:width>
+            <kie:width>343</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D8AACBEB-D9FD-4680-928B-B53F0348F5D4">
+            <kie:width>354</kie:width>
+          </kie:ComponentWidths>
         </kie:ComponentsWidthsExtension>
       </di:extension>
       <dmndi:DMNShape id="dmnshape-drg-_D9146FCE-C889-4A9B-AECA-6BF749D21C19" dmnElementRef="_D9146FCE-C889-4A9B-AECA-6BF749D21C19" isCollapsed="false">
@@ -370,7 +453,7 @@ else
           <dmndi:StrokeColor red="0" green="0" blue="0"/>
           <dmndi:FontColor red="0" green="0" blue="0"/>
         </dmndi:DMNStyle>
-        <dc:Bounds x="443" y="404" width="100" height="50"/>
+        <dc:Bounds x="468.29906542056074" y="423" width="100" height="50"/>
         <dmndi:DMNLabel/>
       </dmndi:DMNShape>
       <dmndi:DMNShape id="dmnshape-drg-_9B6B2B90-A660-466E-8E34-3029FA2ED153" dmnElementRef="_9B6B2B90-A660-466E-8E34-3029FA2ED153" isCollapsed="false">
@@ -379,7 +462,7 @@ else
           <dmndi:StrokeColor red="0" green="0" blue="0"/>
           <dmndi:FontColor red="0" green="0" blue="0"/>
         </dmndi:DMNStyle>
-        <dc:Bounds x="443" y="305" width="100" height="50"/>
+        <dc:Bounds x="529" y="300" width="100" height="50"/>
         <dmndi:DMNLabel/>
       </dmndi:DMNShape>
       <dmndi:DMNShape id="dmnshape-drg-_A405D283-7026-4B92-8926-2FCDD97E6428" dmnElementRef="_A405D283-7026-4B92-8926-2FCDD97E6428" isCollapsed="false">
@@ -388,7 +471,7 @@ else
           <dmndi:StrokeColor red="0" green="0" blue="0"/>
           <dmndi:FontColor red="0" green="0" blue="0"/>
         </dmndi:DMNStyle>
-        <dc:Bounds x="443" y="196" width="100" height="50"/>
+        <dc:Bounds x="469" y="128" width="100" height="50"/>
         <dmndi:DMNLabel/>
       </dmndi:DMNShape>
       <dmndi:DMNShape id="dmnshape-drg-_A20A5CED-5EDE-4905-9CA7-E2A984ECF40B" dmnElementRef="_A20A5CED-5EDE-4905-9CA7-E2A984ECF40B" isCollapsed="false">
@@ -409,21 +492,51 @@ else
         <dc:Bounds x="287.29906542056074" y="195" width="100" height="50"/>
         <dmndi:DMNLabel/>
       </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_7DE8DB50-D706-4D1C-AEAB-4CBCC4CFF6A1" dmnElementRef="_7DE8DB50-D706-4D1C-AEAB-4CBCC4CFF6A1" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="308" y="102.31578947368422" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_69D490EF-BE3A-4EC6-8864-F24509921744" dmnElementRef="_69D490EF-BE3A-4EC6-8864-F24509921744" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="409" y="300" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
       <dmndi:DMNEdge id="dmnedge-drg-_CFE59E1D-DFB8-4995-BE69-B88CF31EE3C9" dmnElementRef="_CFE59E1D-DFB8-4995-BE69-B88CF31EE3C9">
-        <di:waypoint x="493" y="429"/>
-        <di:waypoint x="493" y="330"/>
+        <di:waypoint x="518.2990654205607" y="448"/>
+        <di:waypoint x="579" y="325"/>
       </dmndi:DMNEdge>
       <dmndi:DMNEdge id="dmnedge-drg-_1EDA7F26-837A-4A2E-BE56-48B5944F1498" dmnElementRef="_1EDA7F26-837A-4A2E-BE56-48B5944F1498">
-        <di:waypoint x="493" y="330"/>
-        <di:waypoint x="493" y="221"/>
+        <di:waypoint x="579" y="325"/>
+        <di:waypoint x="519" y="153"/>
       </dmndi:DMNEdge>
       <dmndi:DMNEdge id="dmnedge-drg-_06C1D393-11C4-460D-BB98-BFD732D1B88E-AUTO-TARGET" dmnElementRef="_06C1D393-11C4-460D-BB98-BFD732D1B88E">
         <di:waypoint x="337.29906542056074" y="220"/>
-        <di:waypoint x="443" y="221"/>
+        <di:waypoint x="469" y="153"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_24A73AA3-FC7B-40AE-B627-5E6D6FEF48D5-AUTO-TARGET" dmnElementRef="_24A73AA3-FC7B-40AE-B627-5E6D6FEF48D5">
+        <di:waypoint x="358" y="127.31578947368422"/>
+        <di:waypoint x="519" y="178"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_27132123-7FD1-46EB-B907-106142DE043B" dmnElementRef="_27132123-7FD1-46EB-B907-106142DE043B">
+        <di:waypoint x="459" y="325"/>
+        <di:waypoint x="519" y="178"/>
       </dmndi:DMNEdge>
       <dmndi:DMNEdge id="dmnedge-drg-_C3D0A366-9168-4438-BB41-79C959DE2808-AUTO-TARGET" dmnElementRef="_C3D0A366-9168-4438-BB41-79C959DE2808">
         <di:waypoint x="181.5981308411215" y="220"/>
         <di:waypoint x="287.29906542056074" y="220"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_E8565DBD-2584-4DEF-9621-EB81F0CA5859" dmnElementRef="_E8565DBD-2584-4DEF-9621-EB81F0CA5859">
+        <di:waypoint x="518.2990654205607" y="448"/>
+        <di:waypoint x="459" y="350"/>
       </dmndi:DMNEdge>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
