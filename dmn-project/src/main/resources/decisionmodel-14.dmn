@@ -1,0 +1,1015 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="com.aeh.aoc2022.dmn" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_7363C89C-D8C3-4ADE-A7DA-D6F3D87C050A" name="decisionmodel-14" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="com.aeh.aoc2022.dmn">
+  <dmn:extensionElements/>
+  <dmn:itemDefinition id="_244FE06A-F3CB-4A4D-B262-B79984865BE5" name="Raw Lines" isCollection="true">
+    <dmn:typeRef>string</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_0A6B8DFD-6F38-4E0E-B6F0-383414DE8E3D" name="Line" isCollection="false">
+    <dmn:itemComponent id="_81BDC1C5-5B6C-4D35-90A9-C20F89AF4F0D" name="vertices" isCollection="false">
+      <dmn:typeRef>Vertices</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_FBCCEE26-12F7-42D8-A866-07D7897698A2" name="min_x" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_EAE60B37-D413-49DF-B092-0EBF173B9F19" name="max_x" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_507D9250-C164-4AE5-8BD9-9EA97F36E9E8" name="min_y" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_B4AEFAF9-288E-4CEB-84E9-7BB3BFED641E" name="max_y" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_E54E9785-37C7-4CB1-91DB-2763B54626F8" name="rocks" isCollection="false">
+      <dmn:typeRef>Vertices</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_91AAEC3F-3190-4D7B-98B9-2A44E9CDB510" name="Vertex" isCollection="false">
+    <dmn:itemComponent id="_116388AB-C0DC-40FF-958D-1DCA97E9C341" name="x" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_4B980599-AA05-438D-832C-861EC1E9FBAD" name="y" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_E941D0A2-FE80-408F-997D-7C47322758AA" name="Lines" isCollection="true">
+    <dmn:typeRef>Line</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_CC54519A-D1F9-441B-99C7-C0ECBA725C00" name="Rock" isCollection="false">
+    <dmn:itemComponent id="_815ECDAE-B84B-4665-9065-1404E884D69E" name="index" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_73970693-A39C-4D0A-B721-F160A99FCDC7" name="pos" isCollection="false">
+      <dmn:typeRef>Vertex</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_949E2CC4-3DEC-4C8E-BD1A-BA56F815F2F4" name="Rocks" isCollection="true">
+    <dmn:typeRef>Rock</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_C248E581-9B43-4F4E-BD78-423761ADADE9" name="Vertices" isCollection="true">
+    <dmn:typeRef>Vertex</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_3D39783E-CAF6-43BE-9D22-C5C12C9C646F" name="Columns" isCollection="true">
+    <dmn:typeRef>Vertices</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:inputData id="_0B3BEE63-D087-4953-8C80-30FC903F91E1" name="InputLines">
+    <dmn:extensionElements/>
+    <dmn:variable id="_F146D762-D591-42FE-8A0B-1081F849A6AA" name="InputLines" typeRef="Raw Lines"/>
+  </dmn:inputData>
+  <dmn:decision id="_C33DA238-58CA-49B2-8383-1986D24E00AC" name="Lines">
+    <dmn:extensionElements/>
+    <dmn:variable id="_98FB65BA-432A-493F-A218-074D41F42605" name="Lines" typeRef="Lines"/>
+    <dmn:informationRequirement id="_054B3FEA-1593-4E59-B775-922A931D8BF4">
+      <dmn:requiredInput href="#_0B3BEE63-D087-4953-8C80-30FC903F91E1"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_5CF07FBE-4EB8-4555-8C01-4A9EBBFC6E98">
+      <dmn:requiredKnowledge href="#_09A3458F-FB52-49D1-B8E4-B89DE112D6C6"/>
+    </dmn:knowledgeRequirement>
+    <dmn:context id="_C5232A27-95BA-4E2C-8CD5-0634CA5A844B">
+      <dmn:contextEntry>
+        <dmn:variable id="_9A113F0E-3AB7-46C8-B4F2-9A0B80588EED" name="unique_lines" typeRef="Any"/>
+        <dmn:literalExpression id="_77A64021-B424-4198-A052-99D4BA627C43">
+          <dmn:text>distinct values(InputLines)</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:literalExpression id="_AB3A10C0-24C6-4B16-B042-0626912D565E">
+          <dmn:text>for i in 1..count(unique_lines)
+ return MakeLine(i, unique_lines[i])</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmn:decision id="_7FDFDC41-983E-4ADA-814F-371A181F8F56" name="Config">
+    <dmn:extensionElements/>
+    <dmn:variable id="_F6F492C9-55EB-400D-B9B0-1F05079B012D" name="Config" typeRef="Any"/>
+    <dmn:informationRequirement id="_5CD8E180-667A-4EFC-9C64-18B1085617D9">
+      <dmn:requiredDecision href="#_C33DA238-58CA-49B2-8383-1986D24E00AC"/>
+    </dmn:informationRequirement>
+    <dmn:literalExpression id="_94AADEB6-7D9F-4F40-AD34-DFAFE2BEB588">
+      <dmn:text>{
+ lines: count(Lines),
+ min_x: min(Lines.min_x),
+ max_x: max(Lines.max_x),
+ min_y: min(Lines.min_y),
+ max_y: max(Lines.max_y),
+ map_start_y: 130,
+ map_end_y: 181
+}
+</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:businessKnowledgeModel id="_09A3458F-FB52-49D1-B8E4-B89DE112D6C6" name="MakeLine">
+    <dmn:extensionElements/>
+    <dmn:variable id="_A2EC1501-BC98-4A2F-8E70-AF1478F50AA3" name="MakeLine" typeRef="Line"/>
+    <dmn:encapsulatedLogic id="_67B4A9CA-D194-4563-B71F-D20C64547A00" kind="FEEL">
+      <dmn:formalParameter id="_F3F2A2A8-42D1-453F-BB9A-C0225B3212A5" name="idx" typeRef="number"/>
+      <dmn:formalParameter id="_2AF0A15D-B852-4C46-8F9E-C28B68B8061C" name="line" typeRef="string"/>
+      <dmn:context id="_2783492D-C2BC-464A-A03E-2D4097BE8C0C">
+        <dmn:contextEntry>
+          <dmn:variable id="_CA9F7452-8DAD-40CB-890D-E57CD83EA8FB" name="vert_strings" typeRef="Any"/>
+          <dmn:literalExpression id="_F3514A0C-D420-4597-AE1D-92442681656B">
+            <dmn:text>split(line, " -&gt; ")</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_381505E1-5E07-41E9-822B-5E2A67AD3963" name="verts" typeRef="Any"/>
+          <dmn:literalExpression id="_56965964-1A47-436B-A959-7CA341DB92F6">
+            <dmn:text>for v in vert_strings
+ return {
+  x: number(split(v, ",")[1], ",", "."),
+  y: number(split(v, ",")[2], ",", ".")
+ }</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_99899B15-07CD-478B-B53B-F03A247925C3" name="segments" typeRef="Any"/>
+          <dmn:literalExpression id="_FDD33ACA-1F61-4974-A83E-68FF20CC18D5">
+            <dmn:text>for i in 1..count(verts)-1
+ return 
+  {
+   start: verts[i],
+   end: verts[i+1],
+   is_first: i = 1,
+   is_last: i = count(verts)-1
+  }</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_C91C3086-E911-4C9A-BC76-C363D49F28A0" name="rocks" typeRef="Vertices"/>
+          <dmn:literalExpression id="_47903E69-5C05-45F5-8706-87477D9B682C">
+            <dmn:text>flatten(
+for s in segments
+ return
+  if s.start.x = s.end.x then
+   for i in (if s.is_first then 0 else 1)..abs(s.start.y - s.end.y)
+    return {
+     x: s.start.x,
+     y: if s.start.y - s.end.y &lt; 0 then s.start.y + i
+        else s.start.y - i
+    }
+  else
+   for i in (if s.is_first then 0 else 1)..abs(s.start.x - s.end.x)
+    return {
+     x: if s.start.x - s.end.x &lt; 0 then s.start.x + i
+        else s.start.x - i,
+     y: s.start.y
+    }
+)
+
+
+
+
+  </dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:literalExpression id="_453C06C8-318B-4C68-A215-066DEEF9354A">
+            <dmn:text>{
+ index: idx,
+ vertices: verts,
+ min_x: min(verts.x),
+ max_x: max(verts.x),
+ min_y: min(verts.y),
+ max_y: max(verts.y),
+ segments: segments,
+ rocks: rocks
+}</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+  </dmn:businessKnowledgeModel>
+  <dmn:decision id="_0CD9E3EC-DAAA-4A8D-8C0C-EA52519185BC" name="Sand">
+    <dmn:extensionElements/>
+    <dmn:variable id="_2B2B7DE8-FD69-40D0-9AD1-FD32CC5E5CED" name="Sand" typeRef="Columns"/>
+    <dmn:informationRequirement id="_A4A8C62C-9C1D-4A18-961F-0ED8A5A60321">
+      <dmn:requiredDecision href="#_7FDFDC41-983E-4ADA-814F-371A181F8F56"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_832723C1-5750-428B-9DCC-D8C7F0AF2DDF">
+      <dmn:requiredDecision href="#_82605892-7A49-42B6-88A9-D43C49E21430"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_F49383B1-1017-48BC-8D4B-F5994E17F3EE">
+      <dmn:requiredDecision href="#_EE217A65-BF9B-4E12-B06F-B5BF5FEA9BBC"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_B8DF453F-E435-4C4E-B258-86431454A2BA">
+      <dmn:requiredKnowledge href="#_14AA371B-34CF-44E2-B4D9-1039C96E40A2"/>
+    </dmn:knowledgeRequirement>
+    <dmn:literalExpression id="_FD1650A4-CE71-476E-A595-CDF2DE0D7A7D">
+      <dmn:text>Drop Sand Batch(
+RockCols, 
+ for i in 1..(Config.max_x - Config.min_x)+1
+  return [], 
+Config, 
+1000)</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:businessKnowledgeModel id="_58C09F30-CA7E-429B-87BC-9F0E366E2C0D" name="DropSand">
+    <dmn:extensionElements/>
+    <dmn:variable id="_EA28E477-AE93-4B0E-A376-BF939EAAE43D" name="DropSand" typeRef="Columns"/>
+    <dmn:encapsulatedLogic id="_D7E779DE-4F32-4A4B-A910-DDED42DF4A41" kind="FEEL">
+      <dmn:formalParameter id="_C88FFA58-E289-44E3-B454-7D791D98F1E0" name="rocks" typeRef="Columns"/>
+      <dmn:formalParameter id="_1ED01CD1-EAD9-46C0-A644-60164278C9D9" name="sand" typeRef="Columns"/>
+      <dmn:formalParameter id="_B5364DD9-F5B6-4ED9-BDDA-00DEB63B7A46" name="config" typeRef="Any"/>
+      <dmn:formalParameter id="_84087989-F75E-442E-9DD9-13C9A0B35578" name="limit" typeRef="number"/>
+      <dmn:formalParameter id="_4A2DC9F1-F3D2-4892-874B-DA7C96B7A8C1" name="done" typeRef="number"/>
+      <dmn:context id="_947B37AA-9398-43E5-8964-CEDF820B1773">
+        <dmn:contextEntry>
+          <dmn:variable id="_B8642039-2467-495A-8B82-7134941D9D6F" name="new_grain" typeRef="Vertex"/>
+          <dmn:literalExpression id="_0E4D46F0-5142-47B7-83F0-D83E6D131CE9">
+            <dmn:text>DropGrain(rocks, sand, { x: 500, y: 0 }, config.min_x-1, config.max_x-1)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_8A71FF61-5DC2-4217-B865-6FB891AAB97E" name="new_sand" typeRef="Columns"/>
+          <dmn:literalExpression id="_BCBA17F9-DD68-4AA4-BCA9-226338983F4F">
+            <dmn:text>for i in 1..count(sand)
+ return
+  if i = new_grain.x-(config.min_x-1) then
+   sort(append(sand[i], new_grain), function(a,b) a.y &lt; b.y)
+  else
+   sand[i]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:literalExpression id="_80E292C1-364C-4770-9D32-32CEAA07CB4E">
+            <dmn:text>if new_grain.y &gt; config.max_y then
+ sand
+else if done + 1 = limit then
+ new_sand
+else
+ DropSand(rocks, new_sand, config, limit, done + 1)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+    <dmn:knowledgeRequirement id="_F42B920C-DB46-49EF-B771-4156FDAD5CD2">
+      <dmn:requiredKnowledge href="#_89913DB4-E1A3-4E43-BC6F-84AC6FB2A36C"/>
+    </dmn:knowledgeRequirement>
+  </dmn:businessKnowledgeModel>
+  <dmn:businessKnowledgeModel id="_89913DB4-E1A3-4E43-BC6F-84AC6FB2A36C" name="DropGrain">
+    <dmn:extensionElements/>
+    <dmn:variable id="_4AB6185D-ACC2-4DFD-BA00-9EF3C6E5EA70" name="DropGrain" typeRef="Vertex"/>
+    <dmn:encapsulatedLogic id="_A570CEC3-A8CC-4F95-B901-5D44022A696D" kind="FEEL">
+      <dmn:formalParameter id="_0A412472-0DAA-4865-9EA5-D31CF3DED71C" name="rocks" typeRef="Columns"/>
+      <dmn:formalParameter id="_677B0BF4-BD7D-4E39-926F-25DC49DF7EE8" name="sand" typeRef="Columns"/>
+      <dmn:formalParameter id="_4F99C890-4E5A-454A-8D9E-534980229507" name="grain_pos" typeRef="Vertex"/>
+      <dmn:formalParameter id="_527B656F-FD4F-48FB-91CB-05774A2DDB6D" name="min_x" typeRef="number"/>
+      <dmn:formalParameter id="_F15D0C7C-0B4A-4A53-B3DD-52FB2E4BC9F6" name="max_x" typeRef="number"/>
+      <dmn:context id="_C98ADD14-C61E-445E-854C-75106718DB29">
+        <dmn:contextEntry>
+          <dmn:variable id="_A2BA7627-B71C-4D69-997B-698D12070B15" name="at_left" typeRef="boolean"/>
+          <dmn:literalExpression id="_28970D63-E933-453E-9069-AB5A025CCA4C">
+            <dmn:text>grain_pos.x &lt;= min_x+1</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_B9C433F5-28F6-4653-8637-BABE053A1A6E" name="at_right" typeRef="boolean"/>
+          <dmn:literalExpression id="_2C8A03C4-AE4B-49AB-A91A-7EF8C5AC1138">
+            <dmn:text>grain_pos.x &gt;= max_x</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_EE2DDF37-61BD-461B-89D4-2C0767595D7B" name="can_go_down" typeRef="boolean"/>
+          <dmn:literalExpression id="_4EFCBCD6-186D-4302-8253-C4CBF12D960B">
+            <dmn:text>not(at_left) and not(at_right) and
+not(some r in rocks[grain_pos.x -min_x] satisfies r.y=grain_pos.y+1) and
+not(some s in sand[grain_pos.x -min_x] satisfies s.y=grain_pos.y+1)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_D725FC5C-A5E1-4C6E-91E3-576E2D44E820" name="next_rock_down" typeRef="Vertices"/>
+          <dmn:literalExpression id="_D506975E-4AC3-45B2-AA91-1C526AD5AF5D">
+            <dmn:text>if can_go_down = true then 
+ rocks[grain_pos.x -min_x][y &gt; grain_pos.y]
+else
+ []</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_ADAD1A78-9427-4C6C-9E0B-9295929EB241" name="next_sand_down" typeRef="Vertices"/>
+          <dmn:literalExpression id="_6661A2FF-79AB-4AAC-840C-CE60CFAD35A2">
+            <dmn:text>if can_go_down = true  then
+ sand[grain_pos.x -min_x][y &gt; grain_pos.y]
+else
+ []</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_1EF17736-C6DC-4E6F-9303-2019D344D77E" name="can_go_left" typeRef="boolean"/>
+          <dmn:literalExpression id="_1B14FF3A-0917-427F-8940-9550E237A50C">
+            <dmn:text>if can_go_down = true then null
+else if at_left then true
+else
+ not(some r in rocks[grain_pos.x-1 -min_x] satisfies r.y=grain_pos.y+1) and
+ not(some s in sand[grain_pos.x-1 -min_x] satisfies s.y=grain_pos.y+1)
+</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_A8EB29FB-CDC4-4A2B-9D7A-CF095626F6F8" name="next_rock_left" typeRef="Vertices"/>
+          <dmn:literalExpression id="_68FC4DBA-A84B-4D35-8E02-688F762BC161">
+            <dmn:text>if can_go_left = true then
+ if at_left then [] else
+  rocks[grain_pos.x-1 -min_x][y &gt; grain_pos.y]
+else
+ []</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_3A865544-998F-4787-8C96-55407C590EFD" name="next_sand_left" typeRef="Vertices"/>
+          <dmn:literalExpression id="_59E99399-735C-4700-9BC6-C4823E536837">
+            <dmn:text>if can_go_left = true then
+ if at_left then [] else
+  sand[grain_pos.x-1 -min_x][y &gt; grain_pos.y]
+else
+ []</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_ED3DF9D6-B5B8-4ACB-9926-DD31368A5937" name="can_go_right" typeRef="boolean"/>
+          <dmn:literalExpression id="_AD109ACA-1C2F-49BD-BC2B-84107C9C1713">
+            <dmn:text>if can_go_down = true or can_go_left = true then null
+else if at_right then true
+else
+ not(some r in rocks[grain_pos.x+1 -min_x] satisfies r.y=grain_pos.y+1) and
+ not(some s in sand[grain_pos.x+1 -min_x] satisfies s.y=grain_pos.y+1)
+</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_005212E3-C804-42A1-9311-D89F4C1CB7EA" name="next_rock_right" typeRef="Vertices"/>
+          <dmn:literalExpression id="_81F4246D-715E-4FB4-8739-BF90934C5FB9">
+            <dmn:text>if can_go_right = true then
+ if at_right then [] else
+  rocks[grain_pos.x+1 -min_x][y &gt; grain_pos.y]
+else
+ []</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_C1C6405C-4C57-421A-B3A0-B2E0717F0235" name="next_sand_right" typeRef="Vertices"/>
+          <dmn:literalExpression id="_680FB9D2-416D-48DB-9612-6F8BBF4ACB41">
+            <dmn:text>if can_go_right = true then
+ if at_right then [] else
+  sand[grain_pos.x+1 -min_x][y &gt; grain_pos.y]
+else
+ [] </dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_8A487E51-4A72-4D10-86B8-26C8B04EAA11" name="next_pos" typeRef="Vertex"/>
+          <dmn:literalExpression id="_71053492-01E9-420C-A5D9-CE17E19EA9D0">
+            <dmn:text>if can_go_down = true then
+ { x: grain_pos.x, 
+   y: min(
+       if count(next_rock_down) = 0 then 1000000 else next_rock_down[1].y,
+       if count(next_sand_down) = 0 then 1000000 else next_sand_down[1].y
+      ) - 1
+ }
+else if can_go_left = true then
+ { x: grain_pos.x-1,
+   y: min(
+       if count(next_rock_left) = 0 then 1000000 else next_rock_left[1].y,
+       if count(next_sand_left) = 0 then 1000000 else next_sand_left[1].y
+      ) - 1
+ }
+else if can_go_right = true then
+ { x: grain_pos.x+1,
+   y: min(
+       if count(next_rock_right) = 0 then 1000000 else next_rock_right[1].y,
+       if count(next_sand_right) = 0 then 1000000 else next_sand_right[1].y
+      ) - 1
+ }
+else grain_pos
+  </dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:literalExpression id="_D94A15C0-91B7-43C1-94EE-7415C68BE505">
+            <dmn:text>if grain_pos.y = 999999 then 
+ grain_pos
+else if next_pos = grain_pos then
+ grain_pos
+else 
+ DropGrain(rocks, sand, next_pos, min_x, max_x)
+</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+  </dmn:businessKnowledgeModel>
+  <dmn:decision id="_82605892-7A49-42B6-88A9-D43C49E21430" name="Rocks">
+    <dmn:extensionElements/>
+    <dmn:variable id="_C549E636-AA67-4EA0-846E-621C945FBB12" name="Rocks" typeRef="Vertices"/>
+    <dmn:informationRequirement id="_57A110AD-3A06-4375-A8CD-BCAF0E412F12">
+      <dmn:requiredDecision href="#_C33DA238-58CA-49B2-8383-1986D24E00AC"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_11413329-9EC1-46DF-B279-48450236F5D2">
+      <dmn:requiredKnowledge href="#_CD27466C-3D83-45F3-8632-094DB53DE420"/>
+    </dmn:knowledgeRequirement>
+    <dmn:literalExpression id="_492765CC-DA25-47D8-9CDB-0A2BCE251FF6">
+      <dmn:text>BuildRockMap(Lines, 1, [])</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:businessKnowledgeModel id="_CD27466C-3D83-45F3-8632-094DB53DE420" name="BuildRockMap">
+    <dmn:extensionElements/>
+    <dmn:variable id="_B33C1DC6-8F8F-4110-B86C-5E7B8400D4F8" name="BuildRockMap" typeRef="Vertices"/>
+    <dmn:encapsulatedLogic id="_A175CD6A-8899-4EA5-9DF1-D0CA6E8325D3" kind="FEEL">
+      <dmn:formalParameter id="_BE88BE12-8A1C-4A5B-9C49-378F4CB44E27" name="lines" typeRef="Lines"/>
+      <dmn:formalParameter id="_CFFC8316-A904-4A5C-AEDD-65BED2CE1076" name="i" typeRef="number"/>
+      <dmn:formalParameter id="_0A13493F-5635-4AE4-8597-FD9CC16E6DCA" name="map" typeRef="Vertices"/>
+      <dmn:context id="_C7C56FA4-B77D-49A1-9E3C-F9F77DF5BCB9">
+        <dmn:contextEntry>
+          <dmn:variable id="_18DA81D6-F321-4D29-8BFA-C5DC843C459A" name="line_rocks" typeRef="Vertices"/>
+          <dmn:literalExpression id="_A3C2DAFD-CE2F-4704-846F-14F88A7E7B92">
+            <dmn:text>lines[i].rocks</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_950F8600-41B5-4ED7-B691-741BCCBCFD73" name="updated_map" typeRef="Vertices"/>
+          <dmn:literalExpression id="_901AA690-9318-46C3-838C-82061F885F83">
+            <dmn:text>concatenate(
+map,
+line_rocks[not(list contains(map, item))]
+)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:literalExpression id="_5C81A6BA-FAEE-469E-BBDC-F6FD2856C84B">
+            <dmn:text>if i = count(lines) then
+ updated_map
+else
+ BuildRockMap(lines, i+1, updated_map)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+  </dmn:businessKnowledgeModel>
+  <dmn:decision id="_6FC53851-7886-4B84-AB24-BB3798057F72" name="Map">
+    <dmn:extensionElements/>
+    <dmn:variable id="_55C2B931-4D07-47EB-AF90-04E5BC08F895" name="Map" typeRef="string"/>
+    <dmn:informationRequirement id="_53A69D1D-5025-4848-9A97-161131DA407A">
+      <dmn:requiredDecision href="#_82605892-7A49-42B6-88A9-D43C49E21430"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_A00CFE3A-FDC9-4B4B-A4AE-3857A278F87E">
+      <dmn:requiredDecision href="#_7FDFDC41-983E-4ADA-814F-371A181F8F56"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_D7718DA6-74FF-4673-9536-2F2337B1E999">
+      <dmn:requiredDecision href="#_0CD9E3EC-DAAA-4A8D-8C0C-EA52519185BC"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_3293F092-F343-4382-90BE-13F7CD0A72E5">
+      <dmn:requiredKnowledge href="#_DA7C0F2E-AEEC-416E-9B91-B1D59E4B061F"/>
+    </dmn:knowledgeRequirement>
+    <dmn:literalExpression id="_9DBAE6A5-BFB5-439D-B655-5E7227AFA631">
+      <dmn:text>MakeMap(Rocks, "", Config.map_start_y, Config, Sand)</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:businessKnowledgeModel id="_DA7C0F2E-AEEC-416E-9B91-B1D59E4B061F" name="MakeMap">
+    <dmn:extensionElements/>
+    <dmn:variable id="_E27B4B83-2E50-4BCC-A528-6214DD98CBD0" name="MakeMap" typeRef="string"/>
+    <dmn:encapsulatedLogic id="_E53FA88E-09C8-4A84-955F-5692F66EF15C" kind="FEEL">
+      <dmn:formalParameter id="_2BA986C4-BEA2-41DA-A935-8EFF180471CD" name="rocks" typeRef="Vertices"/>
+      <dmn:formalParameter id="_1228468D-04A4-4C15-B675-8C489F34B926" name="map" typeRef="string"/>
+      <dmn:formalParameter id="_4E94597D-9E5F-4BC2-9116-61E8FD759A91" name="current_y" typeRef="number"/>
+      <dmn:formalParameter id="_DA0001BD-822A-4DC1-9AA6-165C3FF91D03" name="config" typeRef="Any"/>
+      <dmn:formalParameter id="_263E8CAB-52B6-4E54-AD65-6882DC8F2C37" name="sand" typeRef="Columns"/>
+      <dmn:context id="_32D487B6-09EE-4794-99B7-5D1D7913678A">
+        <dmn:contextEntry>
+          <dmn:variable id="_453BC376-2DDA-4793-BD4F-1CC76D669A0B" name="row_rocks" typeRef="Vertices"/>
+          <dmn:literalExpression id="_D416A828-D90C-491F-B19A-1838679CD53F">
+            <dmn:text>rocks[y=current_y]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_D0F1670F-5E9D-4C38-AA08-37D96DB3F034" name="row" typeRef="string"/>
+          <dmn:literalExpression id="_98937265-3F52-4F88-9030-72CA09B55B15">
+            <dmn:text>MakeRow(row_rocks, "", config.max_x, 1, sand, config.min_x, current_y) </dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:literalExpression id="_BCF091D9-9ED6-4644-BCEB-40F611DAD391">
+            <dmn:text>if current_y = config.map_end_y then
+ "\n" + map + row
+else
+ MakeMap(rocks, map + row + "\n", current_y + 1, config, sand)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+    <dmn:knowledgeRequirement id="_7A217074-B6A2-4C5C-AF1F-A219DE82FBD3">
+      <dmn:requiredKnowledge href="#_84643960-04EE-47E2-98A9-1BD0970503C8"/>
+    </dmn:knowledgeRequirement>
+  </dmn:businessKnowledgeModel>
+  <dmn:businessKnowledgeModel id="_84643960-04EE-47E2-98A9-1BD0970503C8" name="MakeRow">
+    <dmn:extensionElements/>
+    <dmn:variable id="_C2CE23F5-73EB-464E-9342-47FD6D76F99F" name="MakeRow" typeRef="string"/>
+    <dmn:encapsulatedLogic id="_1BAAE104-E1AB-4ADC-B463-4C551D00EF79" kind="FEEL">
+      <dmn:formalParameter id="_A3C67930-05A2-4021-B326-E8A7C08ED075" name="rocks" typeRef="Vertices"/>
+      <dmn:formalParameter id="_90AAA4F2-2B59-430B-B679-8896A909C087" name="row" typeRef="string"/>
+      <dmn:formalParameter id="_126EE555-FBDE-4A0C-BB09-52469E4BACB8" name="max_x" typeRef="number"/>
+      <dmn:formalParameter id="_C5F3BDAD-9673-4C1B-8FBC-D9B9F5C263AF" name="pos" typeRef="number"/>
+      <dmn:formalParameter id="_2FB155D8-3186-45A6-A229-42DC5439A60F" name="sand" typeRef="Columns"/>
+      <dmn:formalParameter id="_20F82045-B454-4D79-9A3D-563E16AE95D3" name="min_x" typeRef="number"/>
+      <dmn:formalParameter id="_3EC65591-2B70-40AC-824E-88463DDF9C0F" name="current_y" typeRef="number"/>
+      <dmn:context id="_414CA7DF-B9BF-46E1-A9B9-6EC939196FF5">
+        <dmn:contextEntry>
+          <dmn:variable id="_3B67B6E7-8942-40FF-83CA-4889710F3A9C" name="updated_row" typeRef="string"/>
+          <dmn:literalExpression id="_A33127DE-9761-4C64-AF19-AE09F3C2A0A1">
+            <dmn:text>if count(rocks[x=pos+min_x-1]) &gt; 0 then 
+ row + "#" 
+else if count(sand[pos][y=current_y]) &gt; 0 then
+ row + "o"
+else row + "."</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:literalExpression id="_08FA819A-1BE7-4204-B2DF-D7B8A2DEF98B">
+            <dmn:text>if pos = max_x-min_x+1 then
+ updated_row
+else
+ MakeRow(rocks, updated_row, max_x, pos + 1, sand, min_x, current_y)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+  </dmn:businessKnowledgeModel>
+  <dmn:businessKnowledgeModel id="_14AA371B-34CF-44E2-B4D9-1039C96E40A2" name="Drop Sand Batch">
+    <dmn:extensionElements/>
+    <dmn:variable id="_B2DD5161-4A89-4537-9995-CF1F7004DA22" name="Drop Sand Batch" typeRef="Columns"/>
+    <dmn:encapsulatedLogic id="_62B6FCDB-7017-4922-8CE1-AB6A783B1934" kind="FEEL">
+      <dmn:formalParameter id="_F0CA0AF9-E69E-43A3-9143-13E4493A7B85" name="rocks" typeRef="Columns"/>
+      <dmn:formalParameter id="_5DC2EE87-337C-456B-B5A1-3E2DC970D120" name="sand" typeRef="Columns"/>
+      <dmn:formalParameter id="_73F4E401-63C7-48BE-9632-845C416D41DB" name="config" typeRef="Any"/>
+      <dmn:formalParameter id="_4B012C15-FAE7-4CDD-AF99-A1BD35590747" name="limit" typeRef="number"/>
+      <dmn:context id="_934322EA-1418-48A3-9244-915FFEF920BA">
+        <dmn:contextEntry>
+          <dmn:variable id="_3C177F0D-1A49-4A23-9782-05292BC8E594" name="sand_count" typeRef="number"/>
+          <dmn:literalExpression id="_5BB17372-215C-47C2-991A-1E7E78077115">
+            <dmn:text>sum(for i in 1..count(sand) return count(sand[i]))</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_4FD91A58-6890-4958-AFCC-BA46613C8EBE" name="batch_sand" typeRef="Any"/>
+          <dmn:literalExpression id="_19434328-01D3-46D0-9988-4C4391D828C7">
+            <dmn:text>DropSand(rocks, sand, config, min(limit-sand_count, 200), 0)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_B4FCB34B-7E0A-4FDC-8D92-DA2EA229BCC2" name="new_sand_count" typeRef="number"/>
+          <dmn:literalExpression id="_C7B10EFC-D2B3-48A8-A1DE-0B950863FF53">
+            <dmn:text>sum(for i in 1..count(batch_sand) return count(batch_sand[i]))</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:literalExpression id="_B814BEF4-CA68-4105-A4D8-0CB492998747">
+            <dmn:text>if new_sand_count = sand_count or new_sand_count &gt;= limit then
+ batch_sand
+else
+ Drop Sand Batch(rocks, batch_sand, config, limit)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+    <dmn:knowledgeRequirement id="_0959E3A6-E3AA-4520-9F53-ACDCEEAC908A">
+      <dmn:requiredKnowledge href="#_58C09F30-CA7E-429B-87BC-9F0E366E2C0D"/>
+    </dmn:knowledgeRequirement>
+  </dmn:businessKnowledgeModel>
+  <dmn:decision id="_EE217A65-BF9B-4E12-B06F-B5BF5FEA9BBC" name="RockCols">
+    <dmn:extensionElements/>
+    <dmn:variable id="_81C594F1-8307-4AD8-8B3A-E815B0D69E08" name="RockCols" typeRef="Columns"/>
+    <dmn:informationRequirement id="_881ADC63-CC92-444D-8F89-4C89562D016A">
+      <dmn:requiredDecision href="#_82605892-7A49-42B6-88A9-D43C49E21430"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_531FB8FC-C3C9-403B-B01C-147C91CB984F">
+      <dmn:requiredDecision href="#_7FDFDC41-983E-4ADA-814F-371A181F8F56"/>
+    </dmn:informationRequirement>
+    <dmn:literalExpression id="_896D0F8F-06B5-41A9-9BEB-177C349062C5">
+      <dmn:text>for i in Config.min_x..Config.max_x
+ return sort(Rocks[x=i], function (a,b) a.y &lt; b.y)</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:decision id="_DB76BE23-6D43-4E68-BF5B-6199BA5943FE" name="Part 1">
+    <dmn:extensionElements/>
+    <dmn:variable id="_D525D401-5D40-4D10-A7C6-830088118AED" name="Part 1" typeRef="number"/>
+    <dmn:informationRequirement id="_50B93E94-E250-4C27-B48D-F39FAA237C1C">
+      <dmn:requiredDecision href="#_0CD9E3EC-DAAA-4A8D-8C0C-EA52519185BC"/>
+    </dmn:informationRequirement>
+    <dmn:literalExpression id="_1378B596-EAB3-45C0-8847-65CDD017716F">
+      <dmn:text>sum(
+ for i in 1..count(Sand)
+  return count(Sand[i])
+)</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_ABE92894-BEBC-42A8-A3B7-CEA61615C051" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_C5232A27-95BA-4E2C-8CD5-0634CA5A844B">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>373</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_77A64021-B424-4198-A052-99D4BA627C43">
+            <kie:width>373</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_AB3A10C0-24C6-4B16-B042-0626912D565E">
+            <kie:width>373</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_94AADEB6-7D9F-4F40-AD34-DFAFE2BEB588">
+            <kie:width>300</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_2783492D-C2BC-464A-A03E-2D4097BE8C0C">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>775</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_F3514A0C-D420-4597-AE1D-92442681656B">
+            <kie:width>775</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_56965964-1A47-436B-A959-7CA341DB92F6">
+            <kie:width>775</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_FDD33ACA-1F61-4974-A83E-68FF20CC18D5">
+            <kie:width>775</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_47903E69-5C05-45F5-8706-87477D9B682C">
+            <kie:width>775</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_453C06C8-318B-4C68-A215-066DEEF9354A">
+            <kie:width>775</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_67B4A9CA-D194-4563-B71F-D20C64547A00">
+            <kie:width>50</kie:width>
+            <kie:width>945</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_FD1650A4-CE71-476E-A595-CDF2DE0D7A7D">
+            <kie:width>461</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_947B37AA-9398-43E5-8964-CEDF820B1773">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>699</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_0E4D46F0-5142-47B7-83F0-D83E6D131CE9">
+            <kie:width>699</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_BCBA17F9-DD68-4AA4-BCA9-226338983F4F">
+            <kie:width>699</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_80E292C1-364C-4770-9D32-32CEAA07CB4E">
+            <kie:width>699</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D7E779DE-4F32-4A4B-A910-DDED42DF4A41">
+            <kie:width>50</kie:width>
+            <kie:width>869</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_C98ADD14-C61E-445E-854C-75106718DB29">
+            <kie:width>50</kie:width>
+            <kie:width>117</kie:width>
+            <kie:width>851</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_28970D63-E933-453E-9069-AB5A025CCA4C">
+            <kie:width>851</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_2C8A03C4-AE4B-49AB-A91A-7EF8C5AC1138">
+            <kie:width>851</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_4EFCBCD6-186D-4302-8253-C4CBF12D960B">
+            <kie:width>851</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D506975E-4AC3-45B2-AA91-1C526AD5AF5D">
+            <kie:width>851</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_6661A2FF-79AB-4AAC-840C-CE60CFAD35A2">
+            <kie:width>851</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_1B14FF3A-0917-427F-8940-9550E237A50C">
+            <kie:width>851</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_68FC4DBA-A84B-4D35-8E02-688F762BC161">
+            <kie:width>851</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_59E99399-735C-4700-9BC6-C4823E536837">
+            <kie:width>851</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_AD109ACA-1C2F-49BD-BC2B-84107C9C1713">
+            <kie:width>851</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_81F4246D-715E-4FB4-8739-BF90934C5FB9">
+            <kie:width>851</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_680FB9D2-416D-48DB-9612-6F8BBF4ACB41">
+            <kie:width>851</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_71053492-01E9-420C-A5D9-CE17E19EA9D0">
+            <kie:width>851</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D94A15C0-91B7-43C1-94EE-7415C68BE505">
+            <kie:width>851</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_A570CEC3-A8CC-4F95-B901-5D44022A696D">
+            <kie:width>50</kie:width>
+            <kie:width>1038</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_492765CC-DA25-47D8-9CDB-0A2BCE251FF6">
+            <kie:width>300</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_C7C56FA4-B77D-49A1-9E3C-F9F77DF5BCB9">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>486</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_A3C2DAFD-CE2F-4704-846F-14F88A7E7B92">
+            <kie:width>486</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_901AA690-9318-46C3-838C-82061F885F83">
+            <kie:width>486</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_5C81A6BA-FAEE-469E-BBDC-F6FD2856C84B">
+            <kie:width>486</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_A175CD6A-8899-4EA5-9DF1-D0CA6E8325D3">
+            <kie:width>50</kie:width>
+            <kie:width>656</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_9DBAE6A5-BFB5-439D-B655-5E7227AFA631">
+            <kie:width>455</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_32D487B6-09EE-4794-99B7-5D1D7913678A">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>575</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D416A828-D90C-491F-B19A-1838679CD53F">
+            <kie:width>575</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_98937265-3F52-4F88-9030-72CA09B55B15">
+            <kie:width>575</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_BCF091D9-9ED6-4644-BCEB-40F611DAD391">
+            <kie:width>575</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_E53FA88E-09C8-4A84-955F-5692F66EF15C">
+            <kie:width>50</kie:width>
+            <kie:width>745</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_414CA7DF-B9BF-46E1-A9B9-6EC939196FF5">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>673</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_A33127DE-9761-4C64-AF19-AE09F3C2A0A1">
+            <kie:width>673</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_08FA819A-1BE7-4204-B2DF-D7B8A2DEF98B">
+            <kie:width>673</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_1BAAE104-E1AB-4ADC-B463-4C551D00EF79">
+            <kie:width>50</kie:width>
+            <kie:width>843</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_934322EA-1418-48A3-9244-915FFEF920BA">
+            <kie:width>50</kie:width>
+            <kie:width>119</kie:width>
+            <kie:width>569</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_5BB17372-215C-47C2-991A-1E7E78077115">
+            <kie:width>569</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_19434328-01D3-46D0-9988-4C4391D828C7">
+            <kie:width>569</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_C7B10EFC-D2B3-48A8-A1DE-0B950863FF53">
+            <kie:width>569</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_B814BEF4-CA68-4105-A4D8-0CB492998747">
+            <kie:width>569</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_62B6FCDB-7017-4922-8CE1-AB6A783B1934">
+            <kie:width>50</kie:width>
+            <kie:width>758</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_896D0F8F-06B5-41A9-9BEB-177C349062C5">
+            <kie:width>494</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_1378B596-EAB3-45C0-8847-65CDD017716F">
+            <kie:width>310</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-drg-_0B3BEE63-D087-4953-8C80-30FC903F91E1" dmnElementRef="_0B3BEE63-D087-4953-8C80-30FC903F91E1" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="402" y="405" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_C33DA238-58CA-49B2-8383-1986D24E00AC" dmnElementRef="_C33DA238-58CA-49B2-8383-1986D24E00AC" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="403" y="281" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_7FDFDC41-983E-4ADA-814F-371A181F8F56" dmnElementRef="_7FDFDC41-983E-4ADA-814F-371A181F8F56" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="530" y="281" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_09A3458F-FB52-49D1-B8E4-B89DE112D6C6" dmnElementRef="_09A3458F-FB52-49D1-B8E4-B89DE112D6C6" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="244" y="280" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_0CD9E3EC-DAAA-4A8D-8C0C-EA52519185BC" dmnElementRef="_0CD9E3EC-DAAA-4A8D-8C0C-EA52519185BC" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="402" y="149" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_58C09F30-CA7E-429B-87BC-9F0E366E2C0D" dmnElementRef="_58C09F30-CA7E-429B-87BC-9F0E366E2C0D" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="84.5981308411215" y="149.34210526315792" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_89913DB4-E1A3-4E43-BC6F-84AC6FB2A36C" dmnElementRef="_89913DB4-E1A3-4E43-BC6F-84AC6FB2A36C" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="84.5981308411215" y="52.684210526315795" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_82605892-7A49-42B6-88A9-D43C49E21430" dmnElementRef="_82605892-7A49-42B6-88A9-D43C49E21430" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="569" y="149" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_CD27466C-3D83-45F3-8632-094DB53DE420" dmnElementRef="_CD27466C-3D83-45F3-8632-094DB53DE420" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="735" y="148" width="112" height="55"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_6FC53851-7886-4B84-AB24-BB3798057F72" dmnElementRef="_6FC53851-7886-4B84-AB24-BB3798057F72" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="741" y="281" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_DA7C0F2E-AEEC-416E-9B91-B1D59E4B061F" dmnElementRef="_DA7C0F2E-AEEC-416E-9B91-B1D59E4B061F" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="741.2990654205607" y="366.3421052631579" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_84643960-04EE-47E2-98A9-1BD0970503C8" dmnElementRef="_84643960-04EE-47E2-98A9-1BD0970503C8" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="915" y="367" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_14AA371B-34CF-44E2-B4D9-1039C96E40A2" dmnElementRef="_14AA371B-34CF-44E2-B4D9-1039C96E40A2" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="243.80607476635512" y="149.34210526315792" width="99" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_EE217A65-BF9B-4E12-B06F-B5BF5FEA9BBC" dmnElementRef="_EE217A65-BF9B-4E12-B06F-B5BF5FEA9BBC" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="494" y="38" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_DB76BE23-6D43-4E68-BF5B-6199BA5943FE" dmnElementRef="_DB76BE23-6D43-4E68-BF5B-6199BA5943FE" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="325" y="38" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_054B3FEA-1593-4E59-B775-922A931D8BF4" dmnElementRef="_054B3FEA-1593-4E59-B775-922A931D8BF4">
+        <di:waypoint x="452" y="430"/>
+        <di:waypoint x="453" y="306"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_5CF07FBE-4EB8-4555-8C01-4A9EBBFC6E98" dmnElementRef="_5CF07FBE-4EB8-4555-8C01-4A9EBBFC6E98">
+        <di:waypoint x="294" y="305"/>
+        <di:waypoint x="453" y="306"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_5CD8E180-667A-4EFC-9C64-18B1085617D9-AUTO-TARGET" dmnElementRef="_5CD8E180-667A-4EFC-9C64-18B1085617D9">
+        <di:waypoint x="453" y="306"/>
+        <di:waypoint x="630" y="306"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_A4A8C62C-9C1D-4A18-961F-0ED8A5A60321-AUTO-TARGET" dmnElementRef="_A4A8C62C-9C1D-4A18-961F-0ED8A5A60321">
+        <di:waypoint x="580" y="306"/>
+        <di:waypoint x="452" y="199"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_832723C1-5750-428B-9DCC-D8C7F0AF2DDF" dmnElementRef="_832723C1-5750-428B-9DCC-D8C7F0AF2DDF">
+        <di:waypoint x="619" y="174"/>
+        <di:waypoint x="452" y="174"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_F49383B1-1017-48BC-8D4B-F5994E17F3EE" dmnElementRef="_F49383B1-1017-48BC-8D4B-F5994E17F3EE">
+        <di:waypoint x="544" y="63"/>
+        <di:waypoint x="452" y="149"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_B8DF453F-E435-4C4E-B258-86431454A2BA-AUTO-TARGET" dmnElementRef="_B8DF453F-E435-4C4E-B258-86431454A2BA">
+        <di:waypoint x="293.3060747663551" y="174.34210526315792"/>
+        <di:waypoint x="402" y="174"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_F42B920C-DB46-49EF-B771-4156FDAD5CD2" dmnElementRef="_F42B920C-DB46-49EF-B771-4156FDAD5CD2">
+        <di:waypoint x="134.5981308411215" y="77.6842105263158"/>
+        <di:waypoint x="134.5981308411215" y="174.34210526315792"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_57A110AD-3A06-4375-A8CD-BCAF0E412F12-AUTO-TARGET" dmnElementRef="_57A110AD-3A06-4375-A8CD-BCAF0E412F12">
+        <di:waypoint x="453" y="306"/>
+        <di:waypoint x="619" y="199"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_11413329-9EC1-46DF-B279-48450236F5D2-AUTO-TARGET" dmnElementRef="_11413329-9EC1-46DF-B279-48450236F5D2">
+        <di:waypoint x="791" y="175.5"/>
+        <di:waypoint x="669" y="174"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_53A69D1D-5025-4848-9A97-161131DA407A-AUTO-TARGET" dmnElementRef="_53A69D1D-5025-4848-9A97-161131DA407A">
+        <di:waypoint x="619" y="174"/>
+        <di:waypoint x="791" y="281"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_A00CFE3A-FDC9-4B4B-A4AE-3857A278F87E" dmnElementRef="_A00CFE3A-FDC9-4B4B-A4AE-3857A278F87E">
+        <di:waypoint x="580" y="306"/>
+        <di:waypoint x="791" y="306"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_D7718DA6-74FF-4673-9536-2F2337B1E999-AUTO-TARGET" dmnElementRef="_D7718DA6-74FF-4673-9536-2F2337B1E999">
+        <di:waypoint x="452" y="174"/>
+        <di:waypoint x="791" y="281"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_3293F092-F343-4382-90BE-13F7CD0A72E5-AUTO-TARGET" dmnElementRef="_3293F092-F343-4382-90BE-13F7CD0A72E5">
+        <di:waypoint x="791.2990654205607" y="391.3421052631579"/>
+        <di:waypoint x="841" y="306"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_7A217074-B6A2-4C5C-AF1F-A219DE82FBD3-AUTO-TARGET" dmnElementRef="_7A217074-B6A2-4C5C-AF1F-A219DE82FBD3">
+        <di:waypoint x="965" y="392"/>
+        <di:waypoint x="841.2990654205607" y="391.3421052631579"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_0959E3A6-E3AA-4520-9F53-ACDCEEAC908A-AUTO-TARGET" dmnElementRef="_0959E3A6-E3AA-4520-9F53-ACDCEEAC908A">
+        <di:waypoint x="134.5981308411215" y="174.34210526315792"/>
+        <di:waypoint x="243.80607476635512" y="174.34210526315792"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_881ADC63-CC92-444D-8F89-4C89562D016A-AUTO-SOURCE-AUTO-TARGET" dmnElementRef="_881ADC63-CC92-444D-8F89-4C89562D016A">
+        <di:waypoint x="619" y="149"/>
+        <di:waypoint x="544" y="88"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_531FB8FC-C3C9-403B-B01C-147C91CB984F-AUTO-TARGET" dmnElementRef="_531FB8FC-C3C9-403B-B01C-147C91CB984F">
+        <di:waypoint x="580" y="306"/>
+        <di:waypoint x="544" y="88"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_50B93E94-E250-4C27-B48D-F39FAA237C1C-AUTO-SOURCE-AUTO-TARGET" dmnElementRef="_50B93E94-E250-4C27-B48D-F39FAA237C1C">
+        <di:waypoint x="452" y="149"/>
+        <di:waypoint x="375" y="88"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>
