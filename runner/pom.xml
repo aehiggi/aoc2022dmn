@@ -173,9 +173,13 @@
                   <argument>input</argument>
                   <argument>Part 2</argument-->
 
+                  <!--argument>14</argument>
+                  <argument>Input</argument>
+                  <argument>Config, Map, Part 1</argument-->
+
                   <argument>14</argument>
-                  <argument>input</argument>
-                  <argument>Config, Sand, Map, Part 1</argument>
+                  <argument>input2</argument>
+                  <argument>Map2, Part 2</argument>
 
                 </arguments>
             </configuration>
