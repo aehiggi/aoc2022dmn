@@ -177,9 +177,14 @@
                   <argument>Input</argument>
                   <argument>Config, Map, Part 1</argument-->
 
-                  <argument>14</argument>
+                  <!--argument>14</argument>
                   <argument>input2</argument>
-                  <argument>Map2, Part 2</argument>
+                  <argument>Map2, Part 2</argument-->
+
+                  <argument>15</argument>
+                  <argument>input</argument>
+                  <argument>Sensors, Config, Spans, Part 1</argument>
+
 
                 </arguments>
             </configuration>
